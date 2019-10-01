@@ -1,0 +1,508 @@
+<template>
+  <v-layout fill-height>
+    <v-flex>
+      <v-sheet height="64">
+        <v-toolbar flat color="white">
+          <v-row>
+            <v-dialog v-model="dialog" persistent max-width="800px">
+              <template v-slot:activator="{ on }">
+                <v-btn color="primary" dark v-on="on">Evenement</v-btn>
+              </template>
+              <v-card>
+                <v-card-title>
+                  <span class="headline">Crée un évenements</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Name*"
+                          required
+                          v-model="create_event.name"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-textarea
+                          label="description"
+                          v-model="create_event.details"
+                        ></v-textarea>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-date-picker
+                          label="Début*"
+                          v-model="create_event.start"
+                          :landscape="landscape"
+                          :reactive="reactive"
+                          :full-width="fullWidth"
+                          :type="month ? 'month' : 'date'"
+                          :multiple="multiple"
+                          :readonly="readonly"
+                          :disabled="disabled"
+                          :events="enableEvents ? functionEvents : null"
+                        ></v-date-picker>
+                        <v-time-picker
+                          v-model="create_event.heureS"
+                          class="mt-2"
+                          :format="format"
+                        ></v-time-picker>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-date-picker
+                          label="Fin*"
+                          v-model="create_event.end"
+                          :landscape="landscape"
+                          :reactive="reactive"
+                          :full-width="fullWidth"
+                          :type="month ? 'month' : 'date'"
+                          :multiple="multiple"
+                          :readonly="readonly"
+                          :disabled="disabled"
+                          :events="enableEvents ? functionEvents : null"
+                        ></v-date-picker>
+                        <v-time-picker
+                          v-model="create_event.heureF"
+                          class="mt-2"
+                          :format="format"
+                        ></v-time-picker>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-color-picker
+                          v-model="create_event.color"
+                          :hide-canvas="hideCanvas"
+                          :hide-inputs="hideInputs"
+                          :hide-mode-switch="hideModeSwitch"
+                          :mode.sync="mode"
+                          class="mx-auto"
+                        ></v-color-picker>
+                      </v-col>
+                    </v-row>
+                    <v-select
+                      v-model="create_event.role"
+                      :items="role"
+                      :rules="[v => !!v || 'Item is required']"
+                      label="type"
+                      required
+                  ></v-select>
+                  </v-container>
+                  <small>*indicates required field</small>
+                </v-card-text>
+                <v-card-actions>
+                  <div class="flex-grow-1"></div>
+                  <v-btn color="red darken-1" text @click="dialog = false"
+                    >Fermer</v-btn
+                  >
+                  <v-btn color="blue darken-1" text @click="validate"
+                    >Valider</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+          <v-btn outlined class="mr-4" @click="setToday">
+            Aujourd'hui
+          </v-btn>
+          <v-btn fab text small @click="prev">
+            <v-icon small>arrow_back_ios</v-icon>
+          </v-btn>
+          <v-btn fab text small @click="next">
+            <v-icon small>arrow_forward_ios</v-icon>
+          </v-btn>
+          <v-toolbar-title>{{ title }}</v-toolbar-title>
+          <v-spacer></v-spacer>
+          <v-menu bottom right>
+            <template v-slot:activator="{ on }">
+              <v-btn outlined v-on="on">
+                <span>{{ typeToLabel[type] }}</span>
+                <v-icon right>arrow_drop_down</v-icon>
+              </v-btn>
+            </template>
+            <v-list>
+              <v-list-item @click="type = 'day'">
+                <v-list-item-title>Jour</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'week'">
+                <v-list-item-title>Semaine</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = 'month'">
+                <v-list-item-title>Mois</v-list-item-title>
+              </v-list-item>
+              <v-list-item @click="type = '4day'">
+                <v-list-item-title>4 jour</v-list-item-title>
+              </v-list-item>
+            </v-list>
+          </v-menu>
+        </v-toolbar>
+      </v-sheet>
+      <v-sheet height="600">
+        <v-calendar
+          ref="calendar"
+          v-model="focus"
+          color="primary"
+          :events="events"
+          :event-color="getEventColor"
+          :event-margin-bottom="3"
+          :now="today"
+          :type="type"
+          @click:event="showEvent"
+          @click:more="viewDay"
+          @click:date="viewDay"
+          @change="updateRange"
+        ></v-calendar>
+        <v-menu
+          v-model="selectedOpen"
+          :close-on-content-click="false"
+          :activator="selectedElement"
+          full-width
+          offset-x
+        >
+        <v-card color="grey lighten-4" min-width="350px" flat>
+          <v-toolbar :color="selectedEvent.color" dark>
+            <v-row>
+              <v-dialog v-model="dialog_update" persistent max-width="800px">
+                <template v-slot:activator="{ on }">
+                  <v-btn icon dark v-on="on">
+                    <v-icon>edit</v-icon>
+                  </v-btn>
+                </template>
+                <v-card>
+                <v-card-title>
+                  <span class="headline">Modifié un évenements</span>
+                </v-card-title>
+                <v-card-text>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Name*"
+                          required
+                          v-model="create_event.name"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-textarea
+                          label="description"
+                          v-model="create_event.details"
+                        ></v-textarea>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-date-picker
+                          v-model="create_event.start"
+                          :landscape="landscape"
+                          :reactive="reactive"
+                          :full-width="fullWidth"
+                          :type="month ? 'month' : 'date'"
+                          :multiple="multiple"
+                          :readonly="readonly"
+                          :disabled="disabled"
+                          :events="enableEvents ? functionEvents : null"
+                        ></v-date-picker>
+                        <v-time-picker
+                          v-model="create_event.heureS"
+                          class="mt-2"
+                          :format="format"
+                        ></v-time-picker>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-date-picker
+                          v-model="create_event.end"
+                          :landscape="landscape"
+                          :reactive="reactive"
+                          :full-width="fullWidth"
+                          :type="month ? 'month' : 'date'"
+                          :multiple="multiple"
+                          :readonly="readonly"
+                          :disabled="disabled"
+                          :events="enableEvents ? functionEvents : null"
+                        ></v-date-picker>
+                        <v-time-picker
+                          v-model="create_event.heureF"
+                          class="mt-2"
+                          :format="format"
+                        ></v-time-picker>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-color-picker
+                          v-model="create_event.color"
+                          :hide-canvas="hideCanvas"
+                          :hide-inputs="hideInputs"
+                          :hide-mode-switch="hideModeSwitch"
+                          :mode.sync="mode"
+                          class="mx-auto"
+                        ></v-color-picker>
+                      </v-col>
+                    </v-row>
+                  </v-container>
+                  <small>*indicates required field</small>
+                </v-card-text>
+                <v-card-actions>
+                  <div class="flex-grow-1"></div>
+                  <v-btn color="red darken-1" text @click="dialog_update = false"
+                    >Fermer</v-btn
+                  >
+                  <v-btn color="blue darken-1" text @click="update_event"
+                    >Modifier</v-btn
+                  >
+                </v-card-actions>
+              </v-card>
+            </v-dialog>
+          </v-row>
+              <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-title v-html="selectedEvent.user_id"></v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-dialog v-model="dialog_delete" persistent max-width="400px">
+                <template v-slot:activator="{ on }">
+                  <v-btn icon v-on="on">
+                    <v-icon>delete</v-icon>
+                  </v-btn>
+                </template>
+                <v-card>
+                <v-card-text>
+                <p>Etes vous sure de vouloir supprimer cette evenement ?</p>
+                <div class="flex-grow-1"></div>
+                <v-btn color="blue darken-1" text @click="delete_event"
+                  >OUI</v-btn
+                >
+                <v-btn color="red darken-1" text @click="dialog_delete = false"
+                  >NON</v-btn
+                >
+                </v-card-text>
+                </v-card>
+                </v-dialog>
+            </v-toolbar>
+            <v-card-text>
+              <span v-html="selectedEvent.details"></span>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn text color="secondary" @click="selectedOpen = false">
+                Fermer
+              </v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-menu>
+      </v-sheet>
+    </v-flex>
+  </v-layout>
+</template>
+
+<script>
+import axios from "axios";
+
+export default {
+  data() {
+    return {
+      today: new Date().toISOString().slice(0, 10),
+      focus: new Date().toISOString().slice(0, 10),
+      type: "month",
+      hideCanvas: false,
+      hideInputs: true,
+      hideModeSwitch: true,
+      start: null,
+      end: null,
+      selectedEvent: {},
+      selectedElement: null,
+      selectedOpen: false,
+      dialog: false,
+      dialog_delete: false,
+      dialog_update: false,
+      enableEvents: "",
+      readonly: false,
+      multiple: false,
+      month: false,
+      fullWidth: false,
+      reactive: false,
+      landscape: false,
+      disabled: false,
+      mode: "hexa",
+      format: "24hr",
+      events: [],
+      typeToLabel: {
+        month: "Mois",
+        week: "Semaine",
+        day: "Jour",
+        "4day": "4 jour"
+      },
+      role: [
+        'Annonce',
+        'Disponibilité'
+      ],
+      create_event: {
+        name: "",
+        start: "",
+        end: "",
+        details: "",
+        color: "",
+        heureS: "",
+        heureF: "",
+        role: ""
+      }      
+    };
+  },
+
+  computed: {
+    title() {
+      const { start, end } = this;
+      if (!start || !end) {
+        return "";
+      }
+      const startMonth = this.monthFormatter(start);
+      const endMonth = this.monthFormatter(end);
+      const suffixMonth = startMonth === endMonth ? "" : endMonth;
+
+      const startYear = start.year;
+      const endYear = end.year;
+      const suffixYear = startYear === endYear ? "" : endYear;
+
+      const startDay = start.day + this.nth(start.day);
+      const endDay = end.day + this.nth(end.day);
+
+      switch (this.type) {
+        case "month":
+          return `${startMonth} ${startYear}`;
+        case "week":
+        case "4day":
+          return `${startMonth} ${startDay} ${startYear} - ${suffixMonth} ${endDay} ${suffixYear}`;
+        case "day":
+          return `${startMonth} ${startDay} ${startYear}`;
+      }
+      return "";
+    },
+    monthFormatter() {
+      return this.$refs.calendar.getFormatter({
+        timeZone: "UTC",
+        month: "long"
+      });
+    }
+  },
+
+  methods: {
+    validate() {
+      this.dialog = false;
+      var id = localStorage.id;
+      var url = "http://127.0.0.1:8000/api/event/" + id;
+      this.create_event.start = this.create_event.start + " ";
+      this.create_event.start = this.create_event.start + this.create_event.heureS;
+      this.create_event.end = this.create_event.end + " ";
+      this.create_event.end = this.create_event.end + this.create_event.heureF;
+      if (this.create_event.role != null) {
+        if (this.create_event.role == "Annonce") {
+          this.create_event.role = 1;
+        } else if (this.create_event.role == "Disponibilité") {
+          this.create_event.role = 2;
+        }
+      }
+      var bodyFormData = new FormData();
+      bodyFormData.set("titre", this.create_event.name);
+      bodyFormData.set("details", this.create_event.details);
+      bodyFormData.set("date_debut", this.create_event.start);
+      bodyFormData.set("date_fin", this.create_event.end);
+      bodyFormData.set("color", this.create_event.color);
+      bodyFormData.set("role", this.create_event.role);
+      axios.post(url, bodyFormData, {
+        headers: {
+          token: localStorage.token
+        }
+      });
+      
+      window.location.reload();
+    },
+    delete_event: function() {
+      var id = this.selectedEvent.id;
+      var url = "http://127.0.0.1:8000/api/event/" + id;
+      axios.delete(url, {
+        headers: {
+          token: localStorage.token
+        }
+      });
+
+      window.location.reload();
+    },
+    update_event: function() {
+      this.dialog_update = false;
+      var id = this.selectedEvent.id;
+      var url = "http://127.0.0.1:8000/api/event/" + id;
+      this.create_event.start = this.create_event.start + " ";
+      this.create_event.start = this.create_event.start + this.create_event.heureS;
+      this.create_event.end = this.create_event.end + " ";
+      this.create_event.end = this.create_event.end + this.create_event.heureF;
+      axios
+            .put(url, {
+                    titre: this.create_event.name,
+                    details: this.create_event.details,
+                    date_debut: this.create_event.start,
+                    date_fin: this.create_event.end,
+                    color: this.create_event.color
+            }, {
+                headers: {
+                    token: localStorage.token
+                }
+            });
+
+      window.location.reload();
+    },
+    viewDay({ date }) {
+      this.focus = date;
+      this.type = "day";
+    },
+    getEventColor(events) {
+      return events.color;
+    },
+    setToday() {
+      this.focus = this.today;
+    },
+    prev() {
+      this.$refs.calendar.prev();
+    },
+    next() {
+      this.$refs.calendar.next();
+    },
+    showEvent({ nativeEvent, event }) {
+      const open = () => {
+        this.selectedEvent = event;
+        this.selectedElement = nativeEvent.target;
+        setTimeout(() => (this.selectedOpen = true), 10);
+      };
+
+      if (this.selectedOpen) {
+        this.selectedOpen = false;
+        setTimeout(open, 10);
+      } else {
+        open();
+      }
+      nativeEvent.stopPropagation();
+    },
+    updateRange({ start, end }) {
+      // You could load events from an outside source (like database) now that we have the start and end dates on the calendar
+      this.start = start;
+      this.end = end;
+    },
+    nth(d) {
+      return d > 3 && d < 21
+        ? "th"
+        : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
+    }
+  },
+  async mounted() {
+    var id_user = localStorage.id;
+    var url = "http://127.0.0.1:8000/api/user/" + id_user;
+    url = url + "/event";
+    const response = await axios.get(url, {
+      headers: {
+        token: localStorage.token
+      }
+    });
+    for (var x = 0; x < response.data.data.length; x++) {
+      this.events.push({
+        id: response.data.data[x].id,
+        name: response.data.data[x].titre,
+        details: response.data.data[x].details,
+        start: response.data.data[x].date_debut,
+        end: response.data.data[x].date_fin,
+        color: response.data.data[x].color,
+        user_id: response.data.data[x].user_id
+      });
+    }
+  }
+};
+</script>
