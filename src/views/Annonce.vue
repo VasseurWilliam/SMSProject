@@ -61,12 +61,17 @@
           offset-x
         >
         <v-card color="grey lighten-4" min-width="350px" flat>
-        <v-toolbar :color="selectedEvent.color" dark>
-        <v-btn>
-        <v-icon>mail</v-icon>
-        </v-btn>
-            <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-            <v-spacer></v-spacer>
+          <v-toolbar :color="selectedEvent.color" dark>
+            <v-row>
+                  <v-btn icon dark>
+                    <v-icon>mail</v-icon>
+                  </v-btn>
+          </v-row>
+              <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+              <v-spacer></v-spacer>
+              <v-toolbar-title v-html="selectedEvent.user_id"></v-toolbar-title>
+              <v-spacer></v-spacer>
+            </v-toolbar>
             <v-card-text>
               <span v-html="selectedEvent.details"></span>
             </v-card-text>
@@ -75,7 +80,6 @@
                 Fermer
               </v-btn>
             </v-card-actions>
-            </v-toolbar>
           </v-card>
         </v-menu>
       </v-sheet>
@@ -203,7 +207,7 @@ export default {
     }
   },
   async mounted() {
-    var url = "http://127.0.0.1:8000/api/annonce"
+    var url = "https://sportmanagementsystemapi.herokuapp.com/api/annonce"
     const response = await axios.get(url);
     for (var x = 0; x < response.data.data.length; x++) {
       this.events.push({

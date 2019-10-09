@@ -23,6 +23,18 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
+                        <v-text-field   
+                          label="prix client"
+                          v-model="create_event.facture_client"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="prix coach"
+                          v-model="create_event.facture_coach"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
                         <v-textarea
                           label="description"
                           v-model="create_event.details"
@@ -77,7 +89,7 @@
                         ></v-color-picker>
                       </v-col>
                     </v-row>
-                    <v-select
+                    <v-select 
                       v-model="create_event.role"
                       :items="role"
                       :rules="[v => !!v || 'Item is required']"
@@ -314,6 +326,8 @@ export default {
       reactive: false,
       landscape: false,
       disabled: false,
+      token: "",
+      id: "",
       mode: "hexa",
       format: "24hr",
       events: [],
@@ -325,7 +339,8 @@ export default {
       },
       role: [
         'Annonce',
-        'Disponibilité'
+        'Disponibilité',
+        'RDV'
       ],
       create_event: {
         name: "",
@@ -335,7 +350,9 @@ export default {
         color: "",
         heureS: "",
         heureF: "",
-        role: ""
+        role: "",
+        facture_client: "0",
+        facture_coach: "0"
       }      
     };
   },
@@ -380,7 +397,7 @@ export default {
     validate() {
       this.dialog = false;
       var id = localStorage.id;
-      var url = "http://127.0.0.1:8000/api/event/" + id;
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
       this.create_event.start = this.create_event.start + " ";
       this.create_event.start = this.create_event.start + this.create_event.heureS;
       this.create_event.end = this.create_event.end + " ";
@@ -390,6 +407,8 @@ export default {
           this.create_event.role = 1;
         } else if (this.create_event.role == "Disponibilité") {
           this.create_event.role = 2;
+        } else if (this.create_event.role == "RDV") {
+          this.create_event.role = 3;
         }
       }
       var bodyFormData = new FormData();
@@ -399,6 +418,8 @@ export default {
       bodyFormData.set("date_fin", this.create_event.end);
       bodyFormData.set("color", this.create_event.color);
       bodyFormData.set("role", this.create_event.role);
+      bodyFormData.set("facture_client", this.create_event.facture_client);
+      bodyFormData.set("facture_coach", this.create_event.facture_coach);
       axios.post(url, bodyFormData, {
         headers: {
           token: localStorage.token
@@ -409,7 +430,7 @@ export default {
     },
     delete_event: function() {
       var id = this.selectedEvent.id;
-      var url = "http://127.0.0.1:8000/api/event/" + id;
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
       axios.delete(url, {
         headers: {
           token: localStorage.token
@@ -421,7 +442,7 @@ export default {
     update_event: function() {
       this.dialog_update = false;
       var id = this.selectedEvent.id;
-      var url = "http://127.0.0.1:8000/api/event/" + id;
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
       this.create_event.start = this.create_event.start + " ";
       this.create_event.start = this.create_event.start + this.create_event.heureS;
       this.create_event.end = this.create_event.end + " ";
@@ -485,7 +506,7 @@ export default {
   },
   async mounted() {
     var id_user = localStorage.id;
-    var url = "http://127.0.0.1:8000/api/user/" + id_user;
+    var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + id_user;
     url = url + "/event";
     const response = await axios.get(url, {
       headers: {
@@ -500,7 +521,9 @@ export default {
         start: response.data.data[x].date_debut,
         end: response.data.data[x].date_fin,
         color: response.data.data[x].color,
-        user_id: response.data.data[x].user_id
+        user_id: response.data.data[x].user_id,
+        facture_coach: response.data.data[x].facture_coach,
+        facture_client: response.data.data[x].facture_client
       });
     }
   }

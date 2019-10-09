@@ -15,39 +15,6 @@
     >
       <v-list dense nav class="py-0">
         <div v-if="template">
-          <div v-if="id == '1'">
-            <v-list-item two-line>
-            <v-list-item-content>
-              <v-list-item-title
-                >{{ user.lastname }} {{ user.firstname }}</v-list-item-title
-              >
-              <v-list-item-subtitle>{{ user.role }}</v-list-item-subtitle>
-            </v-list-item-content>
-          </v-list-item>
-
-          <v-divider></v-divider>
-
-          <v-list-item
-            v-for="item in items"
-            :key="item.title"
-            router
-            :to="item.route"
-            link
-          >
-            <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
-            </v-list-item-icon>
-
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <div class="pa-2">
-            <v-btn block @click="logout">Déconnection</v-btn>
-          </div>
-        </div>
-        <div v-else>
-          </div>
           <v-list-item two-line>
             <v-list-item-content>
               <v-list-item-title
@@ -142,7 +109,8 @@ export default {
     }
     try {
       var id = localStorage.id;
-      var url = "http://127.0.0.1:8000/api/user/" + id;
+      this.id = localStorage.id;
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + id;
       const response = await axios.get(url, {
         headers: {
           token: localStorage.token
