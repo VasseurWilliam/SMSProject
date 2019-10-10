@@ -64,9 +64,10 @@ export default {
           "https://sportmanagementsystemapi.herokuapp.com/api/auth",
           bodyFormData
         );
-        this.token = response.data.data;
+        this.token = response.data.data.token;
+        console.log(this.token);
         this.id = response.data.id;
-        window.location.reload();
+        //window.location.reload();
       }
     },
     reset() {
