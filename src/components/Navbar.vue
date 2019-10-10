@@ -109,7 +109,6 @@ export default {
     }
     try {
       var id = localStorage.id;
-      this.id = localStorage.id;
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + id;
       const response = await axios.get(url, {
         headers: {
