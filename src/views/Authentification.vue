@@ -61,7 +61,7 @@ export default {
         bodyFormData.set("email", this.user.email);
         bodyFormData.set("password", this.user.password);
         const response = await axios.post(
-          "http://127.0.0.1:8000/api/auth/",
+          "https://sportmanagementsystemapi.herokuapp.com/api/auth",
           bodyFormData
         );
         this.token = response.data.data;
