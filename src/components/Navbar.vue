@@ -103,8 +103,8 @@ export default {
   methods: {
     logout() {
       localStorage.clear();
-      window.location.reload();
       this.$router.push("login");
+      window.location.reload();
     }
   },
   async mounted() {
