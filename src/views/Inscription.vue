@@ -110,7 +110,7 @@ export default {
         bodyFormData.set("password", this.user.password);
         bodyFormData.set("role", this.user.role);
         const response = await axios.post(
-          "http://sportmanagementsystemapi.herokuapp.com/api/user/",
+          "https://sportmanagementsystemapi.herokuapp.com/api/user/",
           bodyFormData
         );
         this.token = response.data.data;
