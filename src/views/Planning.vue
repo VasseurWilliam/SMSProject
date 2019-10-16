@@ -505,8 +505,7 @@ export default {
     }
   },
   async mounted() {
-    var id_user = localStorage.id;
-    var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + id_user;
+    var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + localStorage.id;
     url = url + "/event";
     const response = await axios.get(url, {
       headers: {
