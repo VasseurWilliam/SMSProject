@@ -65,10 +65,7 @@ export default {
           bodyFormData
         );
         this.token = response.data.token;
-        console.log(this.token);
         this.id = response.data.id;
-        console.log(this.id);
-        //window.location.reload();
       }
     },
     reset() {
