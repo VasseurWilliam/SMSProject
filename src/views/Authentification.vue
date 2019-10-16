@@ -72,7 +72,7 @@ export default {
       this.$refs.form.reset();
     }
   },
-  async mounted() {
+  mounted() {
     if (localStorage.token) {
       this.token = localStorage.token;
       this.$router.push("planning");
