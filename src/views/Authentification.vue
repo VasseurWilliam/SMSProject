@@ -66,23 +66,13 @@ export default {
         );
         this.token = response.data.token;
         this.id = response.data.id;
-        sleep(1000);
-        window.location.reload();
       }
     },
     reset() {
       this.$refs.form.reset();
-    },
-    sleep(milliseconds) {
-      var start = new Date().getTime();
-      for (var i = 0; i < 1e7; i++) {
-      if ((new Date().getTime() - start) > milliseconds){
-        break;
-      }
     }
-  }
   },
-  mounted() {
+  async mounted() {
     if (localStorage.token) {
       this.token = localStorage.token;
       this.$router.push("planning");
