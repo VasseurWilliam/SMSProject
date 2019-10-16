@@ -77,11 +77,15 @@ export default {
       items: [
         // https://cdn.materialdesignicons.com/1.1.34/
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
-        { title: "Inscription", icon: "mdi-account-plus", route: "/inscription" }
+        {
+          title: "Inscription",
+          icon: "mdi-account-plus",
+          route: "/inscription"
+        }
       ],
       items_1: [
         { title: "Connexion", icon: "mdi-login", route: "/login" },
-         { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" }    
+        { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" }
       ],
       color: "black",
       colors: ["primary", "blue", "success", "red", "teal"],
@@ -118,10 +122,7 @@ export default {
       this.user.lastname = response.data.data.nom;
       this.user.firstname = response.data.data.prenom;
       this.user.role = response.data.data.role;
-    } catch (err) {
-      localStorage.clear();
-      this.$router.push("login");
-    }
+    } catch (err) {}
   }
 };
 </script>

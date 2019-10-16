@@ -23,7 +23,7 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
-                        <v-text-field   
+                        <v-text-field
                           label="prix client"
                           v-model="create_event.facture_client"
                         ></v-text-field>
@@ -89,13 +89,13 @@
                         ></v-color-picker>
                       </v-col>
                     </v-row>
-                    <v-select 
+                    <v-select
                       v-model="create_event.role"
                       :items="role"
                       :rules="[v => !!v || 'Item is required']"
                       label="type"
                       required
-                  ></v-select>
+                    ></v-select>
                   </v-container>
                   <small>*indicates required field</small>
                 </v-card-text>
@@ -168,97 +168,100 @@
           full-width
           offset-x
         >
-        <v-card color="grey lighten-4" min-width="350px" flat>
-          <v-toolbar :color="selectedEvent.color" dark>
-            <v-row>
-              <v-dialog v-model="dialog_update" persistent max-width="800px">
-                <template v-slot:activator="{ on }">
-                  <v-btn icon dark v-on="on">
-                    <v-icon>edit</v-icon>
-                  </v-btn>
-                </template>
-                <v-card>
-                <v-card-title>
-                  <span class="headline">Modifié un évenements</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Name*"
-                          required
-                          v-model="create_event.name"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-textarea
-                          label="description"
-                          v-model="create_event.details"
-                        ></v-textarea>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-date-picker
-                          v-model="create_event.start"
-                          :landscape="landscape"
-                          :reactive="reactive"
-                          :full-width="fullWidth"
-                          :type="month ? 'month' : 'date'"
-                          :multiple="multiple"
-                          :readonly="readonly"
-                          :disabled="disabled"
-                          :events="enableEvents ? functionEvents : null"
-                        ></v-date-picker>
-                        <v-time-picker
-                          v-model="create_event.heureS"
-                          class="mt-2"
-                          :format="format"
-                        ></v-time-picker>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-date-picker
-                          v-model="create_event.end"
-                          :landscape="landscape"
-                          :reactive="reactive"
-                          :full-width="fullWidth"
-                          :type="month ? 'month' : 'date'"
-                          :multiple="multiple"
-                          :readonly="readonly"
-                          :disabled="disabled"
-                          :events="enableEvents ? functionEvents : null"
-                        ></v-date-picker>
-                        <v-time-picker
-                          v-model="create_event.heureF"
-                          class="mt-2"
-                          :format="format"
-                        ></v-time-picker>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-color-picker
-                          v-model="create_event.color"
-                          :hide-canvas="hideCanvas"
-                          :hide-inputs="hideInputs"
-                          :hide-mode-switch="hideModeSwitch"
-                          :mode.sync="mode"
-                          class="mx-auto"
-                        ></v-color-picker>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                  <small>*indicates required field</small>
-                </v-card-text>
-                <v-card-actions>
-                  <div class="flex-grow-1"></div>
-                  <v-btn color="red darken-1" text @click="dialog_update = false"
-                    >Fermer</v-btn
-                  >
-                  <v-btn color="blue darken-1" text @click="update_event"
-                    >Modifier</v-btn
-                  >
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
-          </v-row>
+          <v-card color="grey lighten-4" min-width="350px" flat>
+            <v-toolbar :color="selectedEvent.color" dark>
+              <v-row>
+                <v-dialog v-model="dialog_update" persistent max-width="800px">
+                  <template v-slot:activator="{ on }">
+                    <v-btn icon dark v-on="on">
+                      <v-icon>edit</v-icon>
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-title>
+                      <span class="headline">Modifié un évenements</span>
+                    </v-card-title>
+                    <v-card-text>
+                      <v-container>
+                        <v-row>
+                          <v-col cols="12">
+                            <v-text-field
+                              label="Name*"
+                              required
+                              v-model="create_event.name"
+                            ></v-text-field>
+                          </v-col>
+                          <v-col cols="12">
+                            <v-textarea
+                              label="description"
+                              v-model="create_event.details"
+                            ></v-textarea>
+                          </v-col>
+                          <v-col cols="12" sm="6">
+                            <v-date-picker
+                              v-model="create_event.start"
+                              :landscape="landscape"
+                              :reactive="reactive"
+                              :full-width="fullWidth"
+                              :type="month ? 'month' : 'date'"
+                              :multiple="multiple"
+                              :readonly="readonly"
+                              :disabled="disabled"
+                              :events="enableEvents ? functionEvents : null"
+                            ></v-date-picker>
+                            <v-time-picker
+                              v-model="create_event.heureS"
+                              class="mt-2"
+                              :format="format"
+                            ></v-time-picker>
+                          </v-col>
+                          <v-col cols="12" sm="6">
+                            <v-date-picker
+                              v-model="create_event.end"
+                              :landscape="landscape"
+                              :reactive="reactive"
+                              :full-width="fullWidth"
+                              :type="month ? 'month' : 'date'"
+                              :multiple="multiple"
+                              :readonly="readonly"
+                              :disabled="disabled"
+                              :events="enableEvents ? functionEvents : null"
+                            ></v-date-picker>
+                            <v-time-picker
+                              v-model="create_event.heureF"
+                              class="mt-2"
+                              :format="format"
+                            ></v-time-picker>
+                          </v-col>
+                          <v-col cols="12" sm="6">
+                            <v-color-picker
+                              v-model="create_event.color"
+                              :hide-canvas="hideCanvas"
+                              :hide-inputs="hideInputs"
+                              :hide-mode-switch="hideModeSwitch"
+                              :mode.sync="mode"
+                              class="mx-auto"
+                            ></v-color-picker>
+                          </v-col>
+                        </v-row>
+                      </v-container>
+                      <small>*indicates required field</small>
+                    </v-card-text>
+                    <v-card-actions>
+                      <div class="flex-grow-1"></div>
+                      <v-btn
+                        color="red darken-1"
+                        text
+                        @click="dialog_update = false"
+                        >Fermer</v-btn
+                      >
+                      <v-btn color="blue darken-1" text @click="update_event"
+                        >Modifier</v-btn
+                      >
+                    </v-card-actions>
+                  </v-card>
+                </v-dialog>
+              </v-row>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
               <v-toolbar-title v-html="selectedEvent.user_id"></v-toolbar-title>
@@ -270,18 +273,21 @@
                   </v-btn>
                 </template>
                 <v-card>
-                <v-card-text>
-                <p>Etes vous sure de vouloir supprimer cette evenement ?</p>
-                <div class="flex-grow-1"></div>
-                <v-btn color="blue darken-1" text @click="delete_event"
-                  >OUI</v-btn
-                >
-                <v-btn color="red darken-1" text @click="dialog_delete = false"
-                  >NON</v-btn
-                >
-                </v-card-text>
+                  <v-card-text>
+                    <p>Etes vous sure de vouloir supprimer cette evenement ?</p>
+                    <div class="flex-grow-1"></div>
+                    <v-btn color="blue darken-1" text @click="delete_event"
+                      >OUI</v-btn
+                    >
+                    <v-btn
+                      color="red darken-1"
+                      text
+                      @click="dialog_delete = false"
+                      >NON</v-btn
+                    >
+                  </v-card-text>
                 </v-card>
-                </v-dialog>
+              </v-dialog>
             </v-toolbar>
             <v-card-text>
               <span v-html="selectedEvent.details"></span>
@@ -337,11 +343,7 @@ export default {
         day: "Jour",
         "4day": "4 jour"
       },
-      role: [
-        'Annonce',
-        'Disponibilité',
-        'RDV'
-      ],
+      role: ["Annonce", "Disponibilité", "RDV"],
       create_event: {
         name: "",
         start: "",
@@ -353,7 +355,7 @@ export default {
         role: "",
         facture_client: "0",
         facture_coach: "0"
-      }      
+      }
     };
   },
 
@@ -397,9 +399,11 @@ export default {
     validate() {
       this.dialog = false;
       var id = localStorage.id;
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
+      var url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
       this.create_event.start = this.create_event.start + " ";
-      this.create_event.start = this.create_event.start + this.create_event.heureS;
+      this.create_event.start =
+        this.create_event.start + this.create_event.heureS;
       this.create_event.end = this.create_event.end + " ";
       this.create_event.end = this.create_event.end + this.create_event.heureF;
       if (this.create_event.role != null) {
@@ -425,12 +429,13 @@ export default {
           token: localStorage.token
         }
       });
-      
+
       window.location.reload();
     },
     delete_event: function() {
       var id = this.selectedEvent.id;
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
+      var url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
       axios.delete(url, {
         headers: {
           token: localStorage.token
@@ -442,23 +447,28 @@ export default {
     update_event: function() {
       this.dialog_update = false;
       var id = this.selectedEvent.id;
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
+      var url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
       this.create_event.start = this.create_event.start + " ";
-      this.create_event.start = this.create_event.start + this.create_event.heureS;
+      this.create_event.start =
+        this.create_event.start + this.create_event.heureS;
       this.create_event.end = this.create_event.end + " ";
       this.create_event.end = this.create_event.end + this.create_event.heureF;
-      axios
-            .put(url, {
-                    titre: this.create_event.name,
-                    details: this.create_event.details,
-                    date_debut: this.create_event.start,
-                    date_fin: this.create_event.end,
-                    color: this.create_event.color
-            }, {
-                headers: {
-                    token: localStorage.token
-                }
-            });
+      axios.put(
+        url,
+        {
+          titre: this.create_event.name,
+          details: this.create_event.details,
+          date_debut: this.create_event.start,
+          date_fin: this.create_event.end,
+          color: this.create_event.color
+        },
+        {
+          headers: {
+            token: localStorage.token
+          }
+        }
+      );
 
       window.location.reload();
     },
@@ -505,7 +515,9 @@ export default {
     }
   },
   async mounted() {
-    var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + localStorage.id;
+    var url =
+      "https://sportmanagementsystemapi.herokuapp.com/api/user/" +
+      localStorage.id;
     url = url + "/event";
     const response = await axios.get(url, {
       headers: {

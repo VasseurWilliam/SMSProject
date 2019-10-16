@@ -60,13 +60,13 @@
           full-width
           offset-x
         >
-        <v-card color="grey lighten-4" min-width="350px" flat>
-          <v-toolbar :color="selectedEvent.color" dark>
-            <v-row>
-                  <v-btn icon dark>
-                    <v-icon>mail</v-icon>
-                  </v-btn>
-          </v-row>
+          <v-card color="grey lighten-4" min-width="350px" flat>
+            <v-toolbar :color="selectedEvent.color" dark>
+              <v-row>
+                <v-btn icon dark>
+                  <v-icon>mail</v-icon>
+                </v-btn>
+              </v-row>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
               <v-toolbar-title v-html="selectedEvent.user_id"></v-toolbar-title>
@@ -123,7 +123,7 @@ export default {
         week: "Semaine",
         day: "Jour",
         "4day": "4 jour"
-      },     
+      }
     };
   },
 
@@ -207,7 +207,7 @@ export default {
     }
   },
   async mounted() {
-    var url = "https://sportmanagementsystemapi.herokuapp.com/api/annonce"
+    var url = "https://sportmanagementsystemapi.herokuapp.com/api/annonce";
     const response = await axios.get(url);
     for (var x = 0; x < response.data.data.length; x++) {
       this.events.push({
@@ -216,7 +216,7 @@ export default {
         details: response.data.data[x].details,
         start: response.data.data[x].date_debut,
         end: response.data.data[x].date_fin,
-        color: response.data.data[x].color,
+        color: response.data.data[x].color
       });
     }
   }
