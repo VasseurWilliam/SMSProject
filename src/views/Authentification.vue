@@ -67,8 +67,8 @@ export default {
         this.token = response.data.token;
         console.log(this.token);
         this.id = response.data.id;
-        console.log(this.token);
-        window.location.reload();
+        console.log(this.id);
+        //window.location.reload();
       }
     },
     reset() {
