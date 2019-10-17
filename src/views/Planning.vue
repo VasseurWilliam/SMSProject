@@ -396,9 +396,6 @@ export default {
   },
 
   methods: {
-    reload_page: function() {
-      window.location.reload();
-    },
     validate: function() {
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
       this.create_event.start = this.create_event.start + " ";
@@ -533,8 +530,8 @@ export default {
         : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
     }
   },
-  async mounted() {
-    setTimeout(this.get_Event, 1000)
+  mounted() {
+    setTimeout(this.get_Event, 500)
   }  
 };
 </script>
