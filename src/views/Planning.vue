@@ -17,18 +17,18 @@
                     <v-row>
                       <v-col cols="12">
                         <v-text-field
-                          label="Name*"
+                          label="Client*"
                           required
                           v-model="create_event.name"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12">
+                      <v-col cols="12" v-if="localStorage.id == 1">
                         <v-text-field
                           label="prix client"
                           v-model="create_event.facture_client"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12">
+                      <v-col cols="12" v-if="localStorage.id == 1">
                         <v-text-field
                           label="prix coach"
                           v-model="create_event.facture_coach"
@@ -41,8 +41,8 @@
                         ></v-textarea>
                       </v-col>
                       <v-col cols="12" sm="6">
+                        <p>Date et heure de début</p>
                         <v-date-picker
-                          label="Début*"
                           v-model="create_event.start"
                           :landscape="landscape"
                           :reactive="reactive"
@@ -60,8 +60,8 @@
                         ></v-time-picker>
                       </v-col>
                       <v-col cols="12" sm="6">
+                        <p>Date et heure de fin</p>
                         <v-date-picker
-                          label="Fin*"
                           v-model="create_event.end"
                           :landscape="landscape"
                           :reactive="reactive"
@@ -78,16 +78,13 @@
                           :format="format"
                         ></v-time-picker>
                       </v-col>
-                      <v-col cols="12" sm="6">
-                        <v-color-picker
-                          v-model="create_event.color"
-                          :hide-canvas="hideCanvas"
-                          :hide-inputs="hideInputs"
-                          :hide-mode-switch="hideModeSwitch"
-                          :mode.sync="mode"
-                          class="mx-auto"
-                        ></v-color-picker>
-                      </v-col>
+                      <v-select
+                      v-model="create_event.color"
+                      :items="color"
+                      :rules="[v => !!v || 'Item is required']"
+                      label="type"
+                      required
+                    ></v-select>
                     </v-row>
                     <v-select
                       v-model="create_event.role"
@@ -344,6 +341,7 @@ export default {
         "4day": "4 jour"
       },
       role: ["Annonce", "Disponibilité", "RDV"],
+      color: ["Rouge", "Vert", "bleu", "Noir", "Blanc", "Jaune"],
       create_event: {
         name: "",
         start: "",
@@ -409,6 +407,21 @@ export default {
           this.create_event.role = 2;
         } else if (this.create_event.role == "RDV") {
           this.create_event.role = 3;
+        }
+      }
+      if (this.create_event.color != null) {
+        if (this.create_event.color == "Rouge") {
+          this.create_event.color = "FF0000";
+        } else if (this.create_event.color == "Vert") {
+          this.create_event.color = "11D800";
+        } else if (this.create_event.color == "Bleu") {
+          this.create_event.color = "1392FF";
+        } else if (this.create_event.color == "Noir") {
+          this.create_event.color = "000000";
+        } else if (this.create_event.color == "Blanc") {
+          this.create_event.color = "FFFFFF";
+        } else if (this.create_event.color == "Jaune") {
+          this.create_event.color = "FFFE00";
         }
       }
       var bodyFormData = new FormData();
