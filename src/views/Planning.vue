@@ -428,25 +428,24 @@ export default {
       this.dialog = false;
       window.location.reload();
     },
-    delete_event: function() {
+    async delete_event(){
       var id = this.selectedEvent.id;
-      var url =
-        "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
-      axios.delete(url, {
+      var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
+      await axios.delete(url, {
         headers: {
           token: localStorage.token
         }
       });
       window.location.reload();
     },
-    update_event: function() {
+    async update_event(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
       this.create_event.start = this.create_event.start + " ";
       this.create_event.start =
       this.create_event.start + this.create_event.heureS;
       this.create_event.end = this.create_event.end + " ";
       this.create_event.end = this.create_event.end + this.create_event.heureF;
-      axios.put(
+      await axios.put(
         url,
         {
           titre: this.create_event.name,
