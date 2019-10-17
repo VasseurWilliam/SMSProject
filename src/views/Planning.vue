@@ -430,7 +430,7 @@ export default {
         }
       });
       this.dialog = false;
-      setTimeout(this.reload_page(), 5000)
+      setTimeout(this.reload_page(), 1000)
     },
     delete_event: function() {
       var id = this.selectedEvent.id;
@@ -467,6 +467,29 @@ export default {
       );
       this.dialog_update = false;
       window.location.reload();
+    },
+    async get_Event(){
+      var url ="https://sportmanagementsystemapi.herokuapp.com/api/user/" +
+      localStorage.id;
+      url = url + "/event";
+      const response = await axios.get(url, {
+        headers: {
+          token: localStorage.token
+        }
+      });
+      for (var x = 0; x < response.data.data.length; x++) {
+      this.events.push({
+        id: response.data.data[x].id,
+        name: response.data.data[x].titre,
+        details: response.data.data[x].details,
+        start: response.data.data[x].date_debut,
+        end: response.data.data[x].date_fin,
+        color: response.data.data[x].color,
+        user_id: response.data.data[x].user_id,
+        facture_coach: response.data.data[x].facture_coach,
+        facture_client: response.data.data[x].facture_client
+        });
+      }
     },
     viewDay({ date }) {
       this.focus = date;
@@ -511,28 +534,7 @@ export default {
     }
   },
   async mounted() {
-    var url =
-      "https://sportmanagementsystemapi.herokuapp.com/api/user/" +
-      localStorage.id;
-    url = url + "/event";
-    const response = await axios.get(url, {
-      headers: {
-        token: localStorage.token
-      }
-    });
-    for (var x = 0; x < response.data.data.length; x++) {
-      this.events.push({
-        id: response.data.data[x].id,
-        name: response.data.data[x].titre,
-        details: response.data.data[x].details,
-        start: response.data.data[x].date_debut,
-        end: response.data.data[x].date_fin,
-        color: response.data.data[x].color,
-        user_id: response.data.data[x].user_id,
-        facture_coach: response.data.data[x].facture_coach,
-        facture_client: response.data.data[x].facture_client
-      });
-    }
-  }
+    setTimeout(this.get_Event, 2000)
+  }  
 };
 </script>
