@@ -396,7 +396,7 @@ export default {
   },
 
   methods: {
-    validate() {
+    validate: function() {
       this.dialog = false;
       var id = localStorage.id;
       var url =
@@ -429,9 +429,6 @@ export default {
           token: localStorage.token
         }
       });
-      for(var i=0; i < 1000; i++){
-        console.log("test");
-      }
       window.location.reload();
     },
     delete_event: function() {
@@ -443,9 +440,6 @@ export default {
           token: localStorage.token
         }
       });
-      for(var i=0; i < 1000; i++){
-        console.log("test");
-      }
       window.location.reload();
     },
     update_event: function() {
