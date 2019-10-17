@@ -86,31 +86,23 @@ export default {
         v => !!v || "Ce champs est requis",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
       ],
-      licenseRules: [
-        v => !!v || "Ce champs est requis",
-        v => v.length < 5 || "15 caractères maximum"
-      ],
       passwordRules: [
         v => !!v || "Ce champs est requis",
         v => v.length < 15 || "15 caractères maximum"
       ],
-      clubRules: [
-        v => !!v || "Ce champs est requis",
-        v => v.length < 15 || "15 caractères maximum"
-      ]
     };
   },
   methods: {
     async validate() {
       if (this.$refs.form.validate()) {
+        var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/";
         var bodyFormData = new FormData();
         bodyFormData.set("nom", this.user.firstname);
         bodyFormData.set("prenom", this.user.lastname);
         bodyFormData.set("email", this.user.email);
         bodyFormData.set("password", this.user.password);
         bodyFormData.set("role", this.user.role);
-        const response = await axios.post(
-          "https://sportmanagementsystemapi.herokuapp.com/api/user/",
+        const response = await axios.post(url,
           bodyFormData
         );
         this.token = response.data.data;
