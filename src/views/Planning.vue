@@ -396,6 +396,9 @@ export default {
   },
 
   methods: {
+    reload_page: function() {
+      window.location.reload();
+    },
     validate: function() {
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
       this.create_event.start = this.create_event.start + " ";
@@ -427,7 +430,7 @@ export default {
         }
       });
       this.dialog = false;
-      //window.location.reload();
+      this.reload_page();
     },
     delete_event: function() {
       var id = this.selectedEvent.id;
