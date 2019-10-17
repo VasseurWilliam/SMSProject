@@ -430,7 +430,7 @@ export default {
         }
       });
       this.dialog = false;
-      setTimeout(this.reload_page(), 1000)
+      setTimeout(this.reload_page(), 5000)
     },
     delete_event: function() {
       var id = this.selectedEvent.id;
