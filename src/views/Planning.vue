@@ -429,7 +429,9 @@ export default {
           token: localStorage.token
         }
       });
-      for(var i=0; i < 1000; i++){}
+      for(var i=0; i < 1000; i++){
+        console.log("test");
+      }
       window.location.reload();
     },
     delete_event: function() {
