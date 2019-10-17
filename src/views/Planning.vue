@@ -427,7 +427,7 @@ export default {
         }
       });
       this.dialog = false;
-      window.location.reload();
+      //window.location.reload();
     },
     delete_event: function() {
       var id = this.selectedEvent.id;
