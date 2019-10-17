@@ -394,9 +394,8 @@ export default {
       });
     }
   },
-
   methods: {
-    validate: function() {
+    async validate(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
       this.create_event.start = this.create_event.start + " ";
       this.create_event.start =
@@ -421,7 +420,7 @@ export default {
       bodyFormData.set("role", this.create_event.role);
       bodyFormData.set("facture_client", this.create_event.facture_client);
       bodyFormData.set("facture_coach", this.create_event.facture_coach);
-      axios.post(url, bodyFormData, {
+      await axios.post(url, bodyFormData, {
         headers: {
           token: localStorage.token
         }
