@@ -429,7 +429,7 @@ export default {
           token: localStorage.token
         }
       });
-
+      for(var i=0; i < 1000; i++){}
       window.location.reload();
     },
     delete_event: function() {
@@ -441,7 +441,7 @@ export default {
           token: localStorage.token
         }
       });
-
+      for(var i=0; i < 1000; i++){}
       window.location.reload();
     },
     update_event: function() {
@@ -451,7 +451,7 @@ export default {
         "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
       this.create_event.start = this.create_event.start + " ";
       this.create_event.start =
-        this.create_event.start + this.create_event.heureS;
+      this.create_event.start + this.create_event.heureS;
       this.create_event.end = this.create_event.end + " ";
       this.create_event.end = this.create_event.end + this.create_event.heureF;
       axios.put(
