@@ -341,7 +341,7 @@ export default {
         "4day": "4 jour"
       },
       role: ["Annonce", "Disponibilité", "RDV"],
-      color: ["Rouge", "Vert", "bleu", "Noir", "Blanc", "Jaune"],
+      color: ["Rouge", "Vert", "Bleu", "Noir", "Blanc", "Jaune"],
       create_event: {
         name: "",
         start: "",
@@ -411,17 +411,17 @@ export default {
       }
       if (this.create_event.color != null) {
         if (this.create_event.color == "Rouge") {
-          this.create_event.color = "FF0000";
+          this.create_event.color = "#FF0000";
         } else if (this.create_event.color == "Vert") {
-          this.create_event.color = "11D800";
+          this.create_event.color = "#11D800";
         } else if (this.create_event.color == "Bleu") {
-          this.create_event.color = "1392FF";
+          this.create_event.color = "#1392FF";
         } else if (this.create_event.color == "Noir") {
-          this.create_event.color = "000000";
+          this.create_event.color = "#000000";
         } else if (this.create_event.color == "Blanc") {
-          this.create_event.color = "FFFFFF";
+          this.create_event.color = "#FFFFFF";
         } else if (this.create_event.color == "Jaune") {
-          this.create_event.color = "FFFE00";
+          this.create_event.color = "#FFFE00";
         }
       }
       var bodyFormData = new FormData();
