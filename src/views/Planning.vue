@@ -397,13 +397,10 @@ export default {
 
   methods: {
     validate: function() {
-      this.dialog = false;
-      var id = localStorage.id;
-      var url =
-        "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
       this.create_event.start = this.create_event.start + " ";
       this.create_event.start =
-        this.create_event.start + this.create_event.heureS;
+      this.create_event.start + this.create_event.heureS;
       this.create_event.end = this.create_event.end + " ";
       this.create_event.end = this.create_event.end + this.create_event.heureF;
       if (this.create_event.role != null) {
@@ -429,6 +426,7 @@ export default {
           token: localStorage.token
         }
       });
+      this.dialog = false;
       window.location.reload();
     },
     delete_event: function() {
@@ -443,10 +441,7 @@ export default {
       window.location.reload();
     },
     update_event: function() {
-      this.dialog_update = false;
-      var id = this.selectedEvent.id;
-      var url =
-        "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
       this.create_event.start = this.create_event.start + " ";
       this.create_event.start =
       this.create_event.start + this.create_event.heureS;
@@ -467,7 +462,7 @@ export default {
           }
         }
       );
-
+      this.dialog_update = false;
       window.location.reload();
     },
     viewDay({ date }) {
