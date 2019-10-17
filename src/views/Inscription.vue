@@ -93,41 +93,18 @@ export default {
     };
   },
   methods: {
-    async validate() {
-      if (this.$refs.form.validate()) {
-        var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/";
+    validate() {
         var bodyFormData = new FormData();
         bodyFormData.set("nom", this.user.firstname);
         bodyFormData.set("prenom", this.user.lastname);
         bodyFormData.set("email", this.user.email);
         bodyFormData.set("password", this.user.password);
         bodyFormData.set("role", this.user.role);
-        const response = await axios.post(url,
-          bodyFormData
-        );
-        this.token = response.data.data;
-        this.id = response.data.id;
+        axios.post("https://sportmanagementsystemapi.herokuapp.com/api/user/", bodyFormData);
         window.location.reload();
-      }
     },
     reset() {
       this.$refs.form.reset();
-    }
-  },
-  mounted() {
-    if (localStorage.token) {
-      this.token = localStorage.token;
-    }
-    if (localStorage.id) {
-      this.id = localStorage.id;
-    }
-  },
-  watch: {
-    token(newToken) {
-      localStorage.token = newToken;
-    },
-    id(newId) {
-      localStorage.id = newId;
     }
   }
 };
