@@ -22,13 +22,13 @@
                           v-model="create_event.name"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" v-if="localStorage.id == 1">
+                      <v-col cols="12">
                         <v-text-field
                           label="prix client"
                           v-model="create_event.facture_client"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" v-if="localStorage.id == 1">
+                      <v-col cols="12">
                         <v-text-field
                           label="prix coach"
                           v-model="create_event.facture_coach"
