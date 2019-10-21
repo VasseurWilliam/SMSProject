@@ -187,7 +187,6 @@
                         <v-text-field
                           label="prix client"
                           v-model="create_event.facture_client"
-                          name="this.selectedEvent.titre"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
@@ -445,15 +444,13 @@ export default {
     },
     async update_event(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
-      this.create_event.start = this.create_event.start + " ";
-      this.create_event.start =
-      this.create_event.start + this.create_event.heureS;
-      this.create_event.end = this.create_event.end + " ";
-      this.create_event.end = this.create_event.end + this.create_event.heureF;
       await axios.put(
         url,
         {
           titre: this.create_event.name,
+          nom_coach: this.create_event.nom_coach,
+          facture_client: this.create_event.nom_facture_client,
+          facture_coach: this.create_event.facture_coach,
           details: this.create_event.details,
           date_debut: this.create_event.start,
           date_fin: this.create_event.end,
