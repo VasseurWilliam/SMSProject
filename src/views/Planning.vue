@@ -167,68 +167,74 @@
                       <span class="headline">Modifié un évenement</span>
                     </v-card-title>
                     <v-card-text>
-                      <v-container>
-                        <v-row>
-                          <v-col cols="12">
-                            <v-text-field
-                              label="Client*"
-                              required
-                              v-model="create_event.name"
-                            ></v-text-field>
-                          </v-col>
-                          <v-col cols="12">
-                            <v-textarea
-                              label="description"
-                              v-model="create_event.details"
-                            ></v-textarea>
-                          </v-col>
-                          <v-col cols="12" sm="6">
-                            <v-date-picker
-                              v-model="create_event.start"
-                              :landscape="landscape"
-                              :reactive="reactive"
-                              :full-width="fullWidth"
-                              :type="month ? 'month' : 'date'"
-                              :multiple="multiple"
-                              :readonly="readonly"
-                              :disabled="disabled"
-                              :events="enableEvents ? functionEvents : null"
-                            ></v-date-picker>
-                            <v-time-picker
-                              v-model="create_event.durée"
-                              class="mt-2"
-                              :format="format"
-                            ></v-time-picker>
-                          </v-col>
-                          <v-col cols="12" sm="6">
-                            <v-date-picker
-                              v-model="create_event.end"
-                              :landscape="landscape"
-                              :reactive="reactive"
-                              :full-width="fullWidth"
-                              :type="month ? 'month' : 'date'"
-                              :multiple="multiple"
-                              :readonly="readonly"
-                              :disabled="disabled"
-                              :events="enableEvents ? functionEvents : null"
-                            ></v-date-picker>
-                            <v-time-picker
-                              v-model="create_event.heureF"
-                              class="mt-2"
-                              :format="format"
-                            ></v-time-picker>
-                          </v-col>
-                          <v-col cols="12" sm="6">
-                            <v-color-picker
-                              v-model="create_event.color"
-                              :hide-canvas="hideCanvas"
-                              :hide-inputs="hideInputs"
-                              :hide-mode-switch="hideModeSwitch"
-                              :mode.sync="mode"
-                              class="mx-auto"
-                            ></v-color-picker>
-                          </v-col>
-                        </v-row>
+                  <v-container>
+                    <v-row>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Client*"
+                          required
+                          v-model="create_event.name"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Coach*"
+                          required
+                          v-model="create_event.nom_coach"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="prix client"
+                          v-model="create_event.facture_client"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="prix coach"
+                          v-model="create_event.facture_coach"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-textarea
+                          label="description"
+                          v-model="create_event.details"
+                        ></v-textarea>
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <VueCtkDateTimePicker
+                          v-model="create_event.start"
+                          format="YYYY-MM-DD HH:mm"
+                          formatted="YYYY-MM-DD HH:mm"
+                          label="Date et heure de début"
+                          minuteInterval="10"
+                        />
+                        <br />
+                        <VueCtkDateTimePicker
+                          v-model="create_event.end"
+                          format="YYYY-MM-DD HH:mm"
+                          formatted="YYYY-MM-DD HH:mm"
+                          label="Date et heure de fin"
+                          minuteInterval="10"
+                        />
+                      </v-col>
+                      <v-col cols="12" sm="6">
+                        <v-select
+                          v-model="create_event.color"
+                          :items="color"
+                          :rules="[v => !!v || 'Item is required']"
+                          label="Couleur"
+                          required
+                        ></v-select>
+                        <v-select
+                          v-model="create_event.role"
+                          :items="role"
+                          :rules="[v => !!v || 'Item is required']"
+                          label="type d'évenement"
+                          required
+                        ></v-select>
+                      </v-col>
+                    </v-row>
                       </v-container>
                       <small>*indicates required field</small>
                     </v-card-text>
