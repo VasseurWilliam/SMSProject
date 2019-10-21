@@ -116,7 +116,7 @@ export default {
         lastname: "",
         firstname: "",
         role: "",
-        admin: false,
+        admin: "",
         show1: false
       }
     };
@@ -146,7 +146,7 @@ export default {
       if(this.user.role == "admin") {
         this.user.admin = true;
       } else { 
-        this.user.admin = false;
+        this.user.admin = "";
       }
     } catch (err) {}
   }
