@@ -187,6 +187,7 @@
                         <v-text-field
                           label="prix client"
                           v-model="create_event.facture_client"
+                          name="this.selectedEvent.titre"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
