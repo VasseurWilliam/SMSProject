@@ -62,14 +62,14 @@
                           v-model="create_event.color"
                           :items="color"
                           :rules="[v => !!v || 'Item is required']"
-                          label="type"
+                          label="Couleur"
                           required
                         ></v-select>
                         <v-select
                           v-model="create_event.role"
                           :items="role"
                           :rules="[v => !!v || 'Item is required']"
-                          label="type"
+                          label="type d'évenement"
                           required
                         ></v-select>
                       </v-col>
