@@ -24,6 +24,7 @@
 
           <v-divider></v-divider>
 
+          <div v-if="user.admin">
           <v-list-item
             v-for="items_admin in items_admin"
             :key="items_admin.title"
@@ -41,7 +42,9 @@
           <div class="pa-2">
             <v-btn block @click="logout">Déconnection</v-btn>
           </div>
+          </div>
 
+          <div v-else>
           <v-list-item
             v-for="items_coach in items_coach"
             :key="items_coach.title"
@@ -58,6 +61,7 @@
           </v-list-item>
           <div class="pa-2">
             <v-btn block @click="logout">Déconnection</v-btn>
+          </div>
           </div>
         </div>
         <div v-else>
@@ -125,6 +129,9 @@ export default {
     if (localStorage.token) {
       this.template = true;
     }
+    if (this.user.role=="admin"){
+      this.user.admin = true;
+    }
     try {
       this.id = localStorage.id;
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + id;
@@ -136,11 +143,6 @@ export default {
       this.user.lastname = response.data.data.nom;
       this.user.firstname = response.data.data.prenom;
       this.user.role = response.data.data.role;
-      if(this.user.role == "admin") {
-        this.user.admin = true;
-      } else { 
-        this.user.admin = "";
-      }
     } catch (err) {}
   }
 };
