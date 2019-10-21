@@ -73,7 +73,6 @@
                           label="type"
                           required
                         ></v-select>
-                      </v-col>
                   </v-container>
                   <small>*indicates required field</small>
                 </v-card-text>
