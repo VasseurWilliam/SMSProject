@@ -59,21 +59,21 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
-                        v-model="create_event.color"
-                        :items="color"
-                        :rules="[v => !!v || 'Item is required']"
-                        label="type"
-                        required
-                      ></v-select>
-                      </v-row>
-                      <v-select
-                        v-model="create_event.role"
-                        :items="role"
-                        :rules="[v => !!v || 'Item is required']"
-                        label="type"
-                        required
-                      ></v-select>
-                    </v-col>
+                          v-model="create_event.color"
+                          :items="color"
+                          :rules="[v => !!v || 'Item is required']"
+                          label="type"
+                          required
+                        ></v-select>
+                        </v-row>
+                        <v-select
+                          v-model="create_event.role"
+                          :items="role"
+                          :rules="[v => !!v || 'Item is required']"
+                          label="type"
+                          required
+                        ></v-select>
+                      </v-col>
                   </v-container>
                   <small>*indicates required field</small>
                 </v-card-text>
