@@ -24,6 +24,7 @@
 
           <v-divider></v-divider>
 
+          <div v-if="user.admin">
           <v-list-item
             v-for="items_admin in items_admin"
             :key="items_admin.title"
@@ -41,7 +42,27 @@
           <div class="pa-2">
             <v-btn block @click="logout">Déconnection</v-btn>
           </div>
+          </div>
 
+          <div v-else>
+          <v-list-item
+            v-for="items_coach in items_coach"
+            :key="items_coach.title"
+            router
+            :to="items_coach.route"
+            link
+          >
+          <v-list-item-icon>
+            <v-icon>{{ items_coach.icon }}</v-icon>
+          </v-list-item-icon>
+            <v-list-item-content>
+          <v-list-item-title>{{ items_coach.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <div class="pa-2">
+            <v-btn block @click="logout">Déconnection</v-btn>
+          </div>
+          </div>
         </div>
         <div v-else>
           <v-list-item
@@ -113,7 +134,7 @@ export default {
     }
     try {
       this.id = localStorage.id;
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + id;
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
       const response = await axios.get(url, {
         headers: {
           token: localStorage.token
