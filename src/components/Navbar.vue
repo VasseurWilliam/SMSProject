@@ -25,40 +25,61 @@
           </v-list-item>
 
           <v-divider></v-divider>
-
+          <div v-if="user.admin">
           <v-list-item
-            v-for="item in items"
-            :key="item.title"
+            v-for="items_admin in items_admin"
+            :key="items_admin.title"
             router
-            :to="item.route"
+            :to="items_admin.route"
             link
           >
             <v-list-item-icon>
-              <v-icon>{{ item.icon }}</v-icon>
+              <v-icon>{{ items_admin.icon }}</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+              <v-list-item-title>{{ items_admin.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
           <div class="pa-2">
             <v-btn block @click="logout">Déconnection</v-btn>
           </div>
-        </div>
-        <div v-else>
-          <v-list-item
-            v-for="item_1 in items_1"
-            :key="item_1.title"
+          </div>
+          <div v-else>
+            <v-list-item
+            v-for="items_coach in items_coach"
+            :key="items_coach.title"
             router
-            :to="item_1.route"
+            :to="items_coach.route"
             link
           >
             <v-list-item-icon>
-              <v-icon>{{ item_1.icon }}</v-icon>
+              <v-icon>{{ items_coach.icon }}</v-icon>
             </v-list-item-icon>
 
             <v-list-item-content>
-              <v-list-item-title>{{ item_1.title }}</v-list-item-title>
+              <v-list-item-title>{{ items_coach.title }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+          <div class="pa-2">
+            <v-btn block @click="logout">Déconnection</v-btn>
+          </div>
+          </div>
+        </div>
+        <div v-else>
+          <v-list-item
+            v-for="noauth in noauth"
+            :key="noauth.title"
+            router
+            :to="noauth.route"
+            link
+          >
+            <v-list-item-icon>
+              <v-icon>{{ item_noauth.icon }}</v-icon>
+            </v-list-item-icon>
+
+            <v-list-item-content>
+              <v-list-item-title>{{ item_noauth.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </div>
@@ -74,16 +95,15 @@ export default {
   data() {
     return {
       drawer: false,
-      items: [
+      items_admin: [
         // https://cdn.materialdesignicons.com/1.1.34/
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
-        {
-          title: "Inscription",
-          icon: "mdi-account-plus",
-          route: "/inscription"
-        }
+        { title: "Inscription", icon: "mdi-account-plus", route: "/inscription"}
       ],
-      items_1: [
+      items_coach: [
+        { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
+      ],
+      items_noauth: [
         { title: "Connexion", icon: "mdi-login", route: "/login" },
         { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" }
       ],
@@ -96,6 +116,7 @@ export default {
         lastname: "",
         firstname: "",
         role: "",
+        admin: false,
         show1: false
       }
     };
@@ -122,6 +143,9 @@ export default {
       this.user.lastname = response.data.data.nom;
       this.user.firstname = response.data.data.prenom;
       this.user.role = response.data.data.role;
+      if(this.user.role == "admin") {
+        this.user.admin = true;
+      }
     } catch (err) {}
   }
 };
