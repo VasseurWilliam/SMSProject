@@ -43,7 +43,7 @@
                       <v-col cols="12" sm="6">
                         <p>Date et heure de début</p>
                         <VueCtkDateTimePicker
-                          v-model="session.firstSession"
+                          v-model="create_event.start"
                           format="YYYY-MM-DD HH:mm"
                           formatted="YYYY-MM-DD HH:mm"
                           label="Date et heure de la première séance"
@@ -51,7 +51,7 @@
                         />
                         <br />
                         <VueCtkDateTimePicker
-                          v-model="session.durationOfSession"
+                          v-model="create_event.heureS"
                           format="HH:mm"
                           formatted="HH:mm"
                           label="Durée de la séance"
