@@ -129,9 +129,6 @@ export default {
     if (localStorage.token) {
       this.template = true;
     }
-    if (this.user.role=="admin"){
-      this.user.admin = true;
-    }
     try {
       this.id = localStorage.id;
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
@@ -144,6 +141,9 @@ export default {
       this.user.firstname = response.data.data.prenom;
       this.user.role = response.data.data.role;
     } catch (err) {}
+    if (this.user.role=="admin") {
+      this.user.admin = true;
+    }
   }
 };
 </script>
