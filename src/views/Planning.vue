@@ -60,7 +60,7 @@
                           v-model="create_event.end"
                           format="YYYY-MM-DD HH:mm"
                           formatted="YYYY-MM-DD HH:mm"
-                          label="Date et heure de début"
+                          label="Date et heure de fin"
                           minuteInterval="10"
                         />
                       </v-col>
