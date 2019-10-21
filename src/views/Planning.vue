@@ -459,6 +459,16 @@ export default {
           this.create_event.color = "#FFFE00";
         }
       }
+      if (this.create_event.role != null) {
+        if (this.create_event.role == "Annonce") {
+          this.create_event.role = 1;
+          this.create_event.color = "#B3BAFF";
+        } else if (this.create_event.role == "Disponibilité") {
+          this.create_event.role = 2;
+        } else if (this.create_event.role == "RDV") {
+          this.create_event.role = 3;
+        }
+      }
       await axios.put(
         url,
         {
