@@ -444,7 +444,6 @@ export default {
     },
     async update_event(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
-      if (this.create_event.color != null) {
         if (this.create_event.color == "Rouge") {
           this.create_event.color = "#FF0000";
         } else if (this.create_event.color == "Vert") {
@@ -458,23 +457,19 @@ export default {
         } else if (this.create_event.color == "Jaune") {
           this.create_event.color = "#FFFE00";
         }
-      }
-      if (this.create_event.role != null) {
         if (this.create_event.role == "Annonce") {
           this.create_event.role = 1;
-          this.create_event.color = "#B3BAFF";
         } else if (this.create_event.role == "Disponibilité") {
           this.create_event.role = 2;
         } else if (this.create_event.role == "RDV") {
           this.create_event.role = 3;
         }
-      }
       await axios.put(
         url,
         {
           titre: this.create_event.name,
           nom_coach: this.create_event.nom_coach,
-          facture_client: this.create_event.nom_facture_client,
+          facture_client: this.create_event.facture_client,
           facture_coach: this.create_event.facture_coach,
           details: this.create_event.details,
           date_debut: this.create_event.start,
