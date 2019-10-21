@@ -100,7 +100,7 @@ export default {
         bodyFormData.set("email", this.user.email);
         bodyFormData.set("password", this.user.password);
         bodyFormData.set("role", this.user.role);
-        await axios.post("https://sportmanagementsystemapi.herokuapp.com/api/user/", bodyFormData);
+        await axios.post("https://sportmanagementsystemapi.herokuapp.com/api/user", bodyFormData);
         window.location.reload();
     },
     reset() {

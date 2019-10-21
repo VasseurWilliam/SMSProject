@@ -10,7 +10,7 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="headline">Crée un évenements</span>
+                  <span class="headline">Crée un évenement</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container>
@@ -176,14 +176,14 @@
                   </template>
                   <v-card>
                     <v-card-title>
-                      <span class="headline">Modifié un évenements</span>
+                      <span class="headline">Modifié un évenement</span>
                     </v-card-title>
                     <v-card-text>
                       <v-container>
                         <v-row>
                           <v-col cols="12">
                             <v-text-field
-                              label="Name*"
+                              label="Client*"
                               required
                               v-model="create_event.name"
                             ></v-text-field>
@@ -341,7 +341,7 @@ export default {
         "4day": "4 jour"
       },
       role: ["Annonce", "Disponibilité", "RDV"],
-      color: ["Rouge", "Vert", "Bleu", "Noir", "Blanc", "Jaune"],
+      color: ["Rouge", "Vert", "Bleu", "Noir", "Orange", "Jaune"],
       create_event: {
         name: "",
         start: "",
@@ -400,15 +400,6 @@ export default {
       this.create_event.start + this.create_event.heureS;
       this.create_event.end = this.create_event.end + " ";
       this.create_event.end = this.create_event.end + this.create_event.heureF;
-      if (this.create_event.role != null) {
-        if (this.create_event.role == "Annonce") {
-          this.create_event.role = 1;
-        } else if (this.create_event.role == "Disponibilité") {
-          this.create_event.role = 2;
-        } else if (this.create_event.role == "RDV") {
-          this.create_event.role = 3;
-        }
-      }
       if (this.create_event.color != null) {
         if (this.create_event.color == "Rouge") {
           this.create_event.color = "#FF0000";
@@ -418,10 +409,20 @@ export default {
           this.create_event.color = "#1392FF";
         } else if (this.create_event.color == "Noir") {
           this.create_event.color = "#000000";
-        } else if (this.create_event.color == "Blanc") {
-          this.create_event.color = "#FFFFFF";
+        } else if (this.create_event.color == "Orange") {
+          this.create_event.color = "#FF9A00";
         } else if (this.create_event.color == "Jaune") {
           this.create_event.color = "#FFFE00";
+        }
+      }
+      if (this.create_event.role != null) {
+        if (this.create_event.role == "Annonce") {
+          this.create_event.role = 1;
+          this.create_event.color = "#B3BAFF";
+        } else if (this.create_event.role == "Disponibilité") {
+          this.create_event.role = 2;
+        } else if (this.create_event.role == "RDV") {
+          this.create_event.role = 3;
         }
       }
       var bodyFormData = new FormData();
