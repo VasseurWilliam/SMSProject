@@ -1,13 +1,14 @@
 <template>
   <v-layout align-center justify-center fill-height>
     <v-flex xs12 sm6 md4 lg6>
-      <v-form ref="form" v-model="valid" lazy-validation class="text-center" autocomplete="off">
+      <v-form ref="form" v-model="valid" lazy-validation class="text-center">
         <v-text-field
           v-model="user.lastname"
           :counter="15"
           :rules="lastnameRules"
           label="Nom"
           required
+          autocomplete="off"
         ></v-text-field>
 
         <v-text-field
@@ -16,6 +17,7 @@
           :rules="firstnameRules"
           label="Prénom"
           required
+          autocomplete="off"
         ></v-text-field>
 
         <v-text-field
@@ -23,6 +25,7 @@
           :rules="emailRules"
           label="Email"
           required
+          autocomplete="off"
         ></v-text-field>
 
         <v-text-field
@@ -34,6 +37,7 @@
           label="Password"
           required
           @click:append="user.show1 = !user.show1"
+          autocomplete="off"
         ></v-text-field>
 
         <v-btn
