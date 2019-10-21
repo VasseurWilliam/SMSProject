@@ -65,7 +65,6 @@
                           label="type"
                           required
                         ></v-select>
-                        </v-row>
                         <v-select
                           v-model="create_event.role"
                           :items="role"
@@ -73,6 +72,8 @@
                           label="type"
                           required
                         ></v-select>
+                      </v-col>
+                    </v-row>
                   </v-container>
                   <small>*indicates required field</small>
                 </v-card-text>
