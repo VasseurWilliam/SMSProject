@@ -410,7 +410,7 @@ export default {
       }
       var bodyFormData = new FormData();
       bodyFormData.set("titre", this.create_event.name);
-      bodyFormData.set("titre", this.create_event.nom_coach);
+      bodyFormData.set("nom_coach", this.create_event.nom_coach);
       bodyFormData.set("details", this.create_event.details);
       bodyFormData.set("date_debut", this.create_event.start);
       bodyFormData.set("date_fin", this.create_event.end);
