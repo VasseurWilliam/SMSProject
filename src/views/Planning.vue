@@ -41,58 +41,21 @@
                         ></v-textarea>
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <p>Date et heure de début</p>
                         <VueCtkDateTimePicker
                           v-model="create_event.start"
                           format="YYYY-MM-DD HH:mm"
                           formatted="YYYY-MM-DD HH:mm"
-                          label="Date et heure de la première séance"
+                          label="Date et heure de début"
                           minuteInterval="10"
                         />
                         <br />
                         <VueCtkDateTimePicker
-                          v-model="create_event.heureS"
-                          format="HH:mm"
-                          formatted="HH:mm"
-                          label="Durée de la séance"
-                          minuteInterval="10"
-                          :only-time="true"
-                        />
-                        <v-date-picker
-                          v-model="create_event.start"
-                          :landscape="landscape"
-                          :reactive="reactive"
-                          :full-width="fullWidth"
-                          :type="month ? 'month' : 'date'"
-                          :multiple="multiple"
-                          :readonly="readonly"
-                          :disabled="disabled"
-                          :events="enableEvents ? functionEvents : null"
-                        ></v-date-picker>
-                        <v-time-picker
-                          v-model="create_event.heureS"
-                          class="mt-2"
-                          :format="format"
-                        ></v-time-picker>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <p>Date et heure de fin</p>
-                        <v-date-picker
                           v-model="create_event.end"
-                          :landscape="landscape"
-                          :reactive="reactive"
-                          :full-width="fullWidth"
-                          :type="month ? 'month' : 'date'"
-                          :multiple="multiple"
-                          :readonly="readonly"
-                          :disabled="disabled"
-                          :events="enableEvents ? functionEvents : null"
-                        ></v-date-picker>
-                        <v-time-picker
-                          v-model="create_event.heureF"
-                          class="mt-2"
-                          :format="format"
-                        ></v-time-picker>
+                          format="YYYY-MM-DD HH:mm"
+                          formatted="YYYY-MM-DD HH:mm"
+                          label="Date et heure de début"
+                          minuteInterval="10"
+                        />
                       </v-col>
                       <v-select
                       v-model="create_event.color"
@@ -223,7 +186,7 @@
                               :events="enableEvents ? functionEvents : null"
                             ></v-date-picker>
                             <v-time-picker
-                              v-model="create_event.heureS"
+                              v-model="create_event.durée"
                               class="mt-2"
                               :format="format"
                             ></v-time-picker>
@@ -364,8 +327,7 @@ export default {
         end: "",
         details: "",
         color: "",
-        heureS: "",
-        heureF: "",
+        durée: "",
         role: "",
         facture_client: "0",
         facture_coach: "0"
@@ -411,11 +373,6 @@ export default {
   methods: {
     async validate(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
-      this.create_event.start = this.create_event.start + " ";
-      this.create_event.start =
-      this.create_event.start + this.create_event.heureS;
-      this.create_event.end = this.create_event.end + " ";
-      this.create_event.end = this.create_event.end + this.create_event.heureF;
       if (this.create_event.color != null) {
         if (this.create_event.color == "Rouge") {
           this.create_event.color = "#FF0000";
