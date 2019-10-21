@@ -24,6 +24,13 @@
                       </v-col>
                       <v-col cols="12">
                         <v-text-field
+                          label="Coach*"
+                          required
+                          v-model="create_event.nom_coach"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
                           label="prix client"
                           v-model="create_event.facture_client"
                         ></v-text-field>
@@ -242,7 +249,7 @@
               </v-row>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-toolbar-title v-html="selectedEvent.user_id"></v-toolbar-title>
+              <v-toolbar-title v-html="selectedEvent.nom_coach"></v-toolbar-title>
               <v-spacer></v-spacer>
               <v-dialog v-model="dialog_delete" persistent max-width="400px">
                 <template v-slot:activator="{ on }">
@@ -325,6 +332,7 @@ export default {
       color: ["Rouge", "Vert", "Bleu", "Noir", "Orange", "Jaune"],
       create_event: {
         name: "",
+        nom_coach: "",
         start: "",
         end: "",
         details: "",
@@ -402,6 +410,7 @@ export default {
       }
       var bodyFormData = new FormData();
       bodyFormData.set("titre", this.create_event.name);
+      bodyFormData.set("titre", this.create_event.nom_coach);
       bodyFormData.set("details", this.create_event.details);
       bodyFormData.set("date_debut", this.create_event.start);
       bodyFormData.set("date_fin", this.create_event.end);
@@ -464,6 +473,7 @@ export default {
       this.events.push({
         id: response.data.data[x].id,
         name: response.data.data[x].titre,
+        nom_coach: response.data.data[x].nom_coach,
         details: response.data.data[x].details,
         start: response.data.data[x].date_debut,
         end: response.data.data[x].date_fin,
