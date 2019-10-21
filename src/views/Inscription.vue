@@ -1,7 +1,7 @@
 <template>
   <v-layout align-center justify-center fill-height>
     <v-flex xs12 sm6 md4 lg6>
-      <v-form ref="form" v-model="valid" lazy-validation class="text-center">
+      <v-form ref="form" v-model="valid" lazy-validation class="text-center" autocomplete="off">
         <v-text-field
           v-model="user.lastname"
           :counter="15"
