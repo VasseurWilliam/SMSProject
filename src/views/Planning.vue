@@ -481,11 +481,11 @@ export default {
         } else if (this.selectedEvent.color == "Jaune") {
           this.selectedEvent.color = "#FFFE00";
         }
-        if (this.selectedEvent.color.role == "Annonce") {
+        if (this.selectedEvent.role == "Annonce") {
           this.selectedEvent.role = 1;
-        } else if (this.selectedEvent.color.role == "Disponibilité") {
+        } else if (this.selectedEvent.role == "Disponibilité") {
           this.selectedEvent.role = 2;
-        } else if (this.selectedEvent.color.role == "RDV") {
+        } else if (this.selectedEvent.role == "RDV") {
           this.selectedEvent.role = 3;
         }
       await axios.put(
