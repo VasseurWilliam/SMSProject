@@ -522,6 +522,7 @@ export default {
       this.coach.push({
         prenom: response.data.data[x].prenom
         });
+        console.log(this.coach);
       }
     },
     viewDay({ date }) {
