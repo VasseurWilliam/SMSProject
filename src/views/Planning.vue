@@ -23,13 +23,11 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
-                        <v-select
-                          v-model="create_event.nom_coach"
-                          :items="coach"
-                          :rules="[v => !!v || 'Item is required']"
+                        <v-text-field
                           label="Coach*"
                           required
-                        ></v-select>
+                          v-model="selectedEvent.nom_coach"
+                        ></v-text-field>
                       </v-col>
                       <div v-if="user.admin">
                       <v-col cols="12">
@@ -291,8 +289,8 @@
             </v-card-text>
             <div v-if="user.admin">
             <v-card-text>
-              <p>facture client
-              <span v-html="selectedEvent.facture_client"></span>
+              <p>facture client : 
+              <span v-html="selectedEvent.facture_client"></span>€
               </p>
             </v-card-text>
             </div>
