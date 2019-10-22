@@ -291,13 +291,15 @@
             </v-card-text>
             <div v-if="user.admin">
             <v-card-text>
-              <p>facture client</p>
+              <p>facture client
               <span v-html="selectedEvent.facture_client"></span>
+              </p>
             </v-card-text>
             </div>
             <v-card-text>
-              <p>facture coach</p>
+              <p>facture coach
               <span v-html="selectedEvent.facture_coach"></span>
+              </p>
             </v-card-text>
             <v-card-actions>
               <v-btn text color="secondary" @click="selectedOpen = false">
