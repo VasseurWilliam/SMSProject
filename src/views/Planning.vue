@@ -230,6 +230,7 @@
                           :items="color"
                           :rules="[v => !!v || 'Item is required']"
                           label="Couleur"
+                          value=selectedEvent.color
                           required
                         ></v-select>
                         <v-select
