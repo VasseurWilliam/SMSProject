@@ -23,11 +23,13 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
-                        <v-text-field
+                        <v-select
+                          v-model="create_event.nom_coach"
+                          :items="coach"
+                          :rules="[v => !!v || 'Item is required']"
                           label="Coach*"
                           required
-                          v-model="create_event.nom_coach"
-                        ></v-text-field>
+                        ></v-select>
                       </v-col>
                       <v-col cols="12">
                         <v-text-field
@@ -328,6 +330,7 @@ export default {
       mode: "hexa",
       format: "24hr",
       events: [],
+      coach: [],
       typeToLabel: {
         month: "Mois",
         week: "Semaine",
@@ -508,6 +511,19 @@ export default {
         });
       }
     },
+    async get_coach(){
+      var url ="https://sportmanagementsystemapi.herokuapp.com/api/user/coach";
+      const response = await axios.get(url, {
+        headers: {
+          token: localStorage.token
+        }
+      });
+      for (var x = 0; x < response.data.data.length; x++) {
+      this.coach.push({
+        prenom: response.data.data[x].prenom
+        });
+      }
+    },
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";
@@ -551,7 +567,8 @@ export default {
     }
   },
   mounted() {
-    setTimeout(this.get_Event, 500)
+    setTimeout(this.get_Event, 100)
+    setTimeout(this.get_coach, 100)
   }  
 };
 </script>
