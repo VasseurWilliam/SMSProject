@@ -297,8 +297,8 @@
             </v-card-text>
             </div>
             <v-card-text>
-              <p>facture coach
-              <span v-html="selectedEvent.facture_coach"></span>
+              <p>facture coach :  
+              <span v-html="selectedEvent.facture_coach"></span>€
               </p>
             </v-card-text>
             <v-card-actions>
