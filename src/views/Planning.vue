@@ -177,28 +177,28 @@
                         <v-text-field
                           label="Client*"
                           required
-                          v-model="create_event.name"
+                          v-model="selectedEvent.name"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
                         <v-text-field
                           label="Coach*"
                           required
-                          v-model="create_event.nom_coach"
+                          v-model="selectedEvent.nom_coach"
                         ></v-text-field>
                       </v-col>
                       <div v-if="user.admin">
                       <v-col cols="12">
                         <v-text-field
                           label="prix client"
-                          v-model="create_event.facture_client"
+                          v-model="selectedEvent.facture_client"
                         ></v-text-field>
                       </v-col>
                       </div>
                       <v-col cols="12">
                         <v-text-field
                           label="prix coach"
-                          v-model="create_event.facture_coach"
+                          v-model="selectedEvent.facture_coach"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
@@ -209,7 +209,7 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <VueCtkDateTimePicker
-                          v-model="create_event.start"
+                          v-model="selectedEvent.start"
                           format="YYYY-MM-DD HH:mm"
                           formatted="YYYY-MM-DD HH:mm"
                           label="Date et heure de début"
@@ -217,7 +217,7 @@
                         />
                         <br />
                         <VueCtkDateTimePicker
-                          v-model="create_event.end"
+                          v-model="selectedEvent.end"
                           format="YYYY-MM-DD HH:mm"
                           formatted="YYYY-MM-DD HH:mm"
                           label="Date et heure de fin"
@@ -226,14 +226,14 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
-                          v-model="create_event.color"
+                          v-model="selectedEvent.color"
                           :items="color"
                           :rules="[v => !!v || 'Item is required']"
                           label="Couleur"
                           required
                         ></v-select>
                         <v-select
-                          v-model="create_event.role"
+                          v-model="selectedEvent.role"
                           :items="role"
                           :rules="[v => !!v || 'Item is required']"
                           label="type d'évenement"
