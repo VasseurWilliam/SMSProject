@@ -204,8 +204,7 @@
                       <v-col cols="12">
                         <v-textarea
                           label="description"
-                          v-model="create_event.details"
-                          placeholder="selectedEvent.desciption"
+                          v-model="selectedEvent.details"
                         ></v-textarea>
                       </v-col>
                       <v-col cols="12" sm="6">
@@ -231,7 +230,6 @@
                           :items="color"
                           :rules="[v => !!v || 'Item is required']"
                           label="Couleur"
-                          placeholder="selectedEvent.color"
                           required
                         ></v-select>
                         <v-select
