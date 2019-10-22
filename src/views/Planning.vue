@@ -468,38 +468,38 @@ export default {
     },
     async update_event(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
-        if (this.create_event.color == "Rouge") {
-          this.create_event.color = "#FF0000";
-        } else if (this.create_event.color == "Vert") {
-          this.create_event.color = "#11D800";
-        } else if (this.create_event.color == "Bleu") {
-          this.create_event.color = "#1392FF";
-        } else if (this.create_event.color == "Noir") {
-          this.create_event.color = "#000000";
-        } else if (this.create_event.color == "Orange") {
-          this.create_event.color = "#FF9A00";
-        } else if (this.create_event.color == "Jaune") {
-          this.create_event.color = "#FFFE00";
+        if (this.selectedEvent.color == "Rouge") {
+          this.selectedEvent.color = "#FF0000";
+        } else if (this.selectedEvent.color == "Vert") {
+          this.selectedEvent.color = "#11D800";
+        } else if (this.selectedEvent.color == "Bleu") {
+          this.selectedEvent.color = "#1392FF";
+        } else if (this.selectedEvent.color == "Noir") {
+          this.selectedEvent.color = "#000000";
+        } else if (this.selectedEvent.color == "Orange") {
+          this.selectedEvent.color = "#FF9A00";
+        } else if (this.selectedEvent.color == "Jaune") {
+          this.selectedEvent.color = "#FFFE00";
         }
-        if (this.create_event.role == "Annonce") {
-          this.create_event.role = 1;
-        } else if (this.create_event.role == "Disponibilité") {
-          this.create_event.role = 2;
-        } else if (this.create_event.role == "RDV") {
-          this.create_event.role = 3;
+        if (this.selectedEvent.color.role == "Annonce") {
+          this.selectedEvent.role = 1;
+        } else if (this.selectedEvent.color.role == "Disponibilité") {
+          this.selectedEvent.role = 2;
+        } else if (this.selectedEvent.color.role == "RDV") {
+          this.selectedEvent.role = 3;
         }
       await axios.put(
         url,
         {
-          titre: this.create_event.name,
-          nom_coach: this.create_event.nom_coach,
-          facture_client: this.create_event.facture_client,
-          facture_coach: this.create_event.facture_coach,
-          details: this.create_event.details,
-          date_debut: this.create_event.start,
-          date_fin: this.create_event.end,
-          color: this.create_event.color,
-          role: this.create_event.role
+          titre: this.selectedEvent.name,
+          nom_coach: this.selectedEvent.nom_coach,
+          facture_client: this.selectedEvent.facture_client,
+          facture_coach: this.selectedEvent.facture_coach,
+          details: this.selectedEvent.details,
+          date_debut: this.selectedEvent.start,
+          date_fin: this.selectedEvent.end,
+          color: this.selectedEvent.color,
+          role: this.selectedEvent.role
         },
         {
           headers: {
