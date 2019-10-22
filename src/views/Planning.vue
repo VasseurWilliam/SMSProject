@@ -177,39 +177,39 @@
                         <v-text-field
                           label="Client*"
                           required
-                          v-model="update_event.name"
+                          v-model="create_event.name"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
                         <v-text-field
                           label="Coach*"
                           required
-                          v-model="update_event.nom_coach"
+                          v-model="create_event.nom_coach"
                         ></v-text-field>
                       </v-col>
                       <div v-if="user.admin">
                       <v-col cols="12">
                         <v-text-field
                           label="prix client"
-                          v-model="update_event.facture_client"
+                          v-model="create_event.facture_client"
                         ></v-text-field>
                       </v-col>
                       </div>
                       <v-col cols="12">
                         <v-text-field
                           label="prix coach"
-                          v-model="update_event.facture_coach"
+                          v-model="create_event.facture_coach"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
                         <v-textarea
                           label="description"
-                          v-model="update_event.details"
+                          v-model="create_event.details"
                         ></v-textarea>
                       </v-col>
                       <v-col cols="12" sm="6">
                         <VueCtkDateTimePicker
-                          v-model="update_event.start"
+                          v-model="create_event.start"
                           format="YYYY-MM-DD HH:mm"
                           formatted="YYYY-MM-DD HH:mm"
                           label="Date et heure de début"
@@ -217,7 +217,7 @@
                         />
                         <br />
                         <VueCtkDateTimePicker
-                          v-model="update_event.end"
+                          v-model="create_event.end"
                           format="YYYY-MM-DD HH:mm"
                           formatted="YYYY-MM-DD HH:mm"
                           label="Date et heure de fin"
@@ -226,14 +226,14 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
-                          v-model="update_event.color"
+                          v-model="create_event.color"
                           :items="color"
                           :rules="[v => !!v || 'Item is required']"
                           label="Couleur"
                           required
                         ></v-select>
                         <v-select
-                          v-model="update_event.role"
+                          v-model="create_event.role"
                           :items="role"
                           :rules="[v => !!v || 'Item is required']"
                           label="type d'évenement"
@@ -365,18 +365,6 @@ export default {
         facture_client: "0",
         facture_coach: "0"
       },
-      update_event: {
-        name: selectedEvent.name,
-        nom_coach: selectedEvent.nom_coach,
-        start: selectedEvent.start,
-        end: selectedEvent.end,
-        details: selectedEvent.details,
-        color: selectedEvent.color,
-        durée: selectedEvent.durée,
-        role: selectedEvent.role,
-        facture_client: selectedEvent.facture_client,
-        facture_coach: selectedEvent.facture_coach
-      },
       id: "",
       user: {
         lastname: "",
@@ -480,38 +468,38 @@ export default {
     },
     async update_event(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
-        if (this.update_event.color == "Rouge") {
-          this.update_event.color = "#FF0000";
-        } else if (this.update_event.color == "Vert") {
-          this.update_event.color = "#11D800";
-        } else if (this.update_event.color == "Bleu") {
-          this.update_event.color = "#1392FF";
-        } else if (this.update_event.color == "Noir") {
-          this.update_event.color = "#000000";
-        } else if (this.update_event.color == "Orange") {
-          this.update_event.color = "#FF9A00";
+        if (this.create_event.color == "Rouge") {
+          this.create_event.color = "#FF0000";
+        } else if (this.create_event.color == "Vert") {
+          this.create_event.color = "#11D800";
+        } else if (this.create_event.color == "Bleu") {
+          this.create_event.color = "#1392FF";
+        } else if (this.create_event.color == "Noir") {
+          this.create_event.color = "#000000";
+        } else if (this.create_event.color == "Orange") {
+          this.create_event.color = "#FF9A00";
         } else if (this.create_event.color == "Jaune") {
-          this.update_event.color = "#FFFE00";
+          this.create_event.color = "#FFFE00";
         }
-        if (this.update_event.role == "Annonce") {
-          this.update_event.role = 1;
-        } else if (this.update_event.role == "Disponibilité") {
-          this.update_event.role = 2;
-        } else if (this.update_event.role == "RDV") {
-          this.update_event.role = 3;
+        if (this.create_event.role == "Annonce") {
+          this.create_event.role = 1;
+        } else if (this.create_event.role == "Disponibilité") {
+          this.create_event.role = 2;
+        } else if (this.create_event.role == "RDV") {
+          this.create_event.role = 3;
         }
       await axios.put(
         url,
         {
-          titre: this.update_event.name,
-          nom_coach: this.update_event.nom_coach,
-          facture_client: this.update_event.facture_client,
-          facture_coach: this.update_event.facture_coach,
-          details: this.update_event.details,
-          date_debut: this.update_event.start,
-          date_fin: this.update_event.end,
-          color: this.update_event.color,
-          role: this.update_event.role
+          titre: this.create_event.name,
+          nom_coach: this.create_event.nom_coach,
+          facture_client: this.create_event.facture_client,
+          facture_coach: this.create_event.facture_coach,
+          details: this.create_event.details,
+          date_debut: this.create_event.start,
+          date_fin: this.create_event.end,
+          color: this.create_event.color,
+          role: this.create_event.role
         },
         {
           headers: {
@@ -542,7 +530,7 @@ export default {
         user_id: response.data.data[x].user_id,
         facture_coach: response.data.data[x].facture_coach,
         facture_client: response.data.data[x].facture_client,
-        role: response.data.data[x].role
+        role: response.data.data[x].role,
         });
       }
     },
