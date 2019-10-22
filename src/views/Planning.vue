@@ -576,7 +576,7 @@ export default {
         : ["th", "st", "nd", "rd", "th", "th", "th", "th", "th", "th"][d % 10];
     }
   },
-  mounted() {
+  async mounted() {
     setTimeout(this.get_Event, 100);
     //setTimeout(this.get_coach, 100);
     try {
