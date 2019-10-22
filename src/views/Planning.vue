@@ -510,7 +510,8 @@ export default {
           details: this.update_event.details,
           date_debut: this.update_event.start,
           date_fin: this.update_event.end,
-          color: this.update_event.color
+          color: this.update_event.color,
+          role: this.update_event.role
         },
         {
           headers: {
@@ -540,7 +541,8 @@ export default {
         color: response.data.data[x].color,
         user_id: response.data.data[x].user_id,
         facture_coach: response.data.data[x].facture_coach,
-        facture_client: response.data.data[x].facture_client
+        facture_client: response.data.data[x].facture_client,
+        role: response.data.data[x].role
         });
       }
     },
