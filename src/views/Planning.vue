@@ -31,12 +31,14 @@
                           required
                         ></v-select>
                       </v-col>
+                      <div v-if="user.admin">
                       <v-col cols="12">
                         <v-text-field
                           label="prix client"
                           v-model="create_event.facture_client"
                         ></v-text-field>
                       </v-col>
+                      </div>
                       <v-col cols="12">
                         <v-text-field
                           label="prix coach"
@@ -350,6 +352,13 @@ export default {
         role: "",
         facture_client: "0",
         facture_coach: "0"
+      },
+      id: "",
+      user: {
+        lastname: "",
+        firstname: "",
+        role: "",
+        admin: "",
       }
     };
   },
@@ -570,6 +579,21 @@ export default {
   mounted() {
     setTimeout(this.get_Event, 100);
     //setTimeout(this.get_coach, 100);
+    try {
+      this.id = localStorage.id;
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
+      const response = await axios.get(url, {
+        headers: {
+          token: localStorage.token
+        }
+      });
+      this.user.lastname = response.data.data.nom;
+      this.user.firstname = response.data.data.prenom;
+      this.user.role = response.data.data.role;
+    } catch (err) {}
+    if (this.user.role=="admin") {
+      this.user.admin = true;
+    }
   }  
 };
 </script>
