@@ -511,7 +511,7 @@ export default {
         });
       }
     },
-    async get_coach(){
+    /*async get_coach(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/user/coach";
       const response = await axios.get(url, {
         headers: {
@@ -524,7 +524,7 @@ export default {
         });
         console.log(this.coach);
       }
-    },
+    },*/
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";
@@ -568,8 +568,8 @@ export default {
     }
   },
   mounted() {
-    setTimeout(this.get_Event, 100)
-    setTimeout(this.get_coach, 100)
+    setTimeout(this.get_Event, 100);
+    //setTimeout(this.get_coach, 100);
   }  
 };
 </script>
