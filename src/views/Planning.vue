@@ -187,12 +187,14 @@
                           v-model="create_event.nom_coach"
                         ></v-text-field>
                       </v-col>
+                      <div v-if="user.admin">
                       <v-col cols="12">
                         <v-text-field
                           label="prix client"
                           v-model="create_event.facture_client"
                         ></v-text-field>
                       </v-col>
+                      </div>
                       <v-col cols="12">
                         <v-text-field
                           label="prix coach"
@@ -286,6 +288,16 @@
             </v-toolbar>
             <v-card-text>
               <span v-html="selectedEvent.details"></span>
+            </v-card-text>
+            <div v-if="user.admin">
+            <v-card-text>
+              <p>facture client</p>
+              <span v-html="selectedEvent.facture_client"></span>
+            </v-card-text>
+            </div>
+            <v-card-text>
+              <p>facture coach</p>
+              <span v-html="selectedEvent.facture_coach"></span>
             </v-card-text>
             <v-card-actions>
               <v-btn text color="secondary" @click="selectedOpen = false">
