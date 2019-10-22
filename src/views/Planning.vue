@@ -366,16 +366,16 @@ export default {
         facture_coach: "0"
       },
       update_event: {
-        name: this.selectedEvent.name,
-        nom_coach: this.selectedEvent.nom_coach,
-        start: this.selectedEvent.start,
-        end: this.selectedEvent.end,
-        details: this.selectedEvent.details,
-        color: this.selectedEvent.color,
-        durée: this.selectedEvent.durée,
-        role: this.selectedEvent.role,
-        facture_client: this.selectedEvent.facture_client,
-        facture_coach: this.selectedEvent.facture_coach
+        name: selectedEvent.name,
+        nom_coach: selectedEvent.nom_coach,
+        start: selectedEvent.start,
+        end: selectedEvent.end,
+        details: selectedEvent.details,
+        color: selectedEvent.color,
+        durée: selectedEvent.durée,
+        role: selectedEvent.role,
+        facture_client: selectedEvent.facture_client,
+        facture_coach: selectedEvent.facture_coach
       },
       id: "",
       user: {
