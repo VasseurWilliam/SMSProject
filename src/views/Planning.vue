@@ -534,20 +534,19 @@ export default {
         });
       }
     },
-    /*async get_coach(){
+    async get_Coach(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/user/coach";
-      const response = await axios.get(url, {
+      const response_coach = await axios.get(url, {
         headers: {
           token: localStorage.token
         }
       });
-      for (var x = 0; x < response.data.data.length; x++) {
+      for (var x = 0; x < response_coach.data.data.length; x++) {
       this.coach.push({
-        prenom: response.data.data[x].prenom
+        prenom: response_coach.data.data[x].prenom
         });
-        console.log(this.coach);
       }
-    },*/
+    },
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";
@@ -592,7 +591,7 @@ export default {
   },
   async mounted() {
     setTimeout(this.get_Event, 100);
-    //setTimeout(this.get_coach, 100);
+    setTimeout(this.get_Coach, 100);
     try {
       this.id = localStorage.id;
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
