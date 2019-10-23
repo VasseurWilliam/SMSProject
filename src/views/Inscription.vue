@@ -99,8 +99,8 @@ export default {
   methods: {
     async validate() {
         var bodyFormData = new FormData();
-        bodyFormData.set("nom", this.user.firstname);
-        bodyFormData.set("prenom", this.user.lastname);
+        bodyFormData.set("nom", this.user.lastname);
+        bodyFormData.set("prenom", this.user.firstname);
         bodyFormData.set("email", this.user.email);
         bodyFormData.set("password", this.user.password);
         bodyFormData.set("role", this.user.role);
