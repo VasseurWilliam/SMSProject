@@ -24,9 +24,9 @@
                       </v-col>
                       <v-col cols="12">
                         <v-text-field
-                          label="Coach*"
+                          label="Coach"
                           required
-                          v-model="selectedEvent.nom_coach"
+                          v-model="create_event.nom_coach"
                         ></v-text-field>
                       </v-col>
                       <div v-if="user.admin">
