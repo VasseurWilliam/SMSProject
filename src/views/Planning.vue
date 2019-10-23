@@ -540,7 +540,7 @@ export default {
       this.coach.push({
         prenom: response.data.data[x].prenom
         });
-        console.log(this.coach);
+        console.log(this.coach.prenom);
       }
     },
     viewDay({ date }) {
