@@ -23,11 +23,11 @@
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
-                        <v-text-field
-                          label="Coach"
-                          required
+                        <v-select
                           v-model="create_event.nom_coach"
-                        ></v-text-field>
+                          :items="coach"
+                          label="Prenom Coach"
+                        ></v-select>
                       </v-col>
                       <div v-if="user.admin">
                       <v-col cols="12">
