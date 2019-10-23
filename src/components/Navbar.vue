@@ -66,17 +66,17 @@
         </div>
         <div v-else>
           <v-list-item
-            v-for="noauth in noauth"
-            :key="noauth.title"
+            v-for="items_noauth in items_noauth"
+            :key="items_noauth.title"
             router
-            :to="noauth.route"
+            :to="items_noauth.route"
             link
           >
             <v-list-item-icon>
-              <v-icon>{{ item_noauth.icon }}</v-icon>
+              <v-icon>{{ items_noauth.icon }}</v-icon>
             </v-list-item-icon>
             <v-list-item-content>
-              <v-list-item-title>{{ item_noauth.title }}</v-list-item-title>
+              <v-list-item-title>{{ items_noauth.title }}</v-list-item-title>
             </v-list-item-content>
           </v-list-item>
         </div>

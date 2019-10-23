@@ -25,7 +25,8 @@
                       <v-col cols="12">
                         <v-select
                           v-model="create_event.nom_coach"
-                          :items="coach.prenom"
+                          :items="coach"
+                          item-text="prenom"
                           label="Prenom Coach"
                         ></v-select>
                       </v-col>
@@ -180,8 +181,9 @@
                       </v-col>
                       <v-col cols="12">
                         <v-select
-                          v-model="create_event.nom_coach"
-                          :items="coach.prenom"
+                          v-model="selectedEvent.nom_coach"
+                          :items="coach"
+                          item-text="prenom"
                           label="Prenom Coach"
                         ></v-select>
                       </v-col>
@@ -538,9 +540,8 @@ export default {
       const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/coach");
       for (var x = 0; x < response.data.data.length; x++) {
       this.coach.push({
-        prenom: response.data.data.data[x].prenom
+        prenom: response.data.data[x].prenom
         });
-        console.log(this.coach.prenom);
       }
     },
     viewDay({ date }) {
