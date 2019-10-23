@@ -535,12 +535,7 @@ export default {
       }
     },
     async get_Coach(){
-      var url ="https://sportmanagementsystemapi.herokuapp.com/api/user/coach";
-      const response_coach = await axios.get(url, {
-        headers: {
-          token: localStorage.token
-        }
-      });
+      const response_coach = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/coach");
       for (var x = 0; x < response_coach.data.data.length; x++) {
       this.coach.push({
         prenom: response_coach.data.data[x].prenom
