@@ -69,13 +69,6 @@
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
-                          v-model="create_event.color"
-                          :items="color"
-                          :rules="[v => !!v || 'Item is required']"
-                          label="Couleur"
-                          required
-                        ></v-select>
-                        <v-select
                           v-model="create_event.role"
                           :items="role"
                           :rules="[v => !!v || 'Item is required']"
@@ -225,13 +218,6 @@
                         />
                       </v-col>
                       <v-col cols="12" sm="6">
-                        <v-select
-                          v-model="selectedEvent.color"
-                          :items="color"
-                          :rules="[v => !!v || 'Item is required']"
-                          label="Couleur"
-                          required
-                        ></v-select>
                         <v-select
                           v-model="selectedEvent.role"
                           :items="role"
@@ -384,7 +370,6 @@ export default {
         "4day": "4 jour"
       },
       role: ["Annonce", "Disponibilité", "RDV"],
-      color: ["Rouge", "Vert", "Bleu", "Noir", "Orange", "Jaune"],
       create_event: {
         name: "",
         nom_coach: "",
@@ -446,20 +431,12 @@ export default {
   methods: {
     async validate(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
-      if (this.create_event.color != null) {
-        if (this.create_event.color == "Rouge") {
-          this.create_event.color = "#FF0000";
-        } else if (this.create_event.color == "Vert") {
-          this.create_event.color = "#11D800";
-        } else if (this.create_event.color == "Bleu") {
-          this.create_event.color = "#1392FF";
-        } else if (this.create_event.color == "Noir") {
-          this.create_event.color = "#000000";
-        } else if (this.create_event.color == "Orange") {
-          this.create_event.color = "#FF9A00";
-        } else if (this.create_event.color == "Jaune") {
-          this.create_event.color = "#FFFE00";
-        }
+      if ( this.selectedEvent.nom_coach == "Mamadou") {
+        this.selectedEvent.color = "##11D800";
+      } else if (this.selectedEvent.nom_coach == "Laurie") {
+        this.selectedEvent.color = "#800080";
+      } else {
+        this.selectedEvent.color = "#000000";
       }
       if (this.create_event.role != null) {
         if (this.create_event.role == "Annonce") {
@@ -513,18 +490,12 @@ export default {
     },
     async update_event(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
-        if (this.selectedEvent.color == "Rouge") {
-          this.selectedEvent.color = "#FF0000";
-        } else if (this.selectedEvent.color == "Vert") {
-          this.selectedEvent.color = "#11D800";
-        } else if (this.selectedEvent.color == "Bleu") {
-          this.selectedEvent.color = "#1392FF";
-        } else if (this.selectedEvent.color == "Noir") {
+        if ( this.selectedEvent.nom_coach == "Mamadou") {
+          this.selectedEvent.color = "##11D800";
+        } else if (this.selectedEvent.nom_coach == "Laurie") {
+          this.selectedEvent.color = "#800080";
+        } else {
           this.selectedEvent.color = "#000000";
-        } else if (this.selectedEvent.color == "Orange") {
-          this.selectedEvent.color = "#FF9A00";
-        } else if (this.selectedEvent.color == "Jaune") {
-          this.selectedEvent.color = "#FFFE00";
         }
         if (this.selectedEvent.role == "Annonce") {
           this.selectedEvent.role = 1;
