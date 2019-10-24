@@ -431,9 +431,9 @@ export default {
   methods: {
     async validate(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
-      if ( this.selectedEvent.nom_coach == "Mamadou") {
-        this.create_event.color = "##11D800";
-      } else if (this.selectedEvent.nom_coach == "Laurie") {
+      if (this.create_event.nom_coach == 'Mamadou') {
+        this.create_event.color = "#11D800";
+      } else if (this.create_event.nom_coach == "Laurie") {
         this.create_event.color = "#800080";
       } else {
         this.create_event.color = "#000000";
