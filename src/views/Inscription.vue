@@ -104,7 +104,15 @@ export default {
         bodyFormData.set("email", this.user.email);
         bodyFormData.set("password", this.user.password);
         bodyFormData.set("role", this.user.role);
-        await axios.post("https://sportmanagementsystemapi.herokuapp.com/api/user", bodyFormData);
+        try {
+          await axios.post("https://sportmanagementsystemapi.herokuapp.com/api/user", bodyFormData);
+        } catch (err) {
+          if (err.response.status === 403) {
+            localStorage.clear();
+            this.$router.push("login");
+            window.location.reload();
+          }
+        }      
         window.location.reload();
     },
     reset() {

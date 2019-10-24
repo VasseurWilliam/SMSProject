@@ -262,7 +262,36 @@
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
               <v-toolbar-title v-html="selectedEvent.nom_coach"></v-toolbar-title>
-              <v-spacer></v-spacer>
+              <v-spacer></v-spacer>  
+              <v-dialog v-model="dialog_ajout" persistent max-width="400px">
+                <template v-slot:activator="{ on }">
+                  <v-btn icon v-on="on">
+                    <v-icon>mdi-account-plus</v-icon>
+                  </v-btn>
+                  </template>
+                <v-card>
+                  <v-card-text>
+                    <v-col cols="12">
+                        <v-select
+                          v-model="ajout_name"
+                          :items="coach"
+                          item-text="prenom"
+                          label="Prenom Coach"
+                        ></v-select>
+                      </v-col>
+                    <div class="flex-grow-1"></div>
+                    <v-btn color="blue darken-1" text @click="ajout_event"
+                      >OUI</v-btn
+                    >
+                    <v-btn
+                      color="red darken-1"
+                      text
+                      @click="dialog_ajout = false"
+                      >NON</v-btn
+                    >
+                  </v-card-text>
+                </v-card>
+              </v-dialog>
               <v-dialog v-model="dialog_delete" persistent max-width="400px">
                 <template v-slot:activator="{ on }">
                   <v-btn icon v-on="on">
@@ -333,6 +362,7 @@ export default {
       dialog: false,
       dialog_delete: false,
       dialog_update: false,
+      dialog_ajout: false,
       enableEvents: "",
       readonly: false,
       multiple: false,
@@ -368,6 +398,7 @@ export default {
         facture_coach: "0"
       },
       id: "",
+      ajout_name: "",
       user: {
         lastname: "",
         firstname: "",
@@ -466,6 +497,18 @@ export default {
           token: localStorage.token
         }
       });
+      window.location.reload();
+    },
+    async ajout_event(){
+      var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/ajout/" + this.selectedEvent.id;
+      var bodyFormData = new FormData();
+      bodyFormData.set("nom_coach", this.ajout_name);
+      await axios.post(url, bodyFormData, {
+        headers: {
+          token: localStorage.token
+        }
+      });
+      this.dialog_ajout = false;
       window.location.reload();
     },
     async update_event(){
@@ -600,7 +643,13 @@ export default {
       this.user.lastname = response.data.data.nom;
       this.user.firstname = response.data.data.prenom;
       this.user.role = response.data.data.role;
-    } catch (err) {}
+    } catch (err) {
+      if (err.response.status === 403) {
+        localStorage.clear();
+        this.$router.push("login");
+        window.location.reload();
+      }
+    }
     if (this.user.role=="admin") {
       this.user.admin = true;
     }
