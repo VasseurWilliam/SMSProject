@@ -432,16 +432,15 @@ export default {
     async validate(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
       if ( this.selectedEvent.nom_coach == "Mamadou") {
-        this.selectedEvent.color = "##11D800";
+        this.create_event.color = "##11D800";
       } else if (this.selectedEvent.nom_coach == "Laurie") {
-        this.selectedEvent.color = "#800080";
+        this.create_event.color = "#800080";
       } else {
-        this.selectedEvent.color = "#000000";
+        this.create_event.color = "#000000";
       }
       if (this.create_event.role != null) {
         if (this.create_event.role == "Annonce") {
           this.create_event.role = 1;
-          this.create_event.color = "#B3BAFF";
         } else if (this.create_event.role == "Disponibilité") {
           this.create_event.role = 2;
         } else if (this.create_event.role == "RDV") {
