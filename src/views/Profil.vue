@@ -129,7 +129,4 @@ export default {
 </script>
 
 <style scoped>
-.account {
-    text-align: center;
-}
 </style>
