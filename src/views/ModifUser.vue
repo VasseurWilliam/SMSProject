@@ -1,19 +1,19 @@
 <template>
     <form class="flex flex-col" @submit.prevent="submitmodif">
         <div class="form-1">
-            <label for="username">Modifier votre Nom: </label>
-            <input type="text" id="username" v-model="username" >
+            <label for="nom">Modifier votre Nom: </label>
+            <input type="text" id="nom" v-model="nom" >
         </div>
         <div class="form-1">
-            <label for="pseudo">Modifier votre prenom: </label>
-            <input type="text" id="pseudo" v-model="pseudo" >
+            <label for="prenom">Modifier votre prenom: </label>
+            <input type="text" id="prenom" v-model="prenom" >
         </div>
         <div class="form-1">
             <label for="email">Modifier votre email: </label>
             <input type="text" id="email" v-model="email" >
         </div>
         <div class="form-1">
-            <label for="password">Modifier votre mot de passe: </label>
+            <label for="Mot de passe">Modifier votre mot de passe: </label>
             <input type="password" id="password" v-model="password" >
         </div>     
         <button>Valider</button>
