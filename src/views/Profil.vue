@@ -93,6 +93,8 @@ export default {
                 token: localStorage.token
             }
         });
+        this.dialog = false;
+        window.location.reload();
     }
 },
   async mounted () {
