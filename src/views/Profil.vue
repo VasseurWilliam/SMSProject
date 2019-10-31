@@ -5,7 +5,7 @@
           <p> Nom: {{ nom }}</p>
           <p> Prénom: {{ prenom }}</p>
           <p> Email: {{ email }}</p>
-          <br/>
+        </div>
           <v-dialog v-model="dialog" persistent max-width="800px">
             <template v-slot:activator="{ on }">
                 <v-btn color="primary" dark v-on="on">Modifier</v-btn>
@@ -59,8 +59,7 @@
             </v-card-actions>
             </v-card>
           </v-dialog>
-        </div>
-      </div>
+    </div>
 </template>
 
 <script>
