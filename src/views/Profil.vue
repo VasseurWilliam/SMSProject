@@ -1,7 +1,7 @@
 <template>
     <div id="acount">
         <div class="form-1">
-          <h1> donnée Utilisateur</h1>
+          <h1>Donnée utilisateur</h1>
           <p> Nom: {{ nom }}</p>
           <p> Prénom: {{ prenom }}</p>
           <p> Email: {{ email }}</p>
