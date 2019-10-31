@@ -538,7 +538,7 @@ export default {
       const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/coach");
       for (var x = 0; x < response.data.data.length; x++) {
       this.coach.push({
-        prenom: response.data.data[x].prenom
+        prenom: response.data.data[x].pseudo
         });
       }
     },
