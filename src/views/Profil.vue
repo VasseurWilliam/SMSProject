@@ -2,10 +2,9 @@
       <div id="acount">
         <div class="form-1">
           <h1> donnée Utilisateur</h1>
-          <p> Username: {{ username }}</p>
-          <p> Pseudo: {{ pseudo }}</p>
+          <p> Nom: {{ nom }}</p>
+          <p> Prénom: {{ prenom }}</p>
           <p> Email: {{ email }}</p>
-          <p> Date de création: {{ date }}</p>
           <br/>
           <router-link class="route" to="/ModifUser">Modifier</router-link>
         </div>
@@ -18,10 +17,9 @@ import axios from 'axios';
 export default {
   data() {
     return {
-      username: null,
-      pseudo: null,
+      nom: null,
+      prenom: null,
       email: null,
-      color: null,
     };
   },
   async mounted () {
@@ -32,10 +30,9 @@ export default {
           token: localStorage.token
         }
       })
-      this.username = response.data.data.username;
-      this.pseudo = response.data.data.pseudo;
+      this.nom = response.data.data.nom;
+      this.prenom = response.data.data.prenom;
       this.email = response.data.data.email;
-      this.color = response.data.data.color;
     } catch(err) {
       console.log(err)
     }
