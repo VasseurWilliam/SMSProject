@@ -1,6 +1,6 @@
 <template>
     <div id="acount">
-        <div class="form-1">
+        <div class="info">
           <h1>Donnée utilisateur</h1>
           <p> Nom: {{ nom }}</p>
           <p> Prénom: {{ prenom }}</p>
@@ -129,4 +129,7 @@ export default {
 </script>
 
 <style scoped>
+.info {
+    text-align: center;
+}
 </style>
