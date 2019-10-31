@@ -463,8 +463,8 @@ export default {
       });
       var i;
       for(i = 0; i < create_event.nb; i++) {
-        this.create_event.start = new Date(create_event.start.getDate()+7);
-        this.create_event.end = new Date(create_event.start.getDate()+7);
+        this.create_event.start.getDate() = new Date(create_event.start.getDate()+7);
+        this.create_event.end.getDate() = new Date(create_event.start.getDate()+7);
         bodyFormData.set("titre", this.create_event.name);
         bodyFormData.set("nom_coach", this.create_event.nom_coach);
         bodyFormData.set("details", this.create_event.details);
