@@ -21,6 +21,15 @@
         ></v-text-field>
 
         <v-text-field
+          v-model="user.pseudo"
+          :counter="15"
+          :rules="pseudoRules"
+          label="Pseudo"
+          required
+          autocomplete="off"
+        ></v-text-field>
+
+        <v-text-field
           v-model="user.email"
           :rules="emailRules"
           label="Email"
@@ -78,6 +87,7 @@ export default {
       user: {
         lastname: "",
         firstname: "",
+        pseudo: "",
         email: "",
         password: "",
         role: "coach",
@@ -93,6 +103,10 @@ export default {
       token: "",
       valid: false,
       lastnameRules: [
+        v => !!v || "Ce champs est requis",
+        v => v.length < 15 || "15 caractères maximum"
+      ],
+      pseudoRules: [
         v => !!v || "Ce champs est requis",
         v => v.length < 15 || "15 caractères maximum"
       ],
@@ -119,6 +133,7 @@ export default {
         var bodyFormData = new FormData();
         bodyFormData.set("nom", this.user.lastname);
         bodyFormData.set("prenom", this.user.firstname);
+        bodyFormData.set("pseudo", this.user.pseudo);
         bodyFormData.set("email", this.user.email);
         bodyFormData.set("password", this.user.password);
         bodyFormData.set("role", this.user.role);

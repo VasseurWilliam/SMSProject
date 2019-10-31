@@ -4,6 +4,7 @@
           <h1>Donnée utilisateur</h1>
           <p> Nom: {{ nom }}</p>
           <p> Prénom: {{ prenom }}</p>
+          <p> Pseudo: {{ pseudo }}</p>
           <p> Email: {{ email }}</p>
         </div>
           <v-dialog v-model="dialog" persistent max-width="800px">
@@ -29,6 +30,13 @@
                           label="Prénom"
                           required
                           v-model="prenom"
+                        ></v-text-field>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Pseudo"
+                          required
+                          v-model="pseudo"
                         ></v-text-field>
                       </v-col>
                       <v-col cols="12">
@@ -71,6 +79,7 @@ export default {
       dialog: false,
       nom: null,
       prenom: null,
+      pseudo: null,
       email: null,
       password: null,
       role: null,
@@ -84,6 +93,7 @@ export default {
         .put(url, {
             nom: this.nom,
             prenom: this.prenom,
+            pseudo: this.pseudo,
             email: this.email,
             password: this.password,
             role: this.role,
@@ -107,6 +117,7 @@ export default {
       })
       this.nom = response.data.data.nom;
       this.prenom = response.data.data.prenom;
+      this.pseudo = response.data.data.pseudo;
       this.email = response.data.data.email;
       this.role = response.data.data.role;
       this.color = response.data.data.color;
