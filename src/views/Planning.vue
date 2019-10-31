@@ -431,13 +431,6 @@ export default {
   methods: {
     async validate(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
-      if (this.create_event.nom_coach == 'Mamadou') {
-        this.create_event.color = "#11D800";
-      } else if (this.create_event.nom_coach == "Laurie") {
-        this.create_event.color = "#800080";
-      } else {
-        this.create_event.color = "#000000";
-      }
       if (this.create_event.role != null) {
         if (this.create_event.role == "Annonce") {
           this.create_event.role = 1;
@@ -453,7 +446,6 @@ export default {
       bodyFormData.set("details", this.create_event.details);
       bodyFormData.set("date_debut", this.create_event.start);
       bodyFormData.set("date_fin", this.create_event.end);
-      bodyFormData.set("color", this.create_event.color);
       bodyFormData.set("role", this.create_event.role);
       bodyFormData.set("facture_client", this.create_event.facture_client);
       bodyFormData.set("facture_coach", this.create_event.facture_coach);
@@ -489,13 +481,6 @@ export default {
     },
     async update_event(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
-        if ( this.selectedEvent.nom_coach == "Mamadou") {
-          this.selectedEvent.color = "##11D800";
-        } else if (this.selectedEvent.nom_coach == "Laurie") {
-          this.selectedEvent.color = "#800080";
-        } else {
-          this.selectedEvent.color = "#000000";
-        }
         if (this.selectedEvent.role == "Annonce") {
           this.selectedEvent.role = 1;
         } else if (this.selectedEvent.role == "Disponibilité") {

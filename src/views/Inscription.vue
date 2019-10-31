@@ -39,6 +39,18 @@
           @click:append="user.show1 = !user.show1"
           autocomplete="off"
         ></v-text-field>
+        
+        <v-color-picker
+          v-model="user.color"
+          :hide-canvas="hideCanvas"
+          :hide-inputs="hideInputs"
+          :hide-mode-switch="hideModeSwitch"
+          :mode.sync="mode"
+          :show-swatches="showSwatches"
+          class="mx-auto"
+        ></v-color-picker>
+        
+        <br />
 
         <v-btn
           :disabled="!valid"
@@ -69,8 +81,14 @@ export default {
         email: "",
         password: "",
         role: "coach",
+        color : "",
         show1: false
       },
+      mode: "hexa",
+      hideCanvas: true,
+      hideInputs: true,
+      hideModeSwitch: true,
+      showSwatches: false,
       id: "",
       token: "",
       valid: false,
@@ -104,6 +122,7 @@ export default {
         bodyFormData.set("email", this.user.email);
         bodyFormData.set("password", this.user.password);
         bodyFormData.set("role", this.user.role);
+        bodyFormData.set("color", this.user.color);
         try {
           await axios.post("https://sportmanagementsystemapi.herokuapp.com/api/user", bodyFormData);
         } catch (err) {
