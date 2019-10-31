@@ -27,7 +27,7 @@
                           v-model="create_event.nom_coach"
                           :items="coach"
                           item-text="prenom"
-                          label="Prenom Coach"
+                          label="Pseudo Coach"
                         ></v-select>
                       </v-col>
                       <div v-if="user.admin">
