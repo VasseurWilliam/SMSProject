@@ -67,6 +67,12 @@
                           minuteInterval="10"
                         />
                       </v-col>
+                      <v-col cols="12">
+                        <v-textarea
+                          label="Nombre de Répétition"
+                          v-model="create_event.nb"
+                        ></v-textarea>
+                      </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
                           v-model="create_event.role"
@@ -380,7 +386,8 @@ export default {
         durée: "",
         role: "",
         facture_client: "0",
-        facture_coach: "0"
+        facture_coach: "0",
+        nb: "0",
       },
       id: "",
       ajout_name: "",
@@ -454,6 +461,24 @@ export default {
           token: localStorage.token
         }
       });
+      var i;
+      for(i = 0; i < create_event.nb; i++) {
+        this.create_event.start = new Date(create_event.start.getDate()+7);
+        this.create_event.end = new Date(create_event.start.getDate()+7);
+        bodyFormData.set("titre", this.create_event.name);
+        bodyFormData.set("nom_coach", this.create_event.nom_coach);
+        bodyFormData.set("details", this.create_event.details);
+        bodyFormData.set("date_debut", this.create_event.start);
+        bodyFormData.set("date_fin", this.create_event.end);
+        bodyFormData.set("role", this.create_event.role);
+        bodyFormData.set("facture_client", this.create_event.facture_client);
+        bodyFormData.set("facture_coach", this.create_event.facture_coach);
+        await axios.post(url, bodyFormData, {
+          headers: {
+            token: localStorage.token
+          }
+        });
+      }
       this.dialog = false;
       window.location.reload();
     },
