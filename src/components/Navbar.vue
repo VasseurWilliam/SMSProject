@@ -95,10 +95,12 @@ export default {
       items_admin: [
         // https://cdn.materialdesignicons.com/1.1.34/
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
-        { title: "Inscription", icon: "mdi-account-plus", route: "/inscription"}
+        { title: "Inscription", icon: "mdi-account-plus", route: "/inscription"},
+        { title: "Profil", icon: "mdi-account", route: "/profil"}
       ],
       items_coach: [
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
+        { title: "Profil", icon: "mdi-account", route: "/profil"}
       ],
       items_noauth: [
         { title: "Connexion", icon: "mdi-login", route: "/login" },

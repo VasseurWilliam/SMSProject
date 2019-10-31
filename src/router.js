@@ -5,6 +5,7 @@ import Authentification from "./views/Authentification.vue";
 import Inscription from "./views/Inscription.vue";
 import Planning from "./views/Planning.vue";
 import Annonce from "./views/Annonce.vue";
+import Profil from "./views/Profil.vue";
 
 Vue.use(Router);
 
@@ -21,6 +22,11 @@ export default new Router({
       path: "/annonce",
       name: "annonce",
       component: Annonce
+    },
+    {
+      path: "/profil",
+      name: "profil",
+      component: Profil
     },
     {
       path: "/login",
