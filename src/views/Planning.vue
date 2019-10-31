@@ -461,7 +461,7 @@ export default {
           token: localStorage.token
         }
       });
-      var i;
+      /*var i;
       if(this.create_event.nb != 0) {
         for(i = 0; i < this.create_event.nb; i++) {
           this.create_event.start = new Date(this.create_event.start.getFullYear(), this.create_event.start.getMonth(), this.create_event.start.getDate()+7);
@@ -480,7 +480,7 @@ export default {
             }
           });
         }
-      }
+      }*/
       this.dialog = false;
       window.location.reload();
     },
