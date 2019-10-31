@@ -72,7 +72,9 @@ export default {
       nom: null,
       prenom: null,
       email: null,
-      password: null
+      password: null,
+      role: null,
+      color: null
     };
   },
   methods: {
@@ -84,6 +86,8 @@ export default {
             prenom: this.prenom,
             email: this.email,
             password: this.password,
+            role: this.role,
+            color: this.color,
         }, {
             headers: {
                 token: localStorage.token
@@ -102,6 +106,8 @@ export default {
       this.nom = response.data.data.nom;
       this.prenom = response.data.data.prenom;
       this.email = response.data.data.email;
+      this.role = response.data.data.role;
+      this.color = response.data.data.color;
     } catch(err) {
       console.log(err)
     }
