@@ -1,5 +1,5 @@
 <template>
-    <div id="acount">
+    <div class="acount">
         <div class="info">
           <h1>Donnée utilisateur</h1>
           <p> Nom: {{ nom }}</p>
@@ -129,7 +129,7 @@ export default {
 </script>
 
 <style scoped>
-.info {
+.account {
     text-align: center;
 }
 </style>
