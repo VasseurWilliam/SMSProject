@@ -462,22 +462,24 @@ export default {
         }
       });
       var i;
-      for(i = 0; i < create_event.nb; i++) {
-        this.create_event.start.getDate() = new Date(create_event.start.getDate()+7);
-        this.create_event.end.getDate() = new Date(create_event.start.getDate()+7);
-        bodyFormData.set("titre", this.create_event.name);
-        bodyFormData.set("nom_coach", this.create_event.nom_coach);
-        bodyFormData.set("details", this.create_event.details);
-        bodyFormData.set("date_debut", this.create_event.start);
-        bodyFormData.set("date_fin", this.create_event.end);
-        bodyFormData.set("role", this.create_event.role);
-        bodyFormData.set("facture_client", this.create_event.facture_client);
-        bodyFormData.set("facture_coach", this.create_event.facture_coach);
-        await axios.post(url, bodyFormData, {
-          headers: {
-            token: localStorage.token
-          }
-        });
+      if(this.create_event.nb != 0) {
+        for(i = 0; i < this.create_event.nb; i++) {
+          this.create_event.start = new Date(this.create_event.start.getFullYear(), this.create_event.start.getMonth(), this.create_event.start.getDate()+7);
+          this.create_event.end = new Date(this.create_event.end.getFullYear(), this.create_event.end.getMonth(), this.create_event.end.getDate()+7);
+          bodyFormData.set("titre", this.create_event.name);
+          bodyFormData.set("nom_coach", this.create_event.nom_coach);
+          bodyFormData.set("details", this.create_event.details);
+          bodyFormData.set("date_debut", this.create_event.start);
+          bodyFormData.set("date_fin", this.create_event.end);
+          bodyFormData.set("role", this.create_event.role);
+          bodyFormData.set("facture_client", this.create_event.facture_client);
+          bodyFormData.set("facture_coach", this.create_event.facture_coach);
+          await axios.post(url, bodyFormData, {
+            headers: {
+              token: localStorage.token
+            }
+          });
+        }
       }
       this.dialog = false;
       window.location.reload();
