@@ -56,7 +56,7 @@
                           format="YYYY-MM-DD HH:mm"
                           formatted="YYYY-MM-DD HH:mm"
                           label="Date et heure de début"
-                          minuteInterval="10"
+                          minuteInterval="5"
                         />
                         <br />
                         <VueCtkDateTimePicker
@@ -64,7 +64,7 @@
                           format="YYYY-MM-DD HH:mm"
                           formatted="YYYY-MM-DD HH:mm"
                           label="Date et heure de fin"
-                          minuteInterval="10"
+                          minuteInterval="5"
                         />
                       </v-col>
                       <v-col cols="12">
@@ -212,7 +212,7 @@
                           format="YYYY-MM-DD HH:mm"
                           formatted="YYYY-MM-DD HH:mm"
                           label="Date et heure de début"
-                          minuteInterval="10"
+                          minuteInterval="5"
                         />
                         <br />
                         <VueCtkDateTimePicker
@@ -220,7 +220,7 @@
                           format="YYYY-MM-DD HH:mm"
                           formatted="YYYY-MM-DD HH:mm"
                           label="Date et heure de fin"
-                          minuteInterval="10"
+                          minuteInterval="5"
                         />
                       </v-col>
                       <v-col cols="12" sm="6">
