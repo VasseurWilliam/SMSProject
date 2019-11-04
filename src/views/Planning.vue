@@ -67,6 +67,12 @@
                           minuteInterval="10"
                         />
                       </v-col>
+                      <v-col cols="12">
+                        <v-textarea
+                          label="Nombre de Répétition"
+                          v-model="create_event.nb"
+                        ></v-textarea>
+                      </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
                           v-model="create_event.role"
@@ -246,8 +252,6 @@
                 </v-dialog>
               </v-row>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-              <v-spacer></v-spacer>
-              <v-toolbar-title v-html="selectedEvent.nom_coach"></v-toolbar-title>
               <v-spacer></v-spacer>  
               <v-dialog v-model="dialog_ajout" persistent max-width="400px">
                 <template v-slot:activator="{ on }">
@@ -301,6 +305,11 @@
                 </v-card>
               </v-dialog>
             </v-toolbar>
+            <v-card-text>
+              <p>Pseudo coach : 
+              <span v-html="selectedEvent.nom_coach"></span>
+              </p>
+            </v-card-text>
             <v-card-text>
               <span v-html="selectedEvent.details"></span>
             </v-card-text>
@@ -369,7 +378,7 @@ export default {
         day: "Jour",
         "4day": "4 jour"
       },
-      role: ["Annonce", "Disponibilité", "RDV"],
+      role: ["Je suis disponible", "rendez-vous pour une séance"],
       create_event: {
         name: "",
         nom_coach: "",
@@ -432,15 +441,6 @@ export default {
   methods: {
     async validate(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
-      if (this.create_event.role != null) {
-        if (this.create_event.role == "Annonce") {
-          this.create_event.role = 1;
-        } else if (this.create_event.role == "Disponibilité") {
-          this.create_event.role = 2;
-        } else if (this.create_event.role == "RDV") {
-          this.create_event.role = 3;
-        }
-      }
       var bodyFormData = new FormData();
       bodyFormData.set("titre", this.create_event.name);
       bodyFormData.set("nom_coach", this.create_event.nom_coach);
@@ -455,6 +455,32 @@ export default {
           token: localStorage.token
         }
       });
+      var i;
+      if(this.create_event.nb != 0) {
+        for(i = 0; i < this.create_event.nb; i++) {
+          var oldTime = this.create_event.start.split(' ')[1]; 
+          var start = new Date(this.create_event.start); 
+          var [date, month, year] = new Date(start.getFullYear(), start.getMonth(), start.getDate()+7).toLocaleDateString().split('/'); 
+          this.create_event.start = year + '-' + month + '-' + date + ' ' + oldTime;
+          var oldTimeend = this.create_event.end.split(' ')[1]; 
+          var end = new Date(this.create_event.end); 
+          var [date, month, year] = new Date(end.getFullYear(), end.getMonth(), end.getDate()+7).toLocaleDateString().split('/'); 
+          this.create_event.end = year + '-' + month + '-' + date + ' ' + oldTimeend;
+          bodyFormData.set("titre", this.create_event.name);
+          bodyFormData.set("nom_coach", this.create_event.nom_coach);
+          bodyFormData.set("details", this.create_event.details);
+          bodyFormData.set("date_debut", this.create_event.start);
+          bodyFormData.set("date_fin", this.create_event.end);
+          bodyFormData.set("role", this.create_event.role);
+          bodyFormData.set("facture_client", this.create_event.facture_client);
+          bodyFormData.set("facture_coach", this.create_event.facture_coach);
+          await axios.post(url, bodyFormData, {
+            headers: {
+              token: localStorage.token
+            }
+          });
+        }
+      }
       this.dialog = false;
       window.location.reload();
     },
@@ -482,13 +508,6 @@ export default {
     },
     async update_event(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
-        if (this.selectedEvent.role == "Annonce") {
-          this.selectedEvent.role = 1;
-        } else if (this.selectedEvent.role == "Disponibilité") {
-          this.selectedEvent.role = 2;
-        } else if (this.selectedEvent.role == "RDV") {
-          this.selectedEvent.role = 3;
-        }
       await axios.put(
         url,
         {
