@@ -461,12 +461,13 @@ export default {
           token: localStorage.token
         }
       });
-      /*var i;
+      var i;
       if(this.create_event.nb != 0) {
         for(i = 0; i < this.create_event.nb; i++) {
           this.create_event.start = new Date(this.create_event.start.getFullYear(), this.create_event.start.getMonth(), this.create_event.start.getDate()+7);
           this.create_event.end = new Date(this.create_event.end.getFullYear(), this.create_event.end.getMonth(), this.create_event.end.getDate()+7);
-          bodyFormData.set("titre", this.create_event.name);
+          console.log(this.create_event.start);
+          /*bodyFormData.set("titre", this.create_event.name);
           bodyFormData.set("nom_coach", this.create_event.nom_coach);
           bodyFormData.set("details", this.create_event.details);
           bodyFormData.set("date_debut", this.create_event.start);
@@ -478,9 +479,9 @@ export default {
             headers: {
               token: localStorage.token
             }
-          });
+          });*/
         }
-      }*/
+      }
       this.dialog = false;
       window.location.reload();
     },
