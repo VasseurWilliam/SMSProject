@@ -68,10 +68,10 @@
                         />
                       </v-col>
                       <v-col cols="12">
-                        <v-textarea
+                        <v-text-field
                           label="Nombre de Répétition"
                           v-model="create_event.nb"
-                        ></v-textarea>
+                        ></v-text-field>
                       </v-col>
                       <v-col cols="12" sm="6">
                         <v-select
