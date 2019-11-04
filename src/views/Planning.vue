@@ -442,6 +442,9 @@ export default {
     async validate(){
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
       var bodyFormData = new FormData();
+      if (this.create_event.nom_coach == null) {
+        this.create_event.nom_coach = "Benoit_C"
+      } 
       bodyFormData.set("titre", this.create_event.name);
       bodyFormData.set("nom_coach", this.create_event.nom_coach);
       bodyFormData.set("details", this.create_event.details);
@@ -507,6 +510,9 @@ export default {
       window.location.reload();
     },
     async update_event(){
+      if (this.selectedEvent.nom_coach == null) {
+        this.selectedEvent.nom_coach = "Benoit_C"
+      } 
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
       await axios.put(
         url,
