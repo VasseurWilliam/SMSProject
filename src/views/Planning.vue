@@ -510,9 +510,6 @@ export default {
       window.location.reload();
     },
     async update_event(){
-      if (this.selectedEvent.nom_coach == null) {
-        this.selectedEvent.nom_coach = "Benoit_C";
-      } 
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
       await axios.put(
         url,
