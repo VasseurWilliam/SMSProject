@@ -49,7 +49,14 @@
           autocomplete="off"
         ></v-text-field>
         
-        <v-color-picker
+        <v-select
+          v-model="user.role"
+          :items="item"
+          item-text="role"
+          label="role"
+          ></v-select>
+
+        <v-color-picker v-if="this.user.role === 'coach'"
           v-model="user.color"
           :hide-canvas="hideCanvas"
           :hide-inputs="hideInputs"
@@ -90,10 +97,11 @@ export default {
         pseudo: "",
         email: "",
         password: "",
-        role: "coach",
+        role: "",
         color : "",
         show1: false
       },
+      item: ["coach", "sociéte"],
       mode: "hexa",
       hideCanvas: true,
       hideInputs: true,
@@ -130,6 +138,9 @@ export default {
   },
   methods: {
     async validate() {
+        if (this.user.role == 'sociéte') {
+          this.user.color = "#000000";
+        }
         var bodyFormData = new FormData();
         bodyFormData.set("nom", this.user.nom);
         bodyFormData.set("prenom", this.user.prenom);
