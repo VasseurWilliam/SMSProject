@@ -3,18 +3,18 @@
     <v-flex xs12 sm6 md4 lg6>
       <v-form ref="form" v-model="valid" lazy-validation class="text-center">
         <v-text-field
-          v-model="user.lastname"
+          v-model="user.nom"
           :counter="15"
-          :rules="lastnameRules"
+          :rules="nomRules"
           label="Nom"
           required
           autocomplete="off"
         ></v-text-field>
 
         <v-text-field
-          v-model="user.firstname"
+          v-model="user.prenom"
           :counter="15"
-          :rules="firstnameRules"
+          :rules="prenomRules"
           label="Prénom"
           required
           autocomplete="off"
@@ -85,8 +85,8 @@ export default {
   data() {
     return {
       user: {
-        lastname: "",
-        firstname: "",
+        nom: "",
+        prenom: "",
         pseudo: "",
         email: "",
         password: "",
@@ -102,7 +102,7 @@ export default {
       id: "",
       token: "",
       valid: false,
-      lastnameRules: [
+      nomRules: [
         v => !!v || "Ce champs est requis",
         v => v.length < 15 || "15 caractères maximum"
       ],
@@ -110,7 +110,7 @@ export default {
         v => !!v || "Ce champs est requis",
         v => v.length < 15 || "15 caractères maximum"
       ],
-      firstnameRules: [
+      prenomRules: [
         v => !!v || "Ce champs est requis",
         v => v.length < 15 || "15 caractères maximum"
       ],
@@ -131,8 +131,8 @@ export default {
   methods: {
     async validate() {
         var bodyFormData = new FormData();
-        bodyFormData.set("nom", this.user.lastname);
-        bodyFormData.set("prenom", this.user.firstname);
+        bodyFormData.set("nom", this.user.nom);
+        bodyFormData.set("prenom", this.user.prenom);
         bodyFormData.set("pseudo", this.user.pseudo);
         bodyFormData.set("email", this.user.email);
         bodyFormData.set("password", this.user.password);
