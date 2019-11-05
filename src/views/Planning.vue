@@ -161,6 +161,7 @@
           <v-card color="grey lighten-4" min-width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
               <v-row>
+                <div v-if="user.client">
                 <v-dialog v-model="dialog_update" persistent max-width="800px">
                   <template v-slot:activator="{ on }">
                     <v-btn icon dark v-on="on">
@@ -254,9 +255,11 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
+                <div v-if="user.client">
               </v-row>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
-              <v-spacer></v-spacer>  
+              <v-spacer></v-spacer>
+              <div v-if="user.client">  
               <v-dialog v-model="dialog_ajout" persistent max-width="400px">
                 <template v-slot:activator="{ on }">
                   <v-btn icon v-on="on">
@@ -286,6 +289,7 @@
                   </v-card-text>
                 </v-card>
               </v-dialog>
+              <div v-if="user.client">
               <v-dialog v-model="dialog_delete" persistent max-width="400px">
                 <template v-slot:activator="{ on }">
                   <v-btn icon v-on="on">
@@ -586,7 +590,7 @@ export default {
         });
       }
     },
-    async get_Coach(){
+    async get_Client(){
       const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/client");
       for (var x = 0; x < response.data.data.length; x++) {
       this.client.push({
@@ -639,6 +643,7 @@ export default {
   async mounted() {
     setTimeout(this.get_Event, 100);
     setTimeout(this.get_Coach, 100);
+    setTimeout(this.get_Client, 100);
     try {
       this.id = localStorage.id;
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
