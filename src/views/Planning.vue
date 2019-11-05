@@ -602,21 +602,23 @@ export default {
       for (var x = 0; x < response.data.data.length; x++) {
         var sTime = response.data.data[x].date_debut.split(' ')[1];
         var eTime = response.data.data[x].date_fin.split(' ')[1];
-      this.events.push({
-        id: response.data.data[x].id,
-        name: response.data.data[x].titre,
-        nom_coach: response.data.data[x].nom_coach,
-        details: response.data.data[x].details,
-        start: response.data.data[x].date_debut,
-        end: response.data.data[x].date_fin,
-        color: response.data.data[x].color,
-        user_id: response.data.data[x].user_id,
-        facture_coach: response.data.data[x].facture_coach,
-        facture_client: response.data.data[x].facture_client,
-        role: response.data.data[x].role,
-        heure_debut: sTime,
-        heure_fin: eTime
-        });
+        if(response.data.data[x].role != "annonce") {
+          this.events.push({
+          id: response.data.data[x].id,
+          name: response.data.data[x].titre,
+          nom_coach: response.data.data[x].nom_coach,
+          details: response.data.data[x].details,
+          start: response.data.data[x].date_debut,
+          end: response.data.data[x].date_fin,
+          color: response.data.data[x].color,
+          user_id: response.data.data[x].user_id,
+          facture_coach: response.data.data[x].facture_coach,
+          facture_client: response.data.data[x].facture_client,
+          role: response.data.data[x].role,
+          heure_debut: sTime,
+          heure_fin: eTime
+          });
+        }
       }
     },
     async get_Coach(){
