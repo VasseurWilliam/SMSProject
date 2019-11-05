@@ -332,9 +332,12 @@
               <span v-html="selectedEvent.heure_fin"></span>
               </p>
             </v-card-text>
-            <v-card-text v-if='selectedEvent.details!=null'>
+            <div v-if='selectedEvent.details!=null'>
+            <v-card-text>
+              <p>détails : 
               <span v-html="selectedEvent.details"></span>
             </v-card-text>
+            </div>
             <v-card-actions>
               <v-btn text color="secondary" @click="selectedOpen = false">
                 Fermer
