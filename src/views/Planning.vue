@@ -4,6 +4,7 @@
       <v-sheet height="64">
         <v-toolbar flat color="white">
           <v-row>
+          <div v-if="user.client">
             <v-dialog v-model="dialog" persistent max-width="800px">
               <template v-slot:activator="{ on }">
                 <v-btn color="primary" dark v-on="on">Evenement</v-btn>
@@ -98,6 +99,7 @@
                 </v-card-actions>
               </v-card>
             </v-dialog>
+            </div>
           </v-row>
           <v-btn outlined class="mr-4" @click="setToday">
             Aujourd'hui
@@ -413,6 +415,7 @@ export default {
         firstname: "",
         role: "",
         admin: "",
+        client: "",
       }
     };
   },
@@ -656,6 +659,9 @@ export default {
     }
     if (this.user.role=="admin") {
       this.user.admin = true;
+    }
+    if (this.user.role!="client") {
+      this.user.client = true;
     }
   }  
 };
