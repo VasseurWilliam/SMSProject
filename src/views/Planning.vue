@@ -81,7 +81,16 @@
                           v-model="create_event.nb"
                         ></v-text-field>
                       </v-col>
-                      <v-col cols="12" sm="6">
+                      <v-col cols="12" sm="6" v-if="user.admin">
+                        <v-select
+                          v-model="create_event.role"
+                          :items="role_admin"
+                          :rules="[v => !!v || 'Item is required']"
+                          label="type d'évenement"
+                          required
+                        ></v-select>
+                      </v-col>
+                      <v-col cols="12" sm="6" v-else>
                         <v-select
                           v-model="create_event.role"
                           :items="role"
@@ -240,9 +249,18 @@
                           minuteInterval="5"
                         />
                       </v-col>
-                      <v-col cols="12" sm="6">
+                      <v-col cols="12" sm="6" v-if="user.admin">
                         <v-select
-                          v-model="selectedEvent.role"
+                          v-model="create_event.role"
+                          :items="role_admin"
+                          :rules="[v => !!v || 'Item is required']"
+                          label="type d'évenement"
+                          required
+                        ></v-select>
+                      </v-col>
+                      <v-col cols="12" sm="6" v-else>
+                        <v-select
+                          v-model="create_event.role"
                           :items="role"
                           :rules="[v => !!v || 'Item is required']"
                           label="type d'évenement"
@@ -401,6 +419,8 @@ export default {
       id: "",
       mode: "hexa",
       format: "24hr",
+      role: ["Je suis disponible", "rendez-vous pour une séance"],
+      role_admin: ["Je suis disponible", "rendez-vous pour une séance", "annonce"],
       events: [],
       coach: [],
       client: [],
@@ -410,7 +430,6 @@ export default {
         day: "Jour",
         "4day": "4 jour"
       },
-      role: ["Je suis disponible", "rendez-vous pour une séance"],
       create_event: {
         name: "",
         nom_coach: "",
@@ -478,6 +497,9 @@ export default {
       if (this.create_event.nom_coach == null) {
         this.create_event.nom_coach = "Benoit_C";
       } 
+      if (this.create_event.role == "annonce") {
+        this.create_event.color = "#0099AD"
+      }
       bodyFormData.set("titre", this.create_event.name);
       bodyFormData.set("nom_coach", this.create_event.nom_coach);
       bodyFormData.set("details", this.create_event.details);
@@ -542,7 +564,10 @@ export default {
       this.dialog_ajout = false;
       window.location.reload();
     },
-    async update_event(){
+    async update_event() {
+      if (this.selectedEvent.role == "annonce") {
+        this.selectedEvent.color = "#0099AD"
+      }
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
       await axios.put(
         url,
@@ -555,7 +580,7 @@ export default {
           date_debut: this.selectedEvent.start,
           date_fin: this.selectedEvent.end,
           color: this.selectedEvent.color,
-          role: this.selectedEvent.role
+          role: this.selectedEvent.role,
         },
         {
           headers: {

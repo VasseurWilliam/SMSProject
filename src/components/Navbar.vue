@@ -96,15 +96,16 @@ export default {
         // https://cdn.materialdesignicons.com/1.1.34/
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
         { title: "Inscription", icon: "mdi-account-plus", route: "/inscription"},
+        { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" },
         { title: "Profil", icon: "mdi-account", route: "/profil"}
       ],
       items_coach: [
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
-        { title: "Profil", icon: "mdi-account", route: "/profil"}
+        { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" },
+        { title: "Profil", icon: "mdi-account", route: "/profil"}       
       ],
       items_noauth: [
-        { title: "Connexion", icon: "mdi-login", route: "/login" },
-        { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" }
+        { title: "Connexion", icon: "mdi-login", route: "/login" },       
       ],
       color: "black",
       colors: ["primary", "blue", "success", "red", "teal"],
