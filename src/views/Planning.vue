@@ -18,11 +18,17 @@
                     <v-row>
                       <v-col cols="12">
                         <v-select
-                          v-model="selectedEvent.name"
+                          v-model="create_event.name"
                           :items="client"
                           item-text="name"
                           label="Client*"
                         ></v-select>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Autre client"
+                          v-model="create_event.name"
+                        ></v-text-field>
                       </v-col>
                       <v-col cols="12">
                         <v-select
@@ -182,6 +188,12 @@
                           item-text="name"
                           label="Client*"
                         ></v-select>
+                      </v-col>
+                      <v-col cols="12">
+                        <v-text-field
+                          label="Autre client"
+                          v-model="selectedEvent.name"
+                        ></v-text-field>
                       </v-col>
                       <v-col cols="12">
                         <v-select
