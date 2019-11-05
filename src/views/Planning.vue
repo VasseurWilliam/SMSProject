@@ -16,11 +16,12 @@
                   <v-container>
                     <v-row>
                       <v-col cols="12">
-                        <v-text-field
+                        <v-select
+                          v-model="selectedEvent.name"
+                          :items="client"
+                          item-text="name"
                           label="Client*"
-                          required
-                          v-model="create_event.name"
-                        ></v-text-field>
+                        ></v-select>
                       </v-col>
                       <v-col cols="12">
                         <v-select
@@ -172,11 +173,12 @@
                   <v-container>
                     <v-row>
                       <v-col cols="12">
-                        <v-text-field
-                          label="Client*"
-                          required
+                        <v-select
                           v-model="selectedEvent.name"
-                        ></v-text-field>
+                          :items="client"
+                          item-text="name"
+                          label="Client*"
+                        ></v-select>
                       </v-col>
                       <v-col cols="12">
                         <v-select
@@ -383,6 +385,7 @@ export default {
       format: "24hr",
       events: [],
       coach: [],
+      client: [],
       typeToLabel: {
         month: "Mois",
         week: "Semaine",
@@ -577,6 +580,14 @@ export default {
       for (var x = 0; x < response.data.data.length; x++) {
       this.coach.push({
         prenom: response.data.data[x].pseudo
+        });
+      }
+    },
+    async get_Coach(){
+      const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/client");
+      for (var x = 0; x < response.data.data.length; x++) {
+      this.client.push({
+        name: response.data.data[x].pseudo
         });
       }
     },
