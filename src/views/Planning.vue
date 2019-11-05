@@ -325,6 +325,16 @@
               <span v-html="selectedEvent.facture_coach"></span>€
               </p>
             </v-card-text>
+            <v-card-text>
+              <p>heure de début :  
+              <span v-html="selectedEvent.heure_debut"></span>
+              </p>
+            </v-card-text>
+            <v-card-text>
+              <p>heure de fin :  
+              <span v-html="selectedEvent.heure_fin"></span>
+              </p>
+            </v-card-text>
             <v-card-actions>
               <v-btn text color="secondary" @click="selectedOpen = false">
                 Fermer
@@ -542,6 +552,8 @@ export default {
         }
       });
       for (var x = 0; x < response.data.data.length; x++) {
+        var sTime = response.data.data[x].date_debut.split(' ')[1];
+        var eTime = response.data.data[x].date_fin.split(' ')[1];
       this.events.push({
         id: response.data.data[x].id,
         name: response.data.data[x].titre,
@@ -554,6 +566,8 @@ export default {
         facture_coach: response.data.data[x].facture_coach,
         facture_client: response.data.data[x].facture_client,
         role: response.data.data[x].role,
+        heure_debut: sTime,
+        heure_fin: eTime
         });
       }
     },
