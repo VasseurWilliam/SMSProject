@@ -310,9 +310,6 @@
               <span v-html="selectedEvent.nom_coach"></span>
               </p>
             </v-card-text>
-            <v-card-text>
-              <span v-html="selectedEvent.details"></span>
-            </v-card-text>
             <div v-if="user.admin">
             <v-card-text>
               <p>facture client : 
@@ -334,6 +331,9 @@
               <p>heure de fin :  
               <span v-html="selectedEvent.heure_fin"></span>
               </p>
+            </v-card-text>
+            <v-card-text v-if='selectedEvent.details!=null'>
+              <span v-html="selectedEvent.details"></span>
             </v-card-text>
             <v-card-actions>
               <v-btn text color="secondary" @click="selectedOpen = false">
