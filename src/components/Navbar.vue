@@ -102,7 +102,7 @@ export default {
         { title: "Inscription", icon: "mdi-account-plus", route: "/inscription"}
       ],
       items_coach: [
-        { title: "Profil", icon: "mdi-account", route: "/profil"}
+        { title: "Profil", icon: "mdi-account", route: "/profil"},
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
         { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" }       
       ],
