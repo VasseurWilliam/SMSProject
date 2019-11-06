@@ -48,6 +48,7 @@
           :event-margin-bottom="3"
           :now="today"
           :type="type"
+          :weekdays="weekdays"
           @click:event="showEvent"
           @click:more="viewDay"
           @click:date="viewDay"

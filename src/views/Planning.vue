@@ -161,6 +161,7 @@
           :event-margin-bottom="3"
           :now="today"
           :type="type"
+          :weekdays="weekdays"
           @click:event="showEvent"
           @click:more="viewDay"
           @click:date="viewDay"
@@ -391,11 +392,14 @@
 <script>
 import axios from "axios";
 
+const weekdaysDefault = [1, 2, 3, 4, 5, 6, 0]
+
 export default {
   data() {
     return {
       today: new Date().toISOString().slice(0, 10),
       focus: new Date().toISOString().slice(0, 10),
+      weekdays: weekdaysDefault,
       type: "month",
       hideCanvas: false,
       hideInputs: true,
