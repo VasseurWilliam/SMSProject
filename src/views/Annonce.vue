@@ -69,12 +69,36 @@
               </v-row>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <v-toolbar-title v-html="selectedEvent.user_id"></v-toolbar-title>
-              <v-spacer></v-spacer>
+              <div v-if="user.client">
+              <v-dialog v-model="dialog_delete" persistent max-width="400px">
+                <template v-slot:activator="{ on }">
+                  <v-btn icon v-on="on">
+                    <v-icon>delete</v-icon>
+                  </v-btn>
+                </template>
+                <v-card>
+                  <v-card-text>
+                    <p>Etes vous sure de vouloir supprimer cette annonce ?</p>
+                    <div class="flex-grow-1"></div>
+                    <v-btn color="blue darken-1" text @click="delete_event"
+                      >OUI</v-btn
+                    >
+                    <v-btn
+                      color="red darken-1"
+                      text
+                      @click="dialog_delete = false"
+                      >NON</v-btn
+                    >
+                  </v-card-text>
+                </v-card>
+              </v-dialog>
+              </div>
             </v-toolbar>
             <v-card-text>
+              <p>détails :
               <span v-html="selectedEvent.details"></span>
-            </v-card-text>
+              </p>
+            </v-card-text>              
             <v-card-actions>
               <v-btn text color="secondary" @click="selectedOpen = false">
                 Fermer
@@ -123,6 +147,13 @@ export default {
         week: "Semaine",
         day: "Jour",
         "4day": "4 jour"
+      },
+      user: {
+        lastname: "",
+        firstname: "",
+        role: "",
+        admin: "",
+        client: "",
       }
     };
   },
@@ -164,6 +195,16 @@ export default {
   },
 
   methods: {
+    async delete_event(){
+      var id = this.selectedEvent.id;
+      var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
+      await axios.delete(url, {
+        headers: {
+          token: localStorage.token
+        }
+      });
+      window.location.reload();
+    },
     viewDay({ date }) {
       this.focus = date;
       this.type = "day";
@@ -218,6 +259,27 @@ export default {
         end: response.data.data[x].date_fin,
         color: response.data.data[x].color
       });
+    }
+    try {
+      this.id = localStorage.id;
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
+      const response = await axios.get(url, {
+        headers: {
+          token: localStorage.token
+        }
+      });
+      this.user.lastname = response.data.data.nom;
+      this.user.firstname = response.data.data.prenom;
+      this.user.role = response.data.data.role;
+    } catch (err) {
+      if (err.response.status === 403) {
+        localStorage.clear();
+        this.$router.push("login");
+        window.location.reload();
+      }
+    }
+    if (this.user.role=="admin") {
+      this.user.admin = true;
     }
   }
 };

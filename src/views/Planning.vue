@@ -285,7 +285,7 @@
                     </v-card-actions>
                   </v-card>
                 </v-dialog>
-                <div v-if="user.client">
+                </div>
               </v-row>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
@@ -319,6 +319,7 @@
                   </v-card-text>
                 </v-card>
               </v-dialog>
+              </div>
               <div v-if="user.client">
               <v-dialog v-model="dialog_delete" persistent max-width="400px">
                 <template v-slot:activator="{ on }">
@@ -342,6 +343,7 @@
                   </v-card-text>
                 </v-card>
               </v-dialog>
+              </div>
             </v-toolbar>
             <v-card-text>
               <p>Pseudo coach : 
