@@ -686,7 +686,7 @@ export default {
     }
   },
   async mounted() {
-    this.$refs.calendar.checkChange()
+    //this.$refs.calendar.checkChange()
     setTimeout(this.get_Event, 100);
     setTimeout(this.get_Coach, 100);
     setTimeout(this.get_Client, 100);
