@@ -94,17 +94,17 @@ export default {
       drawer: false,
       items_admin: [
         // https://cdn.materialdesignicons.com/1.1.34/
+        { title: "Profil", icon: "mdi-account", route: "/profil"},
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
         { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" },
         { title: "details facture client", icon: "mdi-receipt", route: "/Details_facture_client"},
         { title: "details facture coach", icon: "mdi-receipt", route: "/Details_facture_coach"},
-        { title: "Inscription", icon: "mdi-account-plus", route: "/inscription"},
-        { title: "Profil", icon: "mdi-account", route: "/profil"}
+        { title: "Inscription", icon: "mdi-account-plus", route: "/inscription"}
       ],
       items_coach: [
+        { title: "Profil", icon: "mdi-account", route: "/profil"}
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
-        { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" },
-        { title: "Profil", icon: "mdi-account", route: "/profil"}       
+        { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" }       
       ],
       items_noauth: [
         { title: "Connexion", icon: "mdi-login", route: "/login" },       
