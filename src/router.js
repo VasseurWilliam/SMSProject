@@ -6,6 +6,8 @@ import Inscription from "./views/Inscription.vue";
 import Planning from "./views/Planning.vue";
 import Annonce from "./views/Annonce.vue";
 import Profil from "./views/Profil.vue";
+import Details_facture_client from "./views/Details_facture_client.vue";
+import Details_facture_coach from "./views/Details_facture_coach.vue";
 
 Vue.use(Router);
 
@@ -22,6 +24,16 @@ export default new Router({
       path: "/annonce",
       name: "annonce",
       component: Annonce
+    },
+    {
+      path: "/Details_facture_client",
+      name: "Details_facture_client",
+      component: Details_facture_client
+    },
+    {
+      path: "/Details_facture_coach",
+      name: "Details_facture_coach",
+      component: Details_facture_coach
     },
     {
       path: "/profil",
