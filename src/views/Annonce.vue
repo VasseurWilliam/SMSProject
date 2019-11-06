@@ -70,7 +70,7 @@
               </v-row>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <div v-if="user.client">
+              <div v-if="user.admin">
               <v-dialog v-model="dialog_delete" persistent max-width="400px">
                 <template v-slot:activator="{ on }">
                   <v-btn icon v-on="on">
@@ -115,11 +115,14 @@
 <script>
 import axios from "axios";
 
+const weekdaysDefault = [1, 2, 3, 4, 5, 6, 0]
+
 export default {
   data() {
     return {
       today: new Date().toISOString().slice(0, 10),
       focus: new Date().toISOString().slice(0, 10),
+      weekdays: weekdaysDefault,
       type: "month",
       hideCanvas: false,
       hideInputs: true,
