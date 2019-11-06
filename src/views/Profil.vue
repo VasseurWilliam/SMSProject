@@ -129,4 +129,7 @@ export default {
 </script>
 
 <style scoped>
+.info{
+  background-color: white;
+}
 </style>
