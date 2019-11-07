@@ -47,7 +47,6 @@ import axios from "axios";
           prenom: response.data.data[x].prenom,
           facture_mois: response.data.data[x].facture_mois,
         });
-        console.log(this.coach);
       }
     },
   }
