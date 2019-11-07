@@ -356,7 +356,7 @@
               <p>facture client : 
               <span v-html="selectedEvent.facture_client"></span>€</p>
               <div v-if="user.admin">
-                <v-btn icon dark @click="add_facture_client">
+                <v-btn :color="green" icon dark @click="add_facture_client">
                   <v-icon>mdi-check</v-icon>
                 </v-btn>
               </div>
@@ -366,7 +366,7 @@
               <p>facture coach :  
               <span v-html="selectedEvent.facture_coach"></span>€</p>
               <div v-if="user.admin">
-                <v-btn icon dark @click="add_facture_coach">
+                <v-btn icon :color="green" dark @click="add_facture_coach">
                   <v-icon>mdi-check</v-icon>
                 </v-btn>
               </div>
