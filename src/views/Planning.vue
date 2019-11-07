@@ -252,7 +252,7 @@
                       </v-col>
                       <v-col cols="12" sm="6" v-if="user.admin">
                         <v-select
-                          v-model="create_event.role"
+                          v-model="selectedEvent.role"
                           :items="role_admin"
                           :rules="[v => !!v || 'Item is required']"
                           label="type d'évenement"
@@ -261,7 +261,7 @@
                       </v-col>
                       <v-col cols="12" sm="6" v-else>
                         <v-select
-                          v-model="create_event.role"
+                          v-model="selectedEvent.role"
                           :items="role"
                           :rules="[v => !!v || 'Item is required']"
                           label="type d'évenement"
