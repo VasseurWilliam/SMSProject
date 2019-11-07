@@ -357,7 +357,7 @@
               <span v-html="selectedEvent.facture_client"></span>€</p>
               <div v-if="user.admin">
                 <v-btn icon dark @click="add_facture_client">
-                  <v-icon>tick-circle</v-icon>
+                  <v-icon>mdi-check</v-icon>
                 </v-btn>
               </div>
             </v-card-text>
@@ -367,7 +367,7 @@
               <span v-html="selectedEvent.facture_coach"></span>€</p>
               <div v-if="user.admin">
                 <v-btn icon dark @click="add_facture_coach">
-                  <v-icon>tick-circle</v-icon>
+                  <v-icon>mdi-check</v-icon>
                 </v-btn>
               </div>
             </v-card-text>
@@ -567,7 +567,7 @@ export default {
     },
     async add_facture_client(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalClient/event/" + this.selectedEvent.id;
-      await axios.post(url, {
+      await axios.put(url, {
         headers: {
           token: localStorage.token
         }
@@ -575,7 +575,7 @@ export default {
     },
     async add_facture_coach(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalCoach/event/" + this.selectedEvent.id;
-      await axios.post(url, {
+      await axios.put(url, {
         headers: {
           token: localStorage.token
         }
