@@ -594,7 +594,7 @@ export default {
           }
         }
       );
-      this.dialog_update = false;
+      //this.dialog_update = false;
       //window.location.reload();
     },
     async get_Event(){
