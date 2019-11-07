@@ -354,15 +354,19 @@
             <div v-if="user.admin">
             <v-card-text>
               <p>facture client : 
-              <span v-html="selectedEvent.facture_client"></span>€
-              </p>
+              <span v-html="selectedEvent.facture_client"></span>€</p>
+              <div v-if="user.admin">
+                <v-btn icon dark @click="add_facture_client">
+                  <v-icon>tick-circle</v-icon>
+                </v-btn>
+              </div>
             </v-card-text>
             </div>
             <v-card-text>
               <p>facture coach :  
               <span v-html="selectedEvent.facture_coach"></span>€</p>
               <div v-if="user.admin">
-                <v-btn icon dark @click="add_facture">
+                <v-btn icon dark @click="add_facture_coach">
                   <v-icon>tick-circle</v-icon>
                 </v-btn>
               </div>
@@ -561,8 +565,16 @@ export default {
       });
       window.location.reload();
     },
-    async add_facture(){
+    async add_facture_client(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalClient/event/" + this.selectedEvent.id;
+      await axios.post(url, {
+        headers: {
+          token: localStorage.token
+        }
+      });
+    },
+    async add_facture_coach(){
+      var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalCoach/event/" + this.selectedEvent.id;
       await axios.post(url, {
         headers: {
           token: localStorage.token
