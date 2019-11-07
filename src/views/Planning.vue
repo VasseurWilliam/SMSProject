@@ -595,7 +595,7 @@ export default {
         }
       );
       this.dialog_update = false;
-      window.location.reload();
+      //window.location.reload();
     },
     async get_Event(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/user/" + localStorage.id;
