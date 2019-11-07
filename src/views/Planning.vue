@@ -549,8 +549,7 @@ export default {
       window.location.reload();
     },
     async delete_event(){
-      var id = this.selectedEvent.id;
-      var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
+      var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
       await axios.delete(url, {
         headers: {
           token: localStorage.token
