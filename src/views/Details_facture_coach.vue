@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="desserts"
+    :items="coach"
     :single-expand="singleExpand"
     :expanded.sync="expanded"
     item-key="name"
