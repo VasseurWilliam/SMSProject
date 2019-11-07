@@ -360,8 +360,12 @@
             </div>
             <v-card-text>
               <p>facture coach :  
-              <span v-html="selectedEvent.facture_coach"></span>€
-              </p>
+              <span v-html="selectedEvent.facture_coach"></span>€</p>
+              <div v-if="user.admin">
+                <v-btn icon dark @click="add_facture">
+                  <v-icon>tick-circle</v-icon>
+                </v-btn>
+              </div>
             </v-card-text>
             <v-card-text>
               <p>heure de début :  
@@ -556,6 +560,14 @@ export default {
         }
       });
       window.location.reload();
+    },
+    async add_facture(){
+      var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalClient/event/" + this.selectedEvent.id;
+      await axios.post(url, {
+        headers: {
+          token: localStorage.token
+        }
+      });
     },
     async ajout_event(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/ajout/" + this.selectedEvent.id;
