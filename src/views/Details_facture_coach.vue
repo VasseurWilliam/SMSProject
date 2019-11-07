@@ -19,6 +19,7 @@
     data () {
       return {
         expanded: [],
+        coach:[],
         singleExpand: true,
         headers: [
           {
@@ -27,11 +28,10 @@
             sortable: false,
             value: 'nom',
           },
-          { text: 'prenom', value: 'prenom' },
-          { text: 'facture total', value: 'facture_mois' },
+          { text: 'Prenom', value: 'prenom' },
+          { text: 'Facture total', value: 'facture_mois' },
           { text: '', value: 'data-table-expand' },
         ],
-        coach:[]
       }
     },
     methods: {
