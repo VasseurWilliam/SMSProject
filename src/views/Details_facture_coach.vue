@@ -4,7 +4,7 @@
     :items="coach"
     :single-expand="singleExpand"
     :expanded.sync="expanded"
-    item-key="name"
+    item-key="nom"
     show-expand
     class="elevation-1"
   >
@@ -22,17 +22,16 @@
         singleExpand: true,
         headers: [
           {
-            text: 'facture coach',
+            text: 'Nom',
             align: 'left',
             sortable: false,
-            value: 'name',
+            value: 'nom',
           },
-          { text: 'nom', value: 'nom' },
           { text: 'prenom', value: 'prenom' },
           { text: 'facture total', value: 'facture_mois' },
           { text: '', value: 'data-table-expand' },
         ],
-        coach: []
+        coach:[]
       }
     },
     methods: {
