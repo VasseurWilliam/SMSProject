@@ -25,12 +25,11 @@ import axios from "axios";
         singleExpand: true,
         headers: [
           {
-            text: 'Nom',
+            text: 'Nom de la société',
             align: 'left',
             sortable: false,
-            value: 'nom',
+            value: 'pseudo',
           },
-          { text: 'Prenom', value: 'prenom' },
           { text: 'Facture total', value: 'facture_mois' },
           { text: '', value: 'data-table-expand' },
         ],
@@ -43,8 +42,7 @@ import axios from "axios";
       const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/client");
       for (var x = 0; x < response.data.data.length; x++) {
         this.coach.push({
-          nom: response.data.data[x].nom,
-          prenom: response.data.data[x].prenom,
+          pseudo: response.data.data[x].pseudo,
           facture_mois: response.data.data[x].facture_mois,
         });
       }
