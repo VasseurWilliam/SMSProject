@@ -362,6 +362,7 @@
               </div>
             </v-card-text>
             </div>
+            <div v-if="user.client">
             <v-card-text>
               <p>facture coach :  
               <span v-html="selectedEvent.facture_coach"></span>€</p>
@@ -371,6 +372,7 @@
                 </v-btn>
               </div>
             </v-card-text>
+            </div>
             <v-card-text>
               <p>heure de début :  
               <span v-html="selectedEvent.heure_debut"></span>
