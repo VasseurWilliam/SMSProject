@@ -567,19 +567,23 @@ export default {
     },
     async add_facture_client(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalClient/event/" + this.selectedEvent.id;
-      await axios.put(url, {
-        headers: {
-          token: localStorage.token
+      await axios.put(url,{},
+        {
+          headers: {
+            token: localStorage.token
+          }
         }
-      });
+      );
     },
     async add_facture_coach(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalCoach/event/" + this.selectedEvent.id;
-      await axios.put(url, {
-        headers: {
-          token: localStorage.token
+      await axios.put(url,{},
+        {
+          headers: {
+            token: localStorage.token
+          }
         }
-      });
+      );
     },
     async ajout_event(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/ajout/" + this.selectedEvent.id;
