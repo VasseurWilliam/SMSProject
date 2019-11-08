@@ -44,7 +44,7 @@
           </div>
           </div>
 
-          <div v-if="user.client">
+          <div v-else-if="user.client">
           <v-list-item
             v-for="items_client in items_client"
             :key="items_client.title"
