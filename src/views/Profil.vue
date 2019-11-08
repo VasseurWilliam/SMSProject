@@ -132,4 +132,10 @@ export default {
 .info{
   background-color: white;
 }
+h1 {
+  color: white;
+}
+p {
+  color: white;
+}
 </style>
