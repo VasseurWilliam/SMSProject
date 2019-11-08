@@ -734,7 +734,7 @@ export default {
     if (this.user.role=="admin") {
       this.user.admin = true;
     }
-    if (this.user.role!="client") {
+    if (this.user.role!="sociéte") {
       this.user.client = true;
     }
   }  
