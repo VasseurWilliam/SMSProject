@@ -4,7 +4,7 @@
       <v-sheet height="64">
         <v-toolbar flat color="white">
           <v-row>
-          <div v-if="user.noclient">
+          <div v-if="user.noClient">
             <v-dialog v-model="dialog" persistent max-width="800px">
               <template v-slot:activator="{ on }">
                 <v-btn color="primary" dark v-on="on">Evenement</v-btn>
@@ -21,7 +21,7 @@
                           v-model="create_event.name"
                           :items="client"
                           item-text="name"
-                          label="Client*"
+                          label="client*"
                         ></v-select>
                       </v-col>
                       <v-col cols="12">
@@ -177,7 +177,7 @@
           <v-card color="grey lighten-4" min-width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
               <v-row>
-                <div v-if="user.noclient">
+                <div v-if="user.noClient">
                 <v-dialog v-model="dialog_update" persistent max-width="800px">
                   <template v-slot:activator="{ on }">
                     <v-btn icon dark v-on="on">
@@ -290,7 +290,7 @@
               </v-row>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <div v-if="user.noclient">  
+              <div v-if="user.noClient">  
               <v-dialog v-model="dialog_ajout" persistent max-width="400px">
                 <template v-slot:activator="{ on }">
                   <v-btn icon v-on="on">
@@ -321,7 +321,7 @@
                 </v-card>
               </v-dialog>
               </div>
-              <div v-if="user.noclient">
+              <div v-if="user.noClient">
               <v-dialog v-model="dialog_delete" persistent max-width="400px">
                 <template v-slot:activator="{ on }">
                   <v-btn icon v-on="on">
@@ -362,7 +362,7 @@
               </div>
             </v-card-text>
             </div>
-            <div v-if="user.noclient">
+            <div v-if="user.noClient">
             <v-card-text>
               <p>facture coach :  
               <span v-html="selectedEvent.facture_coach"></span>€</p>
@@ -466,7 +466,7 @@ export default {
         firstname: "",
         role: "",
         admin: "",
-        noclient: "",
+        noClient: ""
       }
     };
   },
@@ -735,8 +735,8 @@ export default {
     }
     if (this.user.role=="admin") {
       this.user.admin = true;
-    } else if (this.user.role!="sociéte") {
-      this.user.noclient = true;
+    } else if (this.user.role=="admin" || this.user.role=="coach") {
+      this.user.noClient = true;
     } 
   }  
 };
