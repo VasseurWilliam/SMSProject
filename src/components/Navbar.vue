@@ -44,6 +44,26 @@
           </div>
           </div>
 
+          <div v-if="user.client">
+          <v-list-item
+            v-for="items_client in items_client"
+            :key="items_client.title"
+            router
+            :to="items_client.route"
+            link
+          >
+          <v-list-item-icon>
+            <v-icon>{{ items_client.icon }}</v-icon>
+          </v-list-item-icon>
+          <v-list-item-content>
+            <v-list-item-title>{{ items_client.title }}</v-list-item-title>
+          </v-list-item-content>
+          </v-list-item>
+          <div class="pa-2">
+            <v-btn block @click="logout">Déconnection</v-btn>
+          </div>
+          </div>
+
           <div v-else>
           <v-list-item
             v-for="items_coach in items_coach"
@@ -106,6 +126,10 @@ export default {
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
         { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" }       
       ],
+      items_client: [
+        { title: "Profil", icon: "mdi-account", route: "/profil"},
+        { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },      
+      ],
       items_noauth: [
         { title: "Connexion", icon: "mdi-login", route: "/login" },       
       ],
@@ -119,6 +143,7 @@ export default {
         firstname: "",
         role: "",
         admin: "",
+        client: "",
         show1: false
       }
     };
@@ -148,6 +173,8 @@ export default {
     } catch (err) {}
     if (this.user.role=="admin") {
       this.user.admin = true;
+    } else if (this.user.role=="sociéte") {
+      this.user.client = true;
     }
   }
 };
