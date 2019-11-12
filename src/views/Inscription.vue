@@ -54,7 +54,15 @@
           :items="item"
           item-text="role"
           label="role"
-          ></v-select>
+        ></v-select>
+
+        <v-text-field v-if="this.user.role === 'coach'"
+          v-model="user.specialite"
+          :rules="specialiteRules"
+          :counter="30"
+          label="Spécialité"
+          autocomplete="off"
+        ></v-text-field> 
 
         <v-color-picker v-if="this.user.role === 'coach'"
           v-model="user.color"
@@ -99,6 +107,7 @@ export default {
         password: "",
         role: "",
         color : "",
+        specialite: "",
         show1: false
       },
       item: ["coach", "sociéte"],
@@ -134,6 +143,10 @@ export default {
         v => !!v || "Ce champs est requis",
         v => v.length < 15 || "15 caractères maximum"
       ],
+      specialiteRules: [
+        v => !!v || "Ce champs est requis",
+        v => v.length < 30 || "30 caractères maximum"
+      ]
     };
   },
   methods: {
@@ -148,6 +161,7 @@ export default {
         bodyFormData.set("email", this.user.email);
         bodyFormData.set("password", this.user.password);
         bodyFormData.set("role", this.user.role);
+        bodyFormData.set("specialite", this.user.specialite);
         bodyFormData.set("color", this.user.color);
         await axios.post("https://sportmanagementsystemapi.herokuapp.com/api/user", bodyFormData);   
         window.location.reload();
