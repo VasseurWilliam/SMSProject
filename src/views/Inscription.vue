@@ -4,7 +4,7 @@
       <v-form ref="form" v-model="valid" lazy-validation class="text-center">
         <v-text-field
           v-model="user.nom"
-          :counter="15"
+          :counter="20"
           :rules="nomRules"
           label="Nom"
           required
@@ -13,7 +13,7 @@
 
         <v-text-field
           v-model="user.prenom"
-          :counter="15"
+          :counter="20"
           :rules="prenomRules"
           label="Prénom"
           required
@@ -22,7 +22,7 @@
 
         <v-text-field
           v-model="user.pseudo"
-          :counter="15"
+          :counter="20"
           :rules="pseudoRules"
           label="Pseudo"
           required
@@ -42,7 +42,7 @@
           :rules="passwordRules"
           :append-icon="user.show1 ? 'visibility' : 'visibility_off'"
           :type="user.show1 ? 'text' : 'password'"
-          :counter="15"
+          :counter="20"
           label="Password"
           required
           @click:append="user.show1 = !user.show1"
@@ -121,19 +121,19 @@ export default {
       valid: false,
       nomRules: [
         v => !!v || "Ce champs est requis",
-        v => v.length < 15 || "15 caractères maximum"
+        v => v.length < 20 || "20 caractères maximum"
       ],
       pseudoRules: [
         v => !!v || "Ce champs est requis",
-        v => v.length < 15 || "15 caractères maximum"
+        v => v.length < 20 || "20 caractères maximum"
       ],
       prenomRules: [
         v => !!v || "Ce champs est requis",
-        v => v.length < 15 || "15 caractères maximum"
+        v => v.length < 20 || "20 caractères maximum"
       ],
       pseudoRules: [
         v => !!v || "Ce champs est requis",
-        v => v.length < 15 || "15 caractères maximum"
+        v => v.length < 20|| "20 caractères maximum"
       ],
       emailRules: [
         v => !!v || "Ce champs est requis",
@@ -141,7 +141,7 @@ export default {
       ],
       passwordRules: [
         v => !!v || "Ce champs est requis",
-        v => v.length < 15 || "15 caractères maximum"
+        v => v.length < 20 || "20 caractères maximum"
       ],
       specialiteRules: [
         v => !!v || "Ce champs est requis",
