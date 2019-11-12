@@ -22,7 +22,7 @@
 
         <v-text-field
           v-model="user.pseudo"
-          :counter="20"
+          :counter="30"
           :rules="pseudoRules"
           label="Pseudo"
           required
@@ -133,7 +133,7 @@ export default {
       ],
       pseudoRules: [
         v => !!v || "Ce champs est requis",
-        v => v.length < 20|| "20 caractères maximum"
+        v => v.length < 30 || "20 caractères maximum"
       ],
       emailRules: [
         v => !!v || "Ce champs est requis",
