@@ -99,6 +99,14 @@
                           required
                         ></v-select>
                       </v-col>
+                      <v-col cols="12" v-if="this.user.role == 'annonce'">
+                        <v-select
+                          v-model="create_event.groupe"
+                          :items="coach"
+                          item-text="specialite"
+                          label="groupe"
+                        ></v-select>     
+                      </v-col>
                     </v-row>
                   </v-container>
                   <small>*indicates required field</small>
@@ -453,6 +461,7 @@ export default {
         color: "",
         durée: "",
         role: "",
+        groupe: "",
         facture_client: "0",
         facture_coach: "0",
         nb: "0",
@@ -522,6 +531,9 @@ export default {
       bodyFormData.set("role", this.create_event.role);
       bodyFormData.set("facture_client", this.create_event.facture_client);
       bodyFormData.set("facture_coach", this.create_event.facture_coach);
+      if (this.create_event.groupe != null) {
+        bodyFormData.set("groupe", this.create_event.groupe);
+      }
       await axios.post(url, bodyFormData, {
         headers: {
           token: localStorage.token
@@ -658,7 +670,8 @@ export default {
       const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/coach");
       for (var x = 0; x < response.data.data.length; x++) {
       this.coach.push({
-        prenom: response.data.data[x].pseudo
+        prenom: response.data.data[x].pseudo,
+        specialite: response.data.data[x].specialite
         });
       }
     },
