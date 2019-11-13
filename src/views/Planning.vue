@@ -99,7 +99,7 @@
                           required
                         ></v-select>
                       </v-col>
-                      <v-col cols="12" v-if="this.user.role == 'annonce'">
+                      <v-col cols="12" v-if="this.create_event.role === 'annonce'">
                         <v-select
                           v-model="create_event.groupe"
                           :items="coach"
