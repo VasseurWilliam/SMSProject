@@ -252,7 +252,7 @@ export default {
     }
   },
   async mounted() {
-    var url = "https://sportmanagementsystemapi.herokuapp.com/api/annonce";
+    var url = "https://sportmanagementsystemapi.herokuapp.com/api/annonce/" + localStorage.id;
     const response = await axios.get(url);
     for (var x = 0; x < response.data.data.length; x++) {
       this.events.push({
@@ -265,8 +265,7 @@ export default {
       });
     }
     try {
-      this.id = localStorage.id;
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + localStorage.id;
       const response = await axios.get(url, {
         headers: {
           token: localStorage.token
