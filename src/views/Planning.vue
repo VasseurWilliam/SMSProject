@@ -604,7 +604,8 @@ export default {
       bodyFormData.set("nom_coach", this.ajout_name);
       await axios.post(url, bodyFormData, {
         headers: {
-          token: localStorage.token
+          token: localStorage.token,
+          id_createur: localStorage.id
         }
       });
       this.dialog_ajout = false;
