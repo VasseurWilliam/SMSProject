@@ -441,8 +441,8 @@ export default {
       id: "",
       mode: "hexa",
       format: "24hr",
-      role: ["Je suis disponible", "rendez-vous pour une séance"],
-      role_admin: ["Je suis disponible", "rendez-vous pour une séance", "annonce"],
+      role: ["je suis disponible", "rendez-vous pour une séance de sport"],
+      role_admin: ["rendez-vous pour une séance de sport", "annonce"],
       events: [],
       coach: [],
       client: [],
@@ -572,7 +572,8 @@ export default {
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
       await axios.delete(url, {
         headers: {
-          token: localStorage.token
+          token: localStorage.token,
+          id: localStorage.id
         }
       });
       window.location.reload();
