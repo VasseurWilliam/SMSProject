@@ -602,10 +602,10 @@ export default {
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/ajout/" + this.selectedEvent.id;
       var bodyFormData = new FormData();
       bodyFormData.set("nom_coach", this.ajout_name);
+      bodyFormData.set("id_createur", localStorage.id);
       await axios.post(url, bodyFormData, {
         headers: {
           token: localStorage.token,
-          id_createur: localStorage.id
         }
       });
       this.dialog_ajout = false;
