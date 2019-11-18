@@ -625,6 +625,7 @@ export default {
       window.location.reload();
     },
     async sendMail() {
+      var bodyFormData = new FormData();
       bodyFormData.set("msg", this.mail.msg);
       bodyFormData.set("subject", this.mail.subject);
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/mail/" + this.selectedEvent.id;
