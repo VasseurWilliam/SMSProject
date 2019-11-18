@@ -185,6 +185,56 @@
           <v-card color="grey lighten-4" min-width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
               <v-row>
+                <div v-if="user.onlyClient">
+                  <v-dialog v-model="dialog_mail" persistent max-width="800px">
+                    <template v-slot:activator="{ on }">
+                      <v-btn icon dark v-on="on">
+                        <v-icon>mail</v-icon>
+                      </v-btn>
+                    </template>
+                    <v-card>
+                      <v-card-title>
+                        <span class="headline">Formulaire de mail</span>
+                      </v-card-title>
+                      <v-card-text>
+                      <v-container>
+                      <v-row>
+                        <v-col cols="12">
+                          <h1>
+                            Pseudo du coach: {selectedEvent.nom_coach}
+                          </h1>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-text-field
+                            label="Sujet"
+                            v-model="mail.subject"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-textarea
+                            label="Votre Message"
+                            v-model="mail.msg"
+                          ></v-textarea>
+                        </v-col>
+                      </v-row>
+                      <small>*indicates required field</small>
+                      <v-card-actions>
+                        <div class="flex-grow-1"></div>
+                        <v-btn
+                          color="red darken-1"
+                          text
+                          @click="dialog_mail = false"
+                          >Fermer</v-btn
+                        >
+                      <v-btn color="blue darken-1" text @click="sendMail"
+                        >Envoyer</v-btn
+                      >
+                    </v-card-actions>
+                    </v-container>
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>
+                </div>
                 <div v-if="user.client">
                 <v-dialog v-model="dialog_update" persistent max-width="800px">
                   <template v-slot:activator="{ on }">
@@ -429,6 +479,7 @@ export default {
       dialog_delete: false,
       dialog_update: false,
       dialog_ajout: false,
+      dialog_mail: false,
       enableEvents: "",
       readonly: false,
       multiple: false,
@@ -474,6 +525,11 @@ export default {
         role: "",
         admin: "",
         client: "",
+        onlyClient: "",
+      },
+      mail: {
+        msg: "",
+        subject: "",
       }
     };
   },
@@ -566,6 +622,18 @@ export default {
         }
       }
       this.dialog = false;
+      window.location.reload();
+    },
+    async sendMail() {
+      bodyFormData.set("msg", this.mail.msg);
+      bodyFormData.set("subject", this.mail.subject);
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/mail/" + this.selectedEvent.id;
+      await axios.post(url, bodyFormData, {
+        headers: {
+          token: localStorage.token
+        }
+      });
+      this.dialog_mail = false;
       window.location.reload();
     },
     async delete_event(){
@@ -756,7 +824,10 @@ export default {
     } 
     if (this.user.role!="sociéte") {
       this.user.client = true;
-    } 
+      
+    } else {
+      this.user.onlyClient = true;
+    }
   }  
 };
 </script>
