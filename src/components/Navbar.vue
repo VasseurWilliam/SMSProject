@@ -171,11 +171,11 @@ export default {
       this.user.firstname = response.data.data.prenom;
       this.user.role = response.data.data.role;
     } catch (err) {
-      if (err.response.status === 403) {
+      /*if (err.response.status === 403) {
         localStorage.clear();
         this.$router.push("login");
         window.location.reload();
-      }
+      }*/
     }
     if (this.user.role=="admin") {
       this.user.admin = true;
