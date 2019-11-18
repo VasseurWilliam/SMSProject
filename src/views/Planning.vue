@@ -201,7 +201,7 @@
                       <v-row>
                         <v-col cols="12">
                           <h1>
-                            Pseudo du coach: {selectedEvent.nom_coach}
+                            Pseudo du coach: {{selectedEvent.nom_coach}}
                           </h1>
                         </v-col>
                         <v-col cols="12">
