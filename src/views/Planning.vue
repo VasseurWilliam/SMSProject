@@ -628,6 +628,7 @@ export default {
           date_fin: this.selectedEvent.end,
           color: this.selectedEvent.color,
           role: this.selectedEvent.role,
+          id_updateur : localStorage.id
         },
         {
           headers: {
