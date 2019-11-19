@@ -185,6 +185,11 @@
           <v-card color="grey lighten-4" min-width="350px" flat>
             <v-toolbar :color="selectedEvent.color" dark>
               <v-row>
+                <div v-if="selectedEvent.valider === 0">
+                  <v-btn icon color="green darken-2" dark @click="accepter">
+                    <v-icon>mdi-check</v-icon>
+                  </v-btn>
+                </div> 
                 <div v-if="user.onlyClient">
                   <v-dialog v-model="dialog_mail" persistent max-width="800px">
                     <template v-slot:activator="{ on }">
@@ -622,6 +627,15 @@ export default {
         }
       }
       this.dialog = false;
+      window.location.reload();
+    },
+    async accepter() {
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/valider/event/" + this.selectedEvent.id;
+      await axios.post(url, {
+        headers: {
+          token: localStorage.token
+        }
+      });
       window.location.reload();
     },
     async sendMail() {
