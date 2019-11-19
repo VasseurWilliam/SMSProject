@@ -631,11 +631,13 @@ export default {
     },
     async accepter() {
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/valider/event/" + this.selectedEvent.id;
-      await axios.put(url, {
-        headers: {
-          token: localStorage.token
+      await axios.put(url,{},
+        {
+          headers: {
+            token: localStorage.token
+          }
         }
-      });
+      );
       window.location.reload();
     },
     async sendMail() {
