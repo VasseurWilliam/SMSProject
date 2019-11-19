@@ -631,7 +631,7 @@ export default {
     },
     async accepter() {
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/valider/event/" + this.selectedEvent.id;
-      await axios.put(url,{},
+      await axios.post(url,{},
         {
           headers: {
             token: localStorage.token
