@@ -747,7 +747,8 @@ export default {
           facture_client: response.data.data[x].facture_client,
           role: response.data.data[x].role,
           heure_debut: sTime,
-          heure_fin: eTime
+          heure_fin: eTime,
+          valider: response.data.data[x].valider
           });
         }
       }
