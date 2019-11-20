@@ -630,7 +630,7 @@ export default {
       window.location.reload();
     },
     async accepter() {
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/valider/event/" + this.selectedEvent.id;
+      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/valider/" + this.selectedEvent.id;
       await axios.put(url,{},
         {
           headers: {
