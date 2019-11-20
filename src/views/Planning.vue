@@ -595,11 +595,19 @@ export default {
       if (this.create_event.groupe != null) {
         bodyFormData.set("groupe", this.create_event.groupe);
       }
-      await axios.post(url, bodyFormData, {
-        headers: {
-          token: localStorage.token
+      try {
+        await axios.post(url, bodyFormData, {
+          headers: {
+            token: localStorage.token
+          }
+        });
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
         }
-      });
+      }  
       var i;
       if(this.create_event.nb != 0) {
         for(i = 0; i < this.create_event.nb; i++) {
@@ -619,11 +627,19 @@ export default {
           bodyFormData.set("role", this.create_event.role);
           bodyFormData.set("facture_client", this.create_event.facture_client);
           bodyFormData.set("facture_coach", this.create_event.facture_coach);
-          await axios.post(url, bodyFormData, {
-            headers: {
-              token: localStorage.token
-            }
-          });
+          try {
+            await axios.post(url, bodyFormData, {
+              headers: {
+                token: localStorage.token
+              }
+            });
+          } catch (err) {
+            if (err.response.status === 403) {
+            localStorage.clear();
+            this.$router.push("login");
+            window.location.reload();
+          }
+        }  
         }
       }
       this.dialog = false;
@@ -631,13 +647,19 @@ export default {
     },
     async accepter() {
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/valider/" + this.selectedEvent.id;
-      await axios.put(url,{},
-        {
+      try {
+        await axios.put(url,{}, {
           headers: {
             token: localStorage.token
           }
+        });
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
         }
-      );
+      }
       window.location.reload();
     },
     async sendMail() {
@@ -645,54 +667,92 @@ export default {
       bodyFormData.set("msg", this.mail.msg);
       bodyFormData.set("subject", this.mail.subject);
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/mail/" + this.selectedEvent.id;
-      await axios.post(url, bodyFormData, {
-        headers: {
-          token: localStorage.token
+      try {
+        await axios.post(url, bodyFormData, {
+          headers: {
+            token: localStorage.token
+          }
+        });
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
         }
-      });
+      }
       this.dialog_mail = false;
       window.location.reload();
     },
     async delete_event(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
-      await axios.delete(url, {
-        headers: {
-          token: localStorage.token,
-          id: localStorage.id
+      try {
+        await axios.delete(url, {
+          headers: {
+            token: localStorage.token,
+            id: localStorage.id
+          }
+        });
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
         }
-      });
+      }
       window.location.reload();
     },
     async add_facture_client(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalClient/event/" + this.selectedEvent.id;
-      await axios.put(url,{},
-        {
+      try {
+        await axios.put(url,{}, {
           headers: {
             token: localStorage.token
           }
+        });
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
         }
-      );
+      }
+      window.location.reload();
     },
     async add_facture_coach(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalCoach/event/" + this.selectedEvent.id;
-      await axios.put(url,{},
-        {
+      try {
+        await axios.put(url,{}, {
           headers: {
             token: localStorage.token
           }
+        });
+      } catch (err) {
+          if (err.response.status === 403) {
+            localStorage.clear();
+            this.$router.push("login");
+            window.location.reload();
+          }
         }
-      );
+      window.location.reload();
     },
     async ajout_event(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/ajout/" + this.selectedEvent.id;
       var bodyFormData = new FormData();
       bodyFormData.set("nom_coach", this.ajout_name);
       bodyFormData.set("id_createur", localStorage.id);
-      await axios.post(url, bodyFormData, {
-        headers: {
-          token: localStorage.token,
+      try {
+        await axios.post(url, bodyFormData, {
+          headers: {
+            token: localStorage.token,
+          }
+        });
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
         }
-      });
+      }
       this.dialog_ajout = false;
       window.location.reload();
     },
@@ -701,7 +761,8 @@ export default {
         this.selectedEvent.color = "#0099AD"
       }
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
-      await axios.put(
+      try {
+        await axios.put(
         url,
         {
           titre: this.selectedEvent.name,
@@ -721,17 +782,32 @@ export default {
           }
         }
       );
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
+        }
+      }
       this.dialog_update = false;
       window.location.reload();
     },
     async get_Event(){
-      var url ="https://sportmanagementsystemapi.herokuapp.com/api/user/" + localStorage.id;
-      url = url + "/event";
-      const response = await axios.get(url, {
-        headers: {
-          token: localStorage.token
+      try {
+        var url ="https://sportmanagementsystemapi.herokuapp.com/api/user/" + localStorage.id;
+        url = url + "/event";
+        const response = await axios.get(url, {
+          headers: {
+            token: localStorage.token
+          }
+        });
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
         }
-      });
+      }
       for (var x = 0; x < response.data.data.length; x++) {
         var sTime = response.data.data[x].date_debut.split(' ')[1];
         var eTime = response.data.data[x].date_fin.split(' ')[1];
@@ -756,21 +832,37 @@ export default {
       }
     },
     async get_Coach(){
-      const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/coach");
-      for (var x = 0; x < response.data.data.length; x++) {
-      this.coach.push({
-        prenom: response.data.data[x].pseudo,
-        specialite: response.data.data[x].specialite
-        });
-      }
+      try {
+        const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/coach");
+        for (var x = 0; x < response.data.data.length; x++) {
+          this.coach.push({
+            prenom: response.data.data[x].pseudo,
+            specialite: response.data.data[x].specialite
+          });
+        }
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
+        }
+      } 
     },
     async get_Client(){
-      const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/client");
-      for (var x = 0; x < response.data.data.length; x++) {
-      this.client.push({
-        name: response.data.data[x].pseudo
-        });
-      }
+      try {
+        const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/client");
+        for (var x = 0; x < response.data.data.length; x++) {
+          this.client.push({
+            name: response.data.data[x].pseudo
+          });
+        }
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
+        }
+      } 
     },
     viewDay({ date }) {
       this.focus = date;

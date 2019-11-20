@@ -202,11 +202,19 @@ export default {
     async delete_event(){
       var id = this.selectedEvent.id;
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
-      await axios.delete(url, {
-        headers: {
-          token: localStorage.token
+      try {
+        await axios.delete(url, {
+          headers: {
+            token: localStorage.token
+          }
+        });
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
         }
-      });
+      }
       window.location.reload();
     },
     viewDay({ date }) {
@@ -253,16 +261,24 @@ export default {
   },
   async mounted() {
     var url = "https://sportmanagementsystemapi.herokuapp.com/api/annonce/" + localStorage.id;
-    const response = await axios.get(url);
-    for (var x = 0; x < response.data.data.length; x++) {
-      this.events.push({
-        id: response.data.data[x].id,
-        name: response.data.data[x].titre,
-        details: response.data.data[x].details,
-        start: response.data.data[x].date_debut,
-        end: response.data.data[x].date_fin,
-        color: response.data.data[x].color
-      });
+    try {
+      const response = await axios.get(url);
+      for (var x = 0; x < response.data.data.length; x++) {
+        this.events.push({
+          id: response.data.data[x].id,
+          name: response.data.data[x].titre,
+          details: response.data.data[x].details,
+          start: response.data.data[x].date_debut,
+          end: response.data.data[x].date_fin,
+          color: response.data.data[x].color
+        });
+      }
+    } catch (err) {
+      if (err.response.status === 403) {
+        localStorage.clear();
+        this.$router.push("login");
+        window.location.reload();
+      }
     }
     try {
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + localStorage.id;

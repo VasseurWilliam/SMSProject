@@ -163,7 +163,15 @@ export default {
         bodyFormData.set("role", this.user.role);
         bodyFormData.set("specialite", this.user.specialite);
         bodyFormData.set("color", this.user.color);
-        await axios.post("https://sportmanagementsystemapi.herokuapp.com/api/user", bodyFormData);   
+        try {
+          await axios.post("https://sportmanagementsystemapi.herokuapp.com/api/user", bodyFormData);
+        } catch (err) {
+          if (err.response.status === 403) {
+            localStorage.clear();
+            this.$router.push("login");
+            window.location.reload();
+          }
+        } 
         window.location.reload();
     },
     reset() {

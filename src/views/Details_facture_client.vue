@@ -9,7 +9,7 @@
     class="elevation-1"
   >
     <template v-slot:expanded-item="{ headers }">
-      <td :colspan="headers.length">Peek-a-boo!</td>
+      <td :colspan="headers.length">all data</td>
     </template>
   </v-data-table>
 </template>
@@ -39,12 +39,20 @@ import axios from "axios";
 
     },
     async mounted() {
-      const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/client");
-      for (var x = 0; x < response.data.data.length; x++) {
-        this.coach.push({
-          pseudo: response.data.data[x].pseudo,
-          facture_mois: response.data.data[x].facture_mois,
-        });
+      try {
+        const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/client");
+        for (var x = 0; x < response.data.data.length; x++) {
+          this.coach.push({
+            pseudo: response.data.data[x].pseudo,
+            facture_mois: response.data.data[x].facture_mois,
+          });
+        }
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
+        }
       }
     },
   }
