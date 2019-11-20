@@ -801,14 +801,7 @@ export default {
             token: localStorage.token
           }
         });
-      } catch (err) {
-        if (err.response.status === 403) {
-          localStorage.clear();
-          this.$router.push("login");
-          window.location.reload();
-        }
-      }
-      for (var x = 0; x < response.data.data.length; x++) {
+        for (var x = 0; x < response.data.data.length; x++) {
         var sTime = response.data.data[x].date_debut.split(' ')[1];
         var eTime = response.data.data[x].date_fin.split(' ')[1];
         if(response.data.data[x].role != "annonce") {
@@ -829,7 +822,14 @@ export default {
           valider: response.data.data[x].valider
           });
         }
-      }
+        }
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
+        }
+      }    
     },
     async get_Coach(){
       try {
