@@ -8,6 +8,7 @@ import Annonce from "./views/Annonce.vue";
 import Profil from "./views/Profil.vue";
 import Details_facture_client from "./views/Details_facture_client.vue";
 import Details_facture_coach from "./views/Details_facture_coach.vue";
+import Prix_seance from "./views/Prix_seance.vue";
 
 Vue.use(Router);
 
@@ -24,6 +25,11 @@ export default new Router({
       path: "/annonce",
       name: "annonce",
       component: Annonce
+    },
+    {
+      path: "/Prix_seance",
+      name: "Prix_seance",
+      component: Prix_seance
     },
     {
       path: "/Details_facture_client",

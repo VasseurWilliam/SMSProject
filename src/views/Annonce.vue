@@ -284,7 +284,8 @@ export default {
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + localStorage.id;
       const response = await axios.get(url, {
         headers: {
-          token: localStorage.token
+          token: localStorage.token,
+          id: localStorage.id
         }
       });
       this.user.lastname = response.data.data.nom;

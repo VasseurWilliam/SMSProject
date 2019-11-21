@@ -36,7 +36,9 @@ import axios from "axios";
       }
     },
     methods: {
-
+      clicked(value) {
+        this.expanded.push(value)
+      }
     },
     async mounted() {
       try {

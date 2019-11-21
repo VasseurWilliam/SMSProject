@@ -117,6 +117,7 @@ export default {
         { title: "Profil", icon: "mdi-account", route: "/profil"},
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
         { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" },
+        { title: "Prix Séance", icon: "mdi-settings", route: "/Prix_seance" },
         { title: "details facture client", icon: "mdi-receipt", route: "/Details_facture_client"},
         { title: "details facture coach", icon: "mdi-receipt", route: "/Details_facture_coach"},
         { title: "Inscription", icon: "mdi-account-plus", route: "/inscription"}
