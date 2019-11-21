@@ -27,12 +27,10 @@
               ></v-select>
             </v-col>
             <v-col cols="12">
-              <v-select
+              <v-text-field
                 v-model="user.prix_par_seance"
-                :items="tout"
-                item-text="prix_par_seance"
                 label="Prix par seance"
-              ></v-select>
+              ></v-text-field>
             </v-col>
           </v-row>
         </v-container>
