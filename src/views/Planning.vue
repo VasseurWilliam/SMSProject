@@ -699,7 +699,7 @@ export default {
           window.location.reload();
         }
       }
-      window.location.reload();
+      //window.location.reload();
     },
     async add_facture_client(){
       var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalClient/event/" + this.selectedEvent.id;
