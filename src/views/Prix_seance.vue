@@ -15,47 +15,6 @@
             <v-card-title>
                 <span class="headline">Crée un évenement</span>
             </v-card-title>
-            <v-card-text>
-                <v-container>
-                    <v-row>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Nom"
-                          required
-                          v-model="nom"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Prénom"
-                          required
-                          v-model="prenom"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Pseudo"
-                          required
-                          v-model="pseudo"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="email"
-                          required
-                          v-model="email"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Mot de passe"
-                          required
-                          v-model="password"
-                        ></v-text-field>
-                      </v-col>
-                    </v-row>
-                </v-container>
-            </v-card-text>
             <v-card-actions>
                 <div class="flex-grow-1"></div>
                 <v-btn color="red darken-1" text @click="dialog = false"
