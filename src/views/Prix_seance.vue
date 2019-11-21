@@ -3,14 +3,14 @@
   <v-data-table
     :headers="headers"
     :items="client"
-    item-key="pseudo"
+    item-key="nom"
     class="elevation-1"
   >
   </v-data-table>
   <v-data-table
     :headers="headers"
     :items="coach"
-    item-key="pseudo"
+    item-key="nom"
     class="elevation-1"
   >
   </v-data-table>
@@ -68,12 +68,12 @@ export default {
       prix_par_seance: [],
       headers: [
           {
-            text: 'Nom de la société',
+            text: 'Pseudo',
             align: 'left',
             sortable: false,
             value: 'pseudo',
           },
-          { text: 'Facture total', value: 'prix_par_seance' },
+          { text: 'Prix par séance', value: 'prix_par_seance' },
         ],
       user: {
         pseudo: "",

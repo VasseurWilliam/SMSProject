@@ -50,11 +50,6 @@ import axios from "axios";
           });
         }
       } catch (err) {
-        if (err.response.status === 403) {
-          localStorage.clear();
-          this.$router.push("login");
-          window.location.reload();
-        }
       }
     },
   }
