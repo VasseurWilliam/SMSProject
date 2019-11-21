@@ -48,6 +48,12 @@
           @click:append="user.show1 = !user.show1"
           autocomplete="off"
         ></v-text-field>
+
+        <v-text-field
+          v-model="user.prix_par_seance"
+          label="prix_par_seance"
+          autocomplete="off"
+        ></v-text-field>
         
         <v-select
           v-model="user.role"
@@ -108,6 +114,7 @@ export default {
         role: "",
         color : "",
         specialite: "",
+        prix_par_seance: "",
         show1: false
       },
       item: ["coach", "sociéte"],
@@ -163,6 +170,7 @@ export default {
         bodyFormData.set("role", this.user.role);
         bodyFormData.set("specialite", this.user.specialite);
         bodyFormData.set("color", this.user.color);
+        bodyFormData.set("prix_par_seance", this.user.prix_par_seance);
         try {
           await axios.post("https://sportmanagementsystemapi.herokuapp.com/api/user", bodyFormData);
         } catch (err) {
