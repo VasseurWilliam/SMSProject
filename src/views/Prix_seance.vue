@@ -2,14 +2,7 @@
 <div>
   <v-data-table
     :headers="headers"
-    :items="client"
-    item-key="pseudo"
-    class="elevation-1"
-  >
-  </v-data-table>
-  <v-data-table
-    :headers="headers"
-    :items="coach"
+    :items="tout"
     item-key="pseudo"
     class="elevation-1"
   >
@@ -28,7 +21,7 @@
             <v-col cols="12">
               <v-select
                 v-model="user.pseudo"
-                :items="item"
+                :items="tout"
                 item-text="pseudo"
                 label="Pseudo"
               ></v-select>
@@ -36,7 +29,7 @@
             <v-col cols="12">
               <v-select
                 v-model="user.prix_par_seance"
-                :items="item"
+                :items="tout"
                 item-text="prix_par_seance"
                 label="Prix par seance"
               ></v-select>
@@ -64,8 +57,7 @@ export default {
   data() {
     return {
       dialog: false,
-      coach:[],
-      client:[],
+      tout:[],
       headers: [
           {
             text: 'Pseudo',
@@ -101,7 +93,7 @@ export default {
     try {
       const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/coach");
       for (var x = 0; x < response.data.data.length; x++) {
-        this.coach.push({
+        this.tout.push({
           pseudo: response.data.data[x].pseudo,
           prix_par_seance: response.data.data[x].prix_par_seance
         });
@@ -111,7 +103,7 @@ export default {
     try {
         const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/client");
         for (var x = 0; x < response.data.data.length; x++) {
-          this.client.push({
+          this.tout.push({
             pseudo: response.data.data[x].pseudo,
             prix_par_seance: response.data.data[x].prix_par_seance
           })
