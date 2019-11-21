@@ -1,32 +1,44 @@
 <template>
-    <div class="acount">
-        <div class="info">
-          <h1>Donnée utilisateur</h1>
-          <p> Nom: {{ nom }}</p>
-          <p> Prénom: {{ prenom }}</p>
-          <p> Pseudo: {{ pseudo }}</p>
-          <p> Email: {{ email }}</p>
-        </div>
-          <v-dialog v-model="dialog" persistent max-width="800px">
-            <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on">Modifier</v-btn>
-            </template>
-            <v-card>
-            <v-card-title>
-                <span class="headline">Crée un évenement</span>
-            </v-card-title>
-            <v-card-actions>
-                <div class="flex-grow-1"></div>
-                <v-btn color="red darken-1" text @click="dialog = false"
-                    >Fermer</v-btn
-                >
-                <v-btn color="blue darken-1" text @click="submitmodif"
-                    >Valider</v-btn
-                >
-            </v-card-actions>
-            </v-card>
-          </v-dialog>
-    </div>
+  <v-dialog v-model="dialog" persistent max-width="800px">
+    <template v-slot:activator="{ on }">
+      <v-btn color="primary" dark v-on="on">Modifier</v-btn>
+    </template>
+    <v-card>
+      <v-card-title>
+        <span class="headline">Modifier prix par séance</span>
+      </v-card-title>
+      <v-card-text>
+        <v-container>
+          <v-row>
+            <v-col cols="12">
+              <v-select
+                v-model="user.pseudo"
+                :items="item"
+                item-text="pseudo"
+                label="Pseudo"
+              ></v-select>
+            </v-col>
+            <v-col cols="12">
+              <v-select
+                v-model="user.prix_par_seance"
+                :items="item"
+                item-text="prix_par_seance"
+                label="Prix par seance"
+              ></v-select>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card-text>
+      <v-card-actions>
+        <v-btn color="red darken-1" text @click="dialog = false"
+          >Fermer</v-btn
+        >
+        <v-btn color="blue darken-1" text @click="submitmodif"
+          >Valider</v-btn
+        >
+      </v-card-actions>
+    </v-card>
+  </v-dialog>
 </template>
 
 <script>
@@ -36,13 +48,12 @@ export default {
   data() {
     return {
       dialog: false,
-      nom: null,
-      prenom: null,
-      pseudo: null,
-      email: null,
-      password: null,
-      role: null,
-      color: null
+      pseudo: [],
+      prix_par_seance: [],
+      user: {
+        pseudo: "",
+        prix_par_seance: ""
+      },
     };
   },
   methods: {
@@ -50,13 +61,8 @@ export default {
         var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + localStorage.id;
         axios
         .put(url, {
-            nom: this.nom,
-            prenom: this.prenom,
-            pseudo: this.pseudo,
-            email: this.email,
-            password: this.password,
-            role: this.role,
-            color: this.color,
+            pseudo: this.user.pseudo,
+            prix_par_seance: this.user.prix_par_seance,
         }, {
             headers: {
                 token: localStorage.token

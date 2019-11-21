@@ -1,73 +1,68 @@
 <template>
-    <div class="acount">
-        <div class="info">
-          <h1>Donnée utilisateur</h1>
-          <p> Nom: {{ nom }}</p>
-          <p> Prénom: {{ prenom }}</p>
-          <p> Pseudo: {{ pseudo }}</p>
-          <p> Email: {{ email }}</p>
-        </div>
-          <v-dialog v-model="dialog" persistent max-width="800px">
-            <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on">Modifier</v-btn>
-            </template>
-            <v-card>
-            <v-card-title>
-                <span class="headline">Crée un évenement</span>
-            </v-card-title>
-            <v-card-text>
-                <v-container>
-                    <v-row>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Nom"
-                          required
-                          v-model="nom"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Prénom"
-                          required
-                          v-model="prenom"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Pseudo"
-                          required
-                          v-model="pseudo"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="email"
-                          required
-                          v-model="email"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Mot de passe"
-                          required
-                          v-model="password"
-                        ></v-text-field>
-                      </v-col>
-                    </v-row>
-                </v-container>
-            </v-card-text>
-            <v-card-actions>
-                <div class="flex-grow-1"></div>
-                <v-btn color="red darken-1" text @click="dialog = false"
-                    >Fermer</v-btn
-                >
-                <v-btn color="blue darken-1" text @click="submitmodif"
-                    >Valider</v-btn
-                >
-            </v-card-actions>
-            </v-card>
-          </v-dialog>
-    </div>
+  <div>
+    <h1>Donnée utilisateur</h1>
+    <p> Nom: {{ nom }}</p>
+    <p> Prénom: {{ prenom }}</p>
+    <p> Pseudo: {{ pseudo }}</p>
+    <p> Email: {{ email }}</p>
+    <v-dialog v-model="dialog" persistent max-width="800px">
+      <template v-slot:activator="{ on }">
+        <v-btn color="primary" dark v-on="on">Modifier</v-btn>
+      </template>
+      <v-card>
+        <v-card-title>
+          <span class="headline">Modifier les informations du compte</span>
+        </v-card-title>
+          <v-card-text>
+            <v-container>
+              <v-row>
+                <v-col cols="12">
+                  <v-text-field
+                    label="Nom"
+                    required
+                    v-model="nom"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    label="Prénom"
+                    required
+                    v-model="prenom"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    label="Pseudo"
+                    required
+                    v-model="pseudo"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    label="email"
+                    required
+                    v-model="email"
+                  ></v-text-field>
+                </v-col>
+                <v-col cols="12">
+                  <v-text-field
+                    label="Mot de passe"
+                    required
+                    v-model="password"
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+            </v-container>
+        </v-card-text>
+        <v-card-actions>
+          <v-btn color="red darken-1" text @click="dialog = false"
+            >Fermer</v-btn>
+          <v-btn color="blue darken-1" text @click="submitmodif"
+            >Valider</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+  </div>
 </template>
 
 <script>
@@ -121,21 +116,13 @@ export default {
       this.email = response.data.data.email;
       this.role = response.data.data.role;
       this.color = response.data.data.color;
-    } catch(err) {
-      console.log(err)
+    } catch (err) {
+      if (err.response.status === 403) {
+        localStorage.clear();
+        this.$router.push("login");
+        window.location.reload();
+      }
     }
   }
 }
 </script>
-
-<style scoped>
-.info{
-  background-color: white;
-}
-h1 {
-  color: white;
-}
-p {
-  color: white;
-}
-</style>
