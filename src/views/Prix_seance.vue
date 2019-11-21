@@ -83,7 +83,7 @@ export default {
   },
   methods: {
     submitmodif() {
-        var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + localStorage.id;
+        var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/prix_par_seance/' + localStorage.id;
         axios
         .put(url, {
             pseudo: this.user.pseudo,
@@ -119,7 +119,7 @@ export default {
           this.client.push({
             pseudo: response.data.data[x].pseudo,
             prix_par_seance: response.data.data[x].prix_par_seance
-          }
+          })
         }
       } catch (err) {
         if (err.response.status === 403) {
@@ -131,15 +131,3 @@ export default {
   },
 }
 </script>
-
-<style scoped>
-.info{
-  background-color: white;
-}
-h1 {
-  color: white;
-}
-p {
-  color: white;
-}
-</style>
