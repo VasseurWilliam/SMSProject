@@ -64,8 +64,8 @@ export default {
   data() {
     return {
       dialog: false,
-      pseudo: [],
-      prix_par_seance: [],
+      coach:[],
+      client:[],
       headers: [
           {
             text: 'Pseudo',
