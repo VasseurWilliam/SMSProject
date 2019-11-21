@@ -1,7 +1,7 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="coach"
+    :items="client"
     :single-expand="singleExpand"
     :expanded.sync="expanded"
     item-key="nom"
@@ -21,7 +21,7 @@ import axios from "axios";
     data () {
       return {
         expanded: [],
-        coach:[],
+        client:[],
         singleExpand: true,
         headers: [
           {
@@ -44,7 +44,7 @@ import axios from "axios";
       try {
         const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/client");
         for (var x = 0; x < response.data.data.length; x++) {
-          this.coach.push({
+          this.client.push({
             pseudo: response.data.data[x].pseudo,
             facture_mois: response.data.data[x].facture_mois,
           });

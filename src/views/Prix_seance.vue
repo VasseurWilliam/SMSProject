@@ -1,4 +1,19 @@
 <template>
+<div>
+  <v-data-table
+    :headers="headers"
+    :items="client"
+    item-key="pseudo"
+    class="elevation-1"
+  >
+  </v-data-table>
+  <v-data-table
+    :headers="headers"
+    :items="coach"
+    item-key="pseudo"
+    class="elevation-1"
+  >
+  </v-data-table>
   <v-dialog v-model="dialog" persistent max-width="800px">
     <template v-slot:activator="{ on }">
       <v-btn color="primary" dark v-on="on">Modifier</v-btn>
@@ -39,6 +54,7 @@
       </v-card-actions>
     </v-card>
   </v-dialog>
+</div>
 </template>
 
 <script>
@@ -50,6 +66,15 @@ export default {
       dialog: false,
       pseudo: [],
       prix_par_seance: [],
+      headers: [
+          {
+            text: 'Nom de la société',
+            align: 'left',
+            sortable: false,
+            value: 'pseudo',
+          },
+          { text: 'Facture total', value: 'prix_par_seance' },
+        ],
       user: {
         pseudo: "",
         prix_par_seance: ""
@@ -72,24 +97,38 @@ export default {
         window.location.reload();
     }
 },
-  async mounted () {
+  async mounted() {
     try {
-      var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + localStorage.id;
-      const response = await axios.get(url, {
-        headers: {
-          token: localStorage.token
-        }
-      })
-      this.nom = response.data.data.nom;
-      this.prenom = response.data.data.prenom;
-      this.pseudo = response.data.data.pseudo;
-      this.email = response.data.data.email;
-      this.role = response.data.data.role;
-      this.color = response.data.data.color;
-    } catch(err) {
-      console.log(err)
+      const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/coach");
+      for (var x = 0; x < response.data.data.length; x++) {
+        this.coach.push({
+          pseudo: response.data.data[x].pseudo,
+          prix_par_seance: response.data.data[x].prix_par_seance
+        });
+      }
+    } catch (err) {
+      if (err.response.status === 403) {
+        localStorage.clear();
+        this.$router.push("login");
+        window.location.reload();
+      }
     }
-  }
+    try {
+        const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/client");
+        for (var x = 0; x < response.data.data.length; x++) {
+          this.client.push({
+            pseudo: response.data.data[x].pseudo,
+            prix_par_seance: response.data.data[x].prix_par_seance
+          }
+        }
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
+        }
+      }
+  },
 }
 </script>
 
