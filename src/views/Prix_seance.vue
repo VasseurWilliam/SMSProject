@@ -3,14 +3,14 @@
   <v-data-table
     :headers="headers"
     :items="client"
-    item-key="nom"
+    item-key="pseudo"
     class="elevation-1"
   >
   </v-data-table>
   <v-data-table
     :headers="headers"
     :items="coach"
-    item-key="nom"
+    item-key="pseudo"
     class="elevation-1"
   >
   </v-data-table>
