@@ -38,20 +38,6 @@
                           label="Pseudo Coach"
                         ></v-select>
                       </v-col>
-                      <div v-if="user.admin">
-                      <v-col cols="12" v-if="this.create_event.role !== 'annonce'">
-                        <v-text-field
-                          label="prix client"
-                          v-model="create_event.facture_client"
-                        ></v-text-field>
-                      </v-col>
-                      </div>
-                      <v-col cols="12" v-if="this.create_event.role !== 'annonce'">
-                        <v-text-field
-                          label="prix coach"
-                          v-model="create_event.facture_coach"
-                        ></v-text-field>
-                      </v-col>
                       <v-col cols="12">
                         <v-textarea
                           label="description"
