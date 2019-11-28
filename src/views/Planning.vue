@@ -576,8 +576,6 @@ export default {
       bodyFormData.set("date_debut", this.create_event.start);
       bodyFormData.set("date_fin", this.create_event.end);
       bodyFormData.set("role", this.create_event.role);
-      bodyFormData.set("facture_client", this.create_event.facture_client);
-      bodyFormData.set("facture_coach", this.create_event.facture_coach);
       if (this.create_event.groupe != null) {
         bodyFormData.set("groupe", this.create_event.groupe);
       }
@@ -611,8 +609,6 @@ export default {
           bodyFormData.set("date_debut", this.create_event.start);
           bodyFormData.set("date_fin", this.create_event.end);
           bodyFormData.set("role", this.create_event.role);
-          bodyFormData.set("facture_client", this.create_event.facture_client);
-          bodyFormData.set("facture_coach", this.create_event.facture_coach);
           try {
             await axios.post(url, bodyFormData, {
               headers: {
@@ -629,7 +625,7 @@ export default {
         }
       }
       this.dialog = false;
-      //window.location.reload();
+      window.location.reload();
     },
     async accepter() {
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/valider/" + this.selectedEvent.id;
