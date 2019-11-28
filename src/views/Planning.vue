@@ -629,7 +629,7 @@ export default {
         }
       }
       this.dialog = false;
-      window.location.reload();
+      //window.location.reload();
     },
     async accepter() {
       var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/valider/" + this.selectedEvent.id;
