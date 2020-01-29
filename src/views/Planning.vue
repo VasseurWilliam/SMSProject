@@ -11,7 +11,7 @@
               </template>
               <v-card>
                 <v-card-title>
-                  <span class="headline">Crée un évenement</span>
+                  <span class="headline">Créer un évenement</span>
                 </v-card-title>
                 <v-card-text>
                   <v-container>
@@ -91,7 +91,7 @@
                           :items="coach"
                           item-text="specialite"
                           label="groupe"
-                        ></v-select>     
+                        ></v-select>
                       </v-col>
                     </v-row>
                   </v-container>
@@ -175,7 +175,7 @@
                   <v-btn icon color="green darken-2" dark @click="accepter">
                     <v-icon>mdi-check</v-icon>
                   </v-btn>
-                </div> 
+                </div>
                 <div v-if="user.onlyClient">
                   <v-dialog v-model="dialog_mail" persistent max-width="800px">
                     <template v-slot:activator="{ on }">
@@ -235,7 +235,7 @@
                   </template>
                   <v-card>
                     <v-card-title>
-                      <span class="headline">Modifié un évenement</span>
+                      <span class="headline">Modifier un évenement</span>
                     </v-card-title>
                     <v-card-text>
                   <v-container>
@@ -339,7 +339,7 @@
               </v-row>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
-              <div v-if="user.client">  
+              <div v-if="user.client">
               <v-dialog v-model="dialog_ajout" persistent max-width="400px">
                 <template v-slot:activator="{ on }">
                   <v-btn icon v-on="on">
@@ -396,13 +396,13 @@
               </div>
             </v-toolbar>
             <v-card-text>
-              <p>Pseudo coach : 
+              <p>Pseudo coach :
               <span v-html="selectedEvent.nom_coach"></span>
               </p>
             </v-card-text>
             <div v-if="user.admin">
             <v-card-text>
-              <p>facture client : 
+              <p>facture client :
               <span v-html="selectedEvent.facture_client">€</span></p>
                 <v-btn color="green darken-2" icon dark @click="add_facture_client">
                   <v-icon>mdi-check</v-icon>
@@ -411,7 +411,7 @@
             </div>
             <div v-if="user.client">
             <v-card-text>
-              <p>facture coach :  
+              <p>facture coach :
               <span v-html="selectedEvent.facture_coach"></span>€</p>
               <div v-if="user.admin">
                 <v-btn icon color="green darken-2" dark @click="add_facture_coach">
@@ -421,18 +421,19 @@
             </v-card-text>
             </div>
             <v-card-text>
-              <p>heure de début :  
+              <p>heure de début :
               <span v-html="selectedEvent.heure_debut"></span>
               </p>
             </v-card-text>
             <v-card-text>
-              <p>heure de fin :  
+              <p>heure de fin :
               <span v-html="selectedEvent.heure_fin"></span>
               </p>
             </v-card-text>
             <v-card-text>
-              <p>détails : 
+              <p>détails :
               <span v-html="selectedEvent.details"></span>
+              </p>
             </v-card-text>
             <v-card-actions>
               <v-btn text color="secondary" @click="selectedOpen = false">
@@ -566,7 +567,7 @@ export default {
       var bodyFormData = new FormData();
       if (this.create_event.nom_coach == null) {
         this.create_event.nom_coach = "Benoit_C";
-      } 
+      }
       if (this.create_event.role == "annonce") {
         this.create_event.color = "#0099AD"
       }
@@ -591,17 +592,17 @@ export default {
           this.$router.push("login");
           window.location.reload();
         }
-      }  
+      }
       var i;
       if(this.create_event.nb != 0) {
         for(i = 0; i < this.create_event.nb; i++) {
-          var oldTime = this.create_event.start.split(' ')[1]; 
-          var start = new Date(this.create_event.start); 
-          var [date, month, year] = new Date(start.getFullYear(), start.getMonth(), start.getDate()+7).toLocaleDateString().split('/'); 
+          var oldTime = this.create_event.start.split(' ')[1];
+          var start = new Date(this.create_event.start);
+          var [date, month, year] = new Date(start.getFullYear(), start.getMonth(), start.getDate()+7).toLocaleDateString().split('/');
           this.create_event.start = year + '-' + month + '-' + date + ' ' + oldTime;
-          var oldTimeend = this.create_event.end.split(' ')[1]; 
-          var end = new Date(this.create_event.end); 
-          var [date, month, year] = new Date(end.getFullYear(), end.getMonth(), end.getDate()+7).toLocaleDateString().split('/'); 
+          var oldTimeend = this.create_event.end.split(' ')[1];
+          var end = new Date(this.create_event.end);
+          var [date, month, year] = new Date(end.getFullYear(), end.getMonth(), end.getDate()+7).toLocaleDateString().split('/');
           this.create_event.end = year + '-' + month + '-' + date + ' ' + oldTimeend;
           bodyFormData.set("titre", this.create_event.name);
           bodyFormData.set("nom_coach", this.create_event.nom_coach);
@@ -621,7 +622,7 @@ export default {
             this.$router.push("login");
             window.location.reload();
           }
-        }  
+        }
         }
       }
       this.dialog = false;
@@ -811,7 +812,7 @@ export default {
           this.$router.push("login");
           window.location.reload();
         }
-      }    
+      }
     },
     async get_Coach(){
       try {
@@ -828,7 +829,7 @@ export default {
           this.$router.push("login");
           window.location.reload();
         }
-      } 
+      }
     },
     async get_Client(){
       try {
@@ -844,7 +845,7 @@ export default {
           this.$router.push("login");
           window.location.reload();
         }
-      } 
+      }
     },
     viewDay({ date }) {
       this.focus = date;
@@ -913,13 +914,13 @@ export default {
     }
     if (this.user.role=="admin") {
       this.user.admin = true;
-    } 
+    }
     if (this.user.role!="sociéte") {
       this.user.client = true;
-      
+
     } else {
       this.user.onlyClient = true;
     }
-  }  
+  }
 };
 </script>
