@@ -99,7 +99,7 @@
               <p>détails :
               <span v-html="selectedEvent.details"></span>
               </p>
-            </v-card-text>              
+            </v-card-text>
             <v-card-actions>
               <v-btn text color="secondary" @click="selectedOpen = false">
                 Fermer
