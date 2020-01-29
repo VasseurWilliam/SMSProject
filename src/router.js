@@ -9,6 +9,7 @@ import Profil from "./views/Profil.vue";
 import Details_facture_client from "./views/Details_facture_client.vue";
 import Details_facture_coach from "./views/Details_facture_coach.vue";
 import Prix_seance from "./views/Prix_seance.vue";
+import Coach from "./views/Coach";
 
 Vue.use(Router);
 
@@ -50,6 +51,11 @@ export default new Router({
       path: "/login",
       name: "authentification",
       component: Authentification
+    },
+    {
+      path: "/coach",
+      name: "coach",
+      component: Coach
     },
     {
       path: "/inscription",

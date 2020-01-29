@@ -120,19 +120,20 @@ export default {
         { title: "details facture client", icon: "mdi-receipt", route: "/Details_facture_client"},
         { title: "details facture coach", icon: "mdi-receipt", route: "/Details_facture_coach"},
         { title: "Prix Séance", icon: "mdi-settings", route: "/Prix_seance" },
+        { title: "Coach", icon: "mdi-dumbbell", route: "/coach"},
         { title: "Inscription", icon: "mdi-account-plus", route: "/inscription"}
       ],
       items_coach: [
         { title: "Profil", icon: "mdi-account", route: "/profil"},
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
-        { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" }       
+        { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" }
       ],
       items_client: [
         { title: "Profil", icon: "mdi-account", route: "/profil"},
-        { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },      
+        { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
       ],
       items_noauth: [
-        { title: "Connexion", icon: "mdi-login", route: "/login" },       
+        { title: "Connexion", icon: "mdi-login", route: "/login" },
       ],
       color: "black",
       colors: ["primary", "blue", "success", "red", "teal"],
