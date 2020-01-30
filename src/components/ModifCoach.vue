@@ -12,7 +12,7 @@
                                 <v-text-field
                                         label="Prénom"
                                         required
-                                        v-model="prenomCoach"
+                                        v-model="this.localStorage.id"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12">
