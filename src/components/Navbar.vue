@@ -120,7 +120,7 @@ export default {
         { title: "details facture client", icon: "mdi-receipt", route: "/Details_facture_client"},
         { title: "details facture coach", icon: "mdi-receipt", route: "/Details_facture_coach"},
         { title: "Prix Séance", icon: "mdi-settings", route: "/Prix_seance" },
-        //{ title: "Coach", icon: "mdi-dumbbell", route: "/coach"},
+        { title: "Coach", icon: "mdi-dumbbell", route: "/coach"},
         { title: "Inscription", icon: "mdi-account-plus", route: "/inscription"}
       ],
       items_coach: [

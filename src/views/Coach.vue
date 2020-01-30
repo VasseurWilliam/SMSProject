@@ -102,7 +102,7 @@
         },
         methods: {
             submitmodif() {
-                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.localStorage.id;
+                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.selectedEvent.id;
                 axios
                     .put(url, {
                         nom: this.nom,
