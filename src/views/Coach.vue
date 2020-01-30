@@ -52,7 +52,7 @@
                                     <v-list-item-content class="align-end">{{ item.prix_par_seance }}</v-list-item-content>
                                 </v-list-item>
                                 <v-list-item>
-                                    <v-list-item-content><ModifCoach :nom="item.name" :prenom="item.prenom" :email="item.email" :specialite="item.specialite" :couleur="item.color" :facture_mois="item.facture_mois" :facture_coach="item.prix_par_seance" :submitmodif="submitmodif"></ModifCoach></v-list-item-content>
+                                    <v-list-item-content><ModifCoach :nom="item.name" :prenom="item.prenom" :email="item.email" :specialite="item.specialite" :couleur="item.color" :facture_mois="item.facture_mois" :facture_coach="item.prix_par_seance" ></ModifCoach></v-list-item-content>
                                     <v-list-item-content class="align-end"><SupprCoach :coach="item.prenom" :delete_coach="deletecoach"></SupprCoach></v-list-item-content>
                                 </v-list-item>
                             </v-list>
@@ -72,8 +72,7 @@
         components: {ModifCoach, SupprCoach},
         data: () => ({
             itemsPerPage: 4,
-            coach: [],
-            idCoach: null
+            coach: []
         }),
         async mounted() {
             try {
@@ -96,13 +95,20 @@
             } catch (err) {
             }
         },
-        methods: {
+        /*methods: {
             submitmodif() {
-                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + 36; //this.selectedElement.id;
+                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + id; //this.selectedElement.id;
                 axios
                     .put(url, {
-                        nom: "Vasseure",
-                        prenom: "William"
+                        nom: this.nom,
+                        prenom: this.prenom,
+                        pseudo: this.pseudo,
+                        email: this.email,
+                        specialite: this.specialite,
+                        role: this.role,
+                        color: this.color,
+                        facture_mois: this.facture_mois,
+                        prix_par_seance: this.prix_par_seance
                     }, {
                         headers: {
                             token: localStorage.token
@@ -115,6 +121,6 @@
                 var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.coach.id;
                 return url
             }
-        }
+        }*/
     }
 </script>

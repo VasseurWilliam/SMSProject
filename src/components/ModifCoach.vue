@@ -12,7 +12,7 @@
                                 <v-text-field
                                         label="Prénom"
                                         required
-                                        v-model="prenom"
+                                        v-model="prenomCoach"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12">
@@ -74,12 +74,47 @@
 <script>
 
 
+    import axios from "axios";
+
     export default {
         data() {
             return {
-                dialog: false
+                dialog: false,
+                prenomCoach: this.prenom,
+                idCoach: this.id,
+                nomCoach: this.nom,
+                pseudoCoach: this.pseudo,
+                emailCoach: this.email,
+                specialiteCoach: this.specialite,
+                roleCoach: this.role,
+                colorCoach: this.couleur,
+                factureMoisCoach: this.facture_mois,
+                prixParSeance: this.facture_coach
             };
         },
-        props: ['prenom', 'nom', 'email', 'specialite', 'couleur', 'facture_mois', 'facture_coach', 'submitmodif']
+        props: ['id', 'prenom', 'nom', 'pseudo', 'email', 'specialite', 'role', 'couleur', 'facture_mois', 'facture_coach'],
+        methods: {
+            submitmodif() {
+                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.idCoach; //this.selectedElement.id;
+                axios
+                    .put(url, {
+                        nom: this.nom,
+                        prenom: this.prenom,
+                        pseudo: this.pseudo,
+                        email: this.email,
+                        specialite: this.specialite,
+                        role: this.role,
+                        color: this.color,
+                        facture_mois: this.facture_mois,
+                        prix_par_seance: this.prix_par_seance
+                    }, {
+                        headers: {
+                            token: localStorage.token
+                        }
+                    });
+                this.dialog = false;
+                window.location.reload();
+            }
+        }
     }
 </script>
