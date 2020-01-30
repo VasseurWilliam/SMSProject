@@ -21,7 +21,8 @@
 
                             <v-divider></v-divider>
 
-                            <v-list dense>
+                            <v-list dense
+                            >
                                 <v-list-item>
                                     <v-list-item-content>Prenom:</v-list-item-content>
                                     <v-list-item-content class="align-end">{{ item.prenom }}</v-list-item-content>
@@ -51,7 +52,7 @@
                                     <v-list-item-content class="align-end">{{ item.prix_par_seance }}</v-list-item-content>
                                 </v-list-item>
                                 <v-list-item>
-                                    <v-list-item-content><ModifCoach :nom="item.name" :prenom="item.prenom" :email="item.email" :specialite="item.specialite" :couleur="item.color" :facture_mois="item.facture_mois" :facture_coach="item.prix_par_seance" :submitmodif="submitmodif"></ModifCoach></v-list-item-content>
+                                    <v-list-item-content><ModifCoach @click="(event) => { setIdCoach(event, item.id) }" :nom="item.name" :prenom="item.prenom" :email="item.email" :specialite="item.specialite" :couleur="item.color" :facture_mois="item.facture_mois" :facture_coach="item.prix_par_seance" :submitmodif="submitmodif"></ModifCoach></v-list-item-content>
                                     <v-list-item-content class="align-end"><SupprCoach :coach="item.prenom" :delete_coach="deletecoach"></SupprCoach></v-list-item-content>
                                 </v-list-item>
                             </v-list>
@@ -71,7 +72,8 @@
         components: {ModifCoach, SupprCoach},
         data: () => ({
             itemsPerPage: 4,
-            coach: []
+            coach: [],
+            idCoach: null
         }),
         async mounted() {
             try {
@@ -95,11 +97,12 @@
             }
         },
         methods: {
-            submitmodif: function (prenom) {
-                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + 36;
+            submitmodif() {
+                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.idCoach; //this.selectedElement.id;
                 axios
                     .put(url, {
-                        prenom: prenom
+                        nom: "Vasseure",
+                        prenom: "William"
                     }, {
                         headers: {
                             token: localStorage.token
@@ -111,6 +114,9 @@
             delete_coach() {
                 var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.coach.id;
                 return url
+            },
+            setIdCoach: function (id) {
+                this.idCoach = id
             }
         }
     }
