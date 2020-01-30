@@ -205,7 +205,8 @@ export default {
       try {
         await axios.delete(url, {
           headers: {
-            token: localStorage.token
+            token: localStorage.token,
+            id: localStorage.id
           }
         });
       } catch (err) {
