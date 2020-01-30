@@ -95,7 +95,7 @@
         props: ['id', 'prenom', 'nom', 'pseudo', 'email', 'specialite', 'role', 'couleur', 'facture_mois', 'facture_coach'],
         methods: {
             submitmodif() {
-                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.idCoach; //this.selectedElement.id;
+                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.id; //this.selectedElement.id;
                 axios
                     .put(url, {
                         nom: this.nom,
