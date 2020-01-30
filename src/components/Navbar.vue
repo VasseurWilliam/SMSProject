@@ -17,7 +17,9 @@
         <div v-if="template">
           <v-list-item two-line>
             <v-list-item-content>
-              <v-list-item-title>{{ user.lastname }} {{ user.firstname }}</v-list-item-title>
+              <v-list-item-title
+                >{{ user.lastname }} {{ user.firstname }}</v-list-item-title
+              >
               <v-list-item-subtitle>{{ user.role }}</v-list-item-subtitle>
             </v-list-item-content>
           </v-list-item>
@@ -25,63 +27,63 @@
           <v-divider></v-divider>
 
           <div v-if="user.admin">
-          <v-list-item
-            v-for="items_admin in items_admin"
-            :key="items_admin.title"
-            router
-            :to="items_admin.route"
-            link
-          >
-          <v-list-item-icon>
-            <v-icon>{{ items_admin.icon }}</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{ items_admin.title }}</v-list-item-title>
-          </v-list-item-content>
-          </v-list-item>
-          <div class="pa-2">
-            <v-btn block @click="logout">Déconnection</v-btn>
-          </div>
+            <v-list-item
+              v-for="items_admin in items_admin"
+              :key="items_admin.title"
+              router
+              :to="items_admin.route"
+              link
+            >
+              <v-list-item-icon>
+                <v-icon>{{ items_admin.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>{{ items_admin.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <div class="pa-2">
+              <v-btn block @click="logout">Déconnection</v-btn>
+            </div>
           </div>
 
           <div v-else-if="user.client">
-          <v-list-item
-            v-for="items_client in items_client"
-            :key="items_client.title"
-            router
-            :to="items_client.route"
-            link
-          >
-          <v-list-item-icon>
-            <v-icon>{{ items_client.icon }}</v-icon>
-          </v-list-item-icon>
-          <v-list-item-content>
-            <v-list-item-title>{{ items_client.title }}</v-list-item-title>
-          </v-list-item-content>
-          </v-list-item>
-          <div class="pa-2">
-            <v-btn block @click="logout">Déconnection</v-btn>
-          </div>
+            <v-list-item
+              v-for="items_client in items_client"
+              :key="items_client.title"
+              router
+              :to="items_client.route"
+              link
+            >
+              <v-list-item-icon>
+                <v-icon>{{ items_client.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>{{ items_client.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <div class="pa-2">
+              <v-btn block @click="logout">Déconnection</v-btn>
+            </div>
           </div>
 
           <div v-else>
-          <v-list-item
-            v-for="items_coach in items_coach"
-            :key="items_coach.title"
-            router
-            :to="items_coach.route"
-            link
-          >
-          <v-list-item-icon>
-            <v-icon>{{ items_coach.icon }}</v-icon>
-          </v-list-item-icon>
-            <v-list-item-content>
-          <v-list-item-title>{{ items_coach.title }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-          <div class="pa-2">
-            <v-btn block @click="logout">Déconnection</v-btn>
-          </div>
+            <v-list-item
+              v-for="items_coach in items_coach"
+              :key="items_coach.title"
+              router
+              :to="items_coach.route"
+              link
+            >
+              <v-list-item-icon>
+                <v-icon>{{ items_coach.icon }}</v-icon>
+              </v-list-item-icon>
+              <v-list-item-content>
+                <v-list-item-title>{{ items_coach.title }}</v-list-item-title>
+              </v-list-item-content>
+            </v-list-item>
+            <div class="pa-2">
+              <v-btn block @click="logout">Déconnection</v-btn>
+            </div>
           </div>
         </div>
         <div v-else>
@@ -114,26 +116,38 @@ export default {
       drawer: false,
       items_admin: [
         // https://cdn.materialdesignicons.com/1.1.34/
-        { title: "Profil", icon: "mdi-account", route: "/profil"},
+        { title: "Profil", icon: "mdi-account", route: "/profil" },
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
         { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" },
-        { title: "details facture client", icon: "mdi-receipt", route: "/Details_facture_client"},
-        { title: "details facture coach", icon: "mdi-receipt", route: "/Details_facture_coach"},
+        {
+          title: "details facture client",
+          icon: "mdi-receipt",
+          route: "/Details_facture_client"
+        },
+        {
+          title: "details facture coach",
+          icon: "mdi-receipt",
+          route: "/Details_facture_coach"
+        },
         { title: "Prix Séance", icon: "mdi-settings", route: "/Prix_seance" },
         //{ title: "Coach", icon: "mdi-dumbbell", route: "/coach"},
-        { title: "Inscription", icon: "mdi-account-plus", route: "/inscription"}
+        {
+          title: "Inscription",
+          icon: "mdi-account-plus",
+          route: "/inscription"
+        }
       ],
       items_coach: [
-        { title: "Profil", icon: "mdi-account", route: "/profil"},
+        { title: "Profil", icon: "mdi-account", route: "/profil" },
         { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
         { title: "Annonces", icon: "mdi-calendar-text", route: "/annonce" }
       ],
       items_client: [
-        { title: "Profil", icon: "mdi-account", route: "/profil"},
-        { title: "Planning", icon: "mdi-calendar-text", route: "/planning" },
+        { title: "Profil", icon: "mdi-account", route: "/profil" },
+        { title: "Planning", icon: "mdi-calendar-text", route: "/planning" }
       ],
       items_noauth: [
-        { title: "Connexion", icon: "mdi-login", route: "/login" },
+        { title: "Connexion", icon: "mdi-login", route: "/login" }
       ],
       color: "black",
       colors: ["primary", "blue", "success", "red", "teal"],
@@ -163,7 +177,8 @@ export default {
     }
     try {
       this.id = localStorage.id;
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
       const response = await axios.get(url, {
         headers: {
           token: localStorage.token
@@ -175,13 +190,13 @@ export default {
     } catch (err) {
       if (err.response.status === 403 && localStorage.id != null) {
         localStorage.clear();
-        this.$router.push("login");
+        await this.$router.push("login");
         window.location.reload();
       }
     }
-    if (this.user.role=="admin") {
+    if (this.user.role === "admin") {
       this.user.admin = true;
-    } else if (this.user.role=="sociéte") {
+    } else if (this.user.role === "sociéte") {
       this.user.client = true;
     }
   }
