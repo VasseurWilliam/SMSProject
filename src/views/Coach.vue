@@ -4,9 +4,6 @@
                 :items="coach"
                 :items-per-page.sync="itemsPerPage"
                 hide-default-footer
-                @click="showEvent"
-                v-model="selectedOpen"
-                :activator="selectedElement"
         >
 
             <template v-slot:default="props">
@@ -54,7 +51,7 @@
                                     <v-list-item-content class="align-end">{{ item.prix_par_seance }}</v-list-item-content>
                                 </v-list-item>
                                 <v-list-item>
-                                    <v-list-item-content><ModifCoach :nom="item.name" :prenom="item.prenom" :email="item.email" :specialite="item.specialite" :couleur="item.color" :facture_mois="item.facture_mois" :facture_coach="item.prix_par_seance" :submitmodif="submitmodif"></ModifCoach></v-list-item-content>
+                                    <v-list-item-content><ModifCoach :nom="item.name" :prenom="item.prenom" :email="item.email" :specialite="item.specialite" :couleur="item.color" :facture_mois="item.facture_mois" :facture_coach="item.prix_par_seance" :submitmodif="submitmodif(item.id, item.name, item.prenom, item.pseudo, item.email, item.role, item.specialite, item.color, item.facture_mois, item.prix_par_seance)"></ModifCoach></v-list-item-content>
                                     <v-list-item-content class="align-end"><SupprCoach :coach="item.prenom" :delete_coach="deletecoach"></SupprCoach></v-list-item-content>
                                 </v-list-item>
                             </v-list>
@@ -74,10 +71,7 @@
         components: {ModifCoach, SupprCoach},
         data: () => ({
             itemsPerPage: 4,
-            coach: [],
-            selectedEvent: {},
-            selectedElement: null,
-            selectedOpen: false
+            coach: []
         }),
         async mounted() {
             try {
@@ -101,17 +95,19 @@
             }
         },
         methods: {
-            submitmodif() {
-                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + 36; //this.selectedElement.id;
+            submitmodif(id, nom, prenom, pseudo, email, role, specialite, color, facture_mois, prix_par_seance) {
+                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + id; //this.selectedElement.id;
                 axios
                     .put(url, {
-                        nom: this.nom,
-                        prenom: this.prenom,
-                        pseudo: this.pseudo,
-                        email: this.email,
-                        password: this.password,
-                        role: this.role,
-                        color: this.color,
+                        nom: nom,
+                        prenom: prenom,
+                        pseudo: pseudo,
+                        email: email,
+                        specialite: specialite,
+                        role: role,
+                        color: color,
+                        facture_mois: facture_mois,
+                        prix_par_seance: prix_par_seance
                     }, {
                         headers: {
                             token: localStorage.token
@@ -123,21 +119,6 @@
             delete_coach() {
                 var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.coach.id;
                 return url
-            },
-            showEvent({ nativeEvent, event }) {
-                const open = () => {
-                    this.selectedEvent = event;
-                    this.selectedElement = nativeEvent.target;
-                    setTimeout(() => (this.selectedOpen = true), 10);
-                };
-
-                if (this.selectedOpen) {
-                    this.selectedOpen = false;
-                    setTimeout(open, 10);
-                } else {
-                    open();
-                }
-                nativeEvent.stopPropagation();
             }
         }
     }
