@@ -539,7 +539,7 @@ export default {
         facture_coach: "0",
         nb: "0"
       },
-      id: "",
+      idUser: "",
       ajout_name: "",
       user: {
         lastname: "",
@@ -630,14 +630,26 @@ export default {
         for (i = 0; i < this.create_event.nb; i++) {
           let oldTime = this.create_event.start.split(" ")[1];
           let start = new Date(this.create_event.start);
-          let [date, month, year] = new Date(start.getFullYear(), start.getMonth(), start.getDate()+7).toLocaleDateString().split('/');
+          let [dateStart, monthStart, yearStart] = new Date(
+            start.getFullYear(),
+            start.getMonth(),
+            start.getDate() + 7
+          )
+            .toLocaleDateString()
+            .split("/");
           this.create_event.start =
-            year + "-" + month + "-" + date + " " + oldTime;
+            yearStart + "-" + monthStart + "-" + dateStart + " " + oldTime;
           let oldTimeend = this.create_event.end.split(" ")[1];
           let end = new Date(this.create_event.end);
-          let [date, month, year] = new Date(end.getFullYear(), end.getMonth(), end.getDate()+7).toLocaleDateString().split('/');
+          let [dateEnd, monthEnd, yearEnd] = new Date(
+            end.getFullYear(),
+            end.getMonth(),
+            end.getDate() + 7
+          )
+            .toLocaleDateString()
+            .split("/");
           this.create_event.end =
-            year + "-" + month + "-" + date + " " + oldTimeend;
+            yearEnd + "-" + monthEnd + "-" + dateEnd + " " + oldTimeend;
           bodyFormData.set("titre", this.create_event.name);
           bodyFormData.set("nom_coach", this.create_event.nom_coach);
           bodyFormData.set("details", this.create_event.details);
@@ -961,9 +973,10 @@ export default {
     setTimeout(this.get_Coach, 100);
     setTimeout(this.get_Client, 100);
     try {
-      this.id = localStorage.id;
+      this.idUser = localStorage.id;
       let url =
-        "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
+        "https://sportmanagementsystemapi.herokuapp.com/api/user/" +
+        this.idUser;
       const response = await axios.get(url, {
         headers: {
           token: localStorage.token
