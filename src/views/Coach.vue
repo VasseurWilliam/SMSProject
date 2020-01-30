@@ -51,7 +51,7 @@
                                     <v-list-item-content class="align-end">{{ item.prix_par_seance }}</v-list-item-content>
                                 </v-list-item>
                                 <v-list-item>
-                                    <v-list-item-content><ModifCoach :nom="item.name" :prenom="item.prenom" :email="item.email" :specialite="item.specialite" :couleur="item.color" :facture_mois="item.facture_mois" :facture_coach="item.prix_par_seance" :submitmodif="submitmodif(item.id, item.name, item.prenom, item.pseudo, item.email, item.role, item.specialite, item.color, item.facture_mois, item.prix_par_seance)"></ModifCoach></v-list-item-content>
+                                    <v-list-item-content><ModifCoach :nom="item.name" :prenom="item.prenom" :email="item.email" :specialite="item.specialite" :couleur="item.color" :facture_mois="item.facture_mois" :facture_coach="item.prix_par_seance" :submitmodif="submitmodif[item.id, item.name, item.prenom, item.pseudo, item.email, item.role, item.specialite, item.color, item.facture_mois, item.prix_par_seance]"></ModifCoach></v-list-item-content>
                                     <v-list-item-content class="align-end"><SupprCoach :coach="item.prenom" :delete_coach="deletecoach"></SupprCoach></v-list-item-content>
                                 </v-list-item>
                             </v-list>
