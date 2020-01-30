@@ -71,33 +71,34 @@
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
               <div v-if="user.admin">
-              <v-dialog v-model="dialog_delete" persistent max-width="400px">
-                <template v-slot:activator="{ on }">
-                  <v-btn icon v-on="on">
-                    <v-icon>delete</v-icon>
-                  </v-btn>
-                </template>
-                <v-card>
-                  <v-card-text>
-                    <p>Etes vous sure de vouloir supprimer cette annonce ?</p>
-                    <div class="flex-grow-1"></div>
-                    <v-btn color="blue darken-1" text @click="delete_event"
-                      >OUI</v-btn
-                    >
-                    <v-btn
-                      color="red darken-1"
-                      text
-                      @click="dialog_delete = false"
-                      >NON</v-btn
-                    >
-                  </v-card-text>
-                </v-card>
-              </v-dialog>
+                <v-dialog v-model="dialog_delete" persistent max-width="400px">
+                  <template v-slot:activator="{ on }">
+                    <v-btn icon v-on="on">
+                      <v-icon>delete</v-icon>
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-text>
+                      <p>Etes vous sure de vouloir supprimer cette annonce ?</p>
+                      <div class="flex-grow-1"></div>
+                      <v-btn color="blue darken-1" text @click="delete_event"
+                        >OUI</v-btn
+                      >
+                      <v-btn
+                        color="red darken-1"
+                        text
+                        @click="dialog_delete = false"
+                        >NON</v-btn
+                      >
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>
               </div>
             </v-toolbar>
             <v-card-text>
-              <p>détails :
-              <span v-html="selectedEvent.details"></span>
+              <p>
+                détails :
+                <span v-html="selectedEvent.details"></span>
               </p>
             </v-card-text>
             <v-card-actions>
@@ -115,7 +116,7 @@
 <script>
 import axios from "axios";
 
-const weekdaysDefault = [1, 2, 3, 4, 5, 6, 0]
+const weekdaysDefault = [1, 2, 3, 4, 5, 6, 0];
 
 export default {
   data() {
@@ -157,7 +158,7 @@ export default {
         firstname: "",
         role: "",
         admin: "",
-        client: "",
+        client: ""
       }
     };
   },
@@ -199,9 +200,10 @@ export default {
   },
 
   methods: {
-    async delete_event(){
-      var id = this.selectedEvent.id;
-      var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
+    async delete_event() {
+      let id = this.selectedEvent.id;
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/event/" + id;
       try {
         await axios.delete(url, {
           headers: {
@@ -212,7 +214,7 @@ export default {
       } catch (err) {
         if (err.response.status === 403) {
           localStorage.clear();
-          this.$router.push("login");
+          await this.$router.push("login");
           window.location.reload();
         }
       }
@@ -261,10 +263,12 @@ export default {
     }
   },
   async mounted() {
-    var url = "https://sportmanagementsystemapi.herokuapp.com/api/annonce/" + localStorage.id;
+    let urlGet =
+      "https://sportmanagementsystemapi.herokuapp.com/api/annonce/" +
+      localStorage.id;
     try {
-      const response = await axios.get(url);
-      for (var x = 0; x < response.data.data.length; x++) {
+      const response = await axios.get(urlGet);
+      for (let x = 0; x < response.data.data.length; x++) {
         this.events.push({
           id: response.data.data[x].id,
           name: response.data.data[x].titre,
@@ -277,12 +281,14 @@ export default {
     } catch (err) {
       if (err.response.status === 403) {
         localStorage.clear();
-        this.$router.push("login");
+        await this.$router.push("login");
         window.location.reload();
       }
     }
     try {
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + localStorage.id;
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/user/" +
+        localStorage.id;
       const response = await axios.get(url, {
         headers: {
           token: localStorage.token,
@@ -295,11 +301,11 @@ export default {
     } catch (err) {
       if (err.response.status === 403) {
         localStorage.clear();
-        this.$router.push("login");
+        await this.$router.push("login");
         window.location.reload();
       }
     }
-    if (this.user.role=="admin") {
+    if (this.user.role === "admin") {
       this.user.admin = true;
     }
   }
