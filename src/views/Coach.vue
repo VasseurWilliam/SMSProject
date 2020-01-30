@@ -102,7 +102,7 @@
         },
         methods: {
             submitmodif() {
-                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.selectedElement.id;
+                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + 36; //this.selectedElement.id;
                 axios
                     .put(url, {
                         nom: this.nom,
