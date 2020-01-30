@@ -9,44 +9,48 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field label="Prénom" required v-model="storageCoach"></v-text-field>
+                <v-text-field
+                  label="Prénom"
+                  required
+                  v-model="prenom"
+                ></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field label="Nom" required v-model="nom"></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-text-field
-                                        label="Email"
-                                        required
-                                        v-model="email"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-text-field
-                                        label="Spécialité"
-                                        required
-                                        v-model="specialite"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-text-field
-                                        label="couleur"
-                                        required
-                                        v-model="couleur"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-text-field
-                                        label="Facture Mois"
-                                        required
-                                        v-model="facture_mois"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-text-field
-                                        label="Facture Coach"
-                                        required
-                                        v-model="facture_coach"
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  label="Email"
+                  required
+                  v-model="email"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  label="Spécialité"
+                  required
+                  v-model="specialite"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  label="couleur"
+                  required
+                  v-model="couleur"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  label="Facture Mois"
+                  required
+                  v-model="facture_mois"
+                ></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field
+                  label="Facture Coach"
+                  required
+                  v-model="facture_coach"
                                 ></v-text-field>
                             </v-col>
                         </v-row>
@@ -81,11 +85,10 @@
                 roleCoach: this.role,
                 colorCoach: this.couleur,
                 factureMoisCoach: this.facture_mois,
-                prixParSeance: this.facture_coach,
-                storageCoach: this.storage
+                prixParSeance: this.facture_coach
             };
         },
-        props: ['id', 'prenom', 'nom', 'pseudo', 'email', 'specialite', 'role', 'couleur', 'facture_mois', 'facture_coach', 'storage'],
+        props: ['id', 'prenom', 'nom', 'pseudo', 'email', 'specialite', 'role', 'couleur', 'facture_mois', 'facture_coach'],
         methods: {
             submitmodif() {
                 var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.id; //this.selectedElement.id;
