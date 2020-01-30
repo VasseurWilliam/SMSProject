@@ -63,7 +63,7 @@
                 <v-card-actions>
                     <v-btn color="red darken-1" text @click="dialog = false"
                     >Fermer</v-btn>
-                    <v-btn color="blue darken-1" text @click="submitmodif"
+                    <v-btn color="blue darken-1" text @click="submitmodif(prenom)"
                     >Valider</v-btn>
                 </v-card-actions>
             </v-card>

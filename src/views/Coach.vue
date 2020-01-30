@@ -51,7 +51,7 @@
                                     <v-list-item-content class="align-end">{{ item.prix_par_seance }}</v-list-item-content>
                                 </v-list-item>
                                 <v-list-item>
-                                    <v-list-item-content><ModifCoach :nom="item.name" :prenom="item.prenom" :email="item.email" :specialite="item.specialite" :couleur="item.color" :facture_mois="item.facture_mois" :facture_coach="item.prix_par_seance" :submitmodif="submitmodif[item.id, item.name, item.prenom, item.pseudo, item.email, item.role, item.specialite, item.color, item.facture_mois, item.prix_par_seance]"></ModifCoach></v-list-item-content>
+                                    <v-list-item-content><ModifCoach :nom="item.name" :prenom="item.prenom" :email="item.email" :specialite="item.specialite" :couleur="item.color" :facture_mois="item.facture_mois" :facture_coach="item.prix_par_seance" :submitmodif="submitmodif(item.prenom)"></ModifCoach></v-list-item-content>
                                     <v-list-item-content class="align-end"><SupprCoach :coach="item.prenom" :delete_coach="deletecoach"></SupprCoach></v-list-item-content>
                                 </v-list-item>
                             </v-list>
@@ -95,19 +95,11 @@
             }
         },
         methods: {
-            submitmodif(id, nom, prenom, pseudo, email, role, specialite, color, facture_mois, prix_par_seance) {
-                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + id; //this.selectedElement.id;
+            submitmodif(prenom) {
+                var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + 36; //this.selectedElement.id;
                 axios
                     .put(url, {
-                        nom: nom,
-                        prenom: prenom,
-                        pseudo: pseudo,
-                        email: email,
-                        specialite: specialite,
-                        role: role,
-                        color: color,
-                        facture_mois: facture_mois,
-                        prix_par_seance: prix_par_seance
+                        prenom: prenom
                     }, {
                         headers: {
                             token: localStorage.token
