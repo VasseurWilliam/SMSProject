@@ -73,7 +73,7 @@
         data: () => ({
             itemsPerPage: 4,
             coach: [],
-            storage: this.localStorage.id
+            storage: localStorage.id
         }),
         async mounted() {
             try {

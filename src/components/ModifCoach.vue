@@ -1,26 +1,18 @@
 <template>
-    <div align="center">
-        <v-dialog v-model="dialog" persistent max-width="800px">
-            <template v-slot:activator="{ on }">
-                <v-btn class="v-btn success" v-on="on">Modifier</v-btn>
-            </template>
-            <v-card>
-                <v-card-text>
-                    <v-container>
-                        <v-row>
-                            <v-col cols="12">
-                                <v-text-field
-                                        label="Prénom"
-                                        required
-                                        v-model="storageCoach"
-                                ></v-text-field>
-                            </v-col>
-                            <v-col cols="12">
-                                <v-text-field
-                                        label="Nom"
-                                        required
-                                        v-model="nom"
-                                ></v-text-field>
+  <div align="center">
+    <v-dialog v-model="dialog" persistent max-width="800px">
+      <template v-slot:activator="{ on }">
+        <v-btn class="v-btn success" v-on="on">Modifier</v-btn>
+      </template>
+      <v-card>
+        <v-card-text>
+          <v-container>
+            <v-row>
+              <v-col cols="12">
+                <v-text-field label="Prénom" required v-model="storageCoach"></v-text-field>
+              </v-col>
+              <v-col cols="12">
+                <v-text-field label="Nom" required v-model="nom"></v-text-field>
                             </v-col>
                             <v-col cols="12">
                                 <v-text-field
