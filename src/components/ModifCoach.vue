@@ -12,7 +12,7 @@
                                 <v-text-field
                                         label="Prénom"
                                         required
-                                        v-model="storage"
+                                        v-model="storageCoach"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12">
@@ -90,7 +90,7 @@
                 colorCoach: this.couleur,
                 factureMoisCoach: this.facture_mois,
                 prixParSeance: this.facture_coach,
-                storage: this.storage
+                storageCoach: this.storage
             };
         },
         props: ['id', 'prenom', 'nom', 'pseudo', 'email', 'specialite', 'role', 'couleur', 'facture_mois', 'facture_coach', 'storage'],
