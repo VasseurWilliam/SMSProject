@@ -4,110 +4,116 @@
       <v-sheet height="64">
         <v-toolbar flat color="white">
           <v-row>
-          <div v-if="user.client">
-            <v-dialog v-model="dialog" persistent max-width="800px">
-              <template v-slot:activator="{ on }">
-                <v-btn color="primary" dark v-on="on">Evenement</v-btn>
-              </template>
-              <v-card>
-                <v-card-title>
-                  <span class="headline">Créer un évenement</span>
-                </v-card-title>
-                <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12">
-                        <v-select
-                          v-model="create_event.name"
-                          :items="client"
-                          item-text="name"
-                          label="Client*"
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Autre client"
-                          v-model="create_event.name"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" v-if="this.create_event.role !== 'annonce'">
-                        <v-select
-                          v-model="create_event.nom_coach"
-                          :items="coach"
-                          item-text="prenom"
-                          label="Pseudo Coach"
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-textarea
-                          label="description"
-                          v-model="create_event.details"
-                        ></v-textarea>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <VueCtkDateTimePicker
-                          v-model="create_event.start"
-                          format="YYYY-MM-DD HH:mm"
-                          formatted="YYYY-MM-DD HH:mm"
-                          label="Date et heure de début"
-                          minuteInterval="5"
-                        />
-                        <br />
-                        <VueCtkDateTimePicker
-                          v-model="create_event.end"
-                          format="YYYY-MM-DD HH:mm"
-                          formatted="YYYY-MM-DD HH:mm"
-                          label="Date et heure de fin"
-                          minuteInterval="5"
-                        />
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Nombre de Répétition"
-                          v-model="create_event.nb"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12" sm="6" v-if="user.admin">
-                        <v-select
-                          v-model="create_event.role"
-                          :items="role_admin"
-                          :rules="[v => !!v || 'Item is required']"
-                          label="type d'évenement"
-                          required
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6" v-else>
-                        <v-select
-                          v-model="create_event.role"
-                          :items="role"
-                          :rules="[v => !!v || 'Item is required']"
-                          label="type d'évenement"
-                          required
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12" v-if="this.create_event.role === 'annonce'">
-                        <v-select
-                          v-model="create_event.groupe"
-                          :items="coach"
-                          item-text="specialite"
-                          label="groupe"
-                        ></v-select>
-                      </v-col>
-                    </v-row>
-                  </v-container>
-                  <small>*indicates required field</small>
-                </v-card-text>
-                <v-card-actions>
-                  <div class="flex-grow-1"></div>
-                  <v-btn color="red darken-1" text @click="dialog = false"
-                    >Fermer</v-btn
-                  >
-                  <v-btn color="blue darken-1" text @click="validate"
-                    >Valider</v-btn
-                  >
-                </v-card-actions>
-              </v-card>
-            </v-dialog>
+            <div v-if="user.client">
+              <v-dialog v-model="dialog" persistent max-width="800px">
+                <template v-slot:activator="{ on }">
+                  <v-btn color="primary" dark v-on="on">Evenement</v-btn>
+                </template>
+                <v-card>
+                  <v-card-title>
+                    <span class="headline">Créer un évenement</span>
+                  </v-card-title>
+                  <v-card-text>
+                    <v-container>
+                      <v-row>
+                        <v-col cols="12">
+                          <v-select
+                            v-model="create_event.name"
+                            :items="client"
+                            item-text="name"
+                            label="Client*"
+                          ></v-select>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-text-field
+                            label="Autre client"
+                            v-model="create_event.name"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          v-if="this.create_event.role !== 'annonce'"
+                        >
+                          <v-select
+                            v-model="create_event.nom_coach"
+                            :items="coach"
+                            item-text="prenom"
+                            label="Pseudo Coach"
+                          ></v-select>
+                        </v-col>
+                        <v-col cols="12">
+                          <v-textarea
+                            label="description"
+                            v-model="create_event.details"
+                          ></v-textarea>
+                        </v-col>
+                        <v-col cols="12" sm="6">
+                          <VueCtkDateTimePicker
+                            v-model="create_event.start"
+                            format="YYYY-MM-DD HH:mm"
+                            formatted="YYYY-MM-DD HH:mm"
+                            label="Date et heure de début"
+                            minuteInterval="5"
+                          />
+                          <br />
+                          <VueCtkDateTimePicker
+                            v-model="create_event.end"
+                            format="YYYY-MM-DD HH:mm"
+                            formatted="YYYY-MM-DD HH:mm"
+                            label="Date et heure de fin"
+                            minuteInterval="5"
+                          />
+                        </v-col>
+                        <v-col cols="12">
+                          <v-text-field
+                            label="Nombre de Répétition"
+                            v-model="create_event.nb"
+                          ></v-text-field>
+                        </v-col>
+                        <v-col cols="12" sm="6" v-if="user.admin">
+                          <v-select
+                            v-model="create_event.role"
+                            :items="role_admin"
+                            :rules="[v => !!v || 'Item is required']"
+                            label="type d'évenement"
+                            required
+                          ></v-select>
+                        </v-col>
+                        <v-col cols="12" sm="6" v-else>
+                          <v-select
+                            v-model="create_event.role"
+                            :items="role"
+                            :rules="[v => !!v || 'Item is required']"
+                            label="type d'évenement"
+                            required
+                          ></v-select>
+                        </v-col>
+                        <v-col
+                          cols="12"
+                          v-if="this.create_event.role === 'annonce'"
+                        >
+                          <v-select
+                            v-model="create_event.groupe"
+                            :items="coach"
+                            item-text="specialite"
+                            label="groupe"
+                          ></v-select>
+                        </v-col>
+                      </v-row>
+                    </v-container>
+                    <small>*indicates required field</small>
+                  </v-card-text>
+                  <v-card-actions>
+                    <div class="flex-grow-1"></div>
+                    <v-btn color="red darken-1" text @click="dialog = false"
+                      >Fermer</v-btn
+                    >
+                    <v-btn color="blue darken-1" text @click="validate"
+                      >Valider</v-btn
+                    >
+                  </v-card-actions>
+                </v-card>
+              </v-dialog>
             </div>
           </v-row>
           <v-btn outlined class="mr-4" @click="setToday">
@@ -188,167 +194,171 @@
                         <span class="headline">Formulaire de mail</span>
                       </v-card-title>
                       <v-card-text>
-                      <v-container>
-                      <v-row>
-                        <v-col cols="12">
-                          <h1>
-                            Pseudo du coach: {{selectedEvent.nom_coach}}
-                          </h1>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-text-field
-                            label="Sujet"
-                            v-model="mail.subject"
-                          ></v-text-field>
-                        </v-col>
-                        <v-col cols="12">
-                          <v-textarea
-                            label="Votre Message"
-                            v-model="mail.msg"
-                          ></v-textarea>
-                        </v-col>
-                      </v-row>
-                      <small>*indicates required field</small>
+                        <v-container>
+                          <v-row>
+                            <v-col cols="12">
+                              <h1>
+                                Pseudo du coach: {{ selectedEvent.nom_coach }}
+                              </h1>
+                            </v-col>
+                            <v-col cols="12">
+                              <v-text-field
+                                label="Sujet"
+                                v-model="mail.subject"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                              <v-textarea
+                                label="Votre Message"
+                                v-model="mail.msg"
+                              ></v-textarea>
+                            </v-col>
+                          </v-row>
+                          <small>*indicates required field</small>
+                          <v-card-actions>
+                            <div class="flex-grow-1"></div>
+                            <v-btn
+                              color="red darken-1"
+                              text
+                              @click="dialog_mail = false"
+                              >Fermer</v-btn
+                            >
+                            <v-btn color="blue darken-1" text @click="sendMail"
+                              >Envoyer</v-btn
+                            >
+                          </v-card-actions>
+                        </v-container>
+                      </v-card-text>
+                    </v-card>
+                  </v-dialog>
+                </div>
+                <div v-if="user.client">
+                  <v-dialog
+                    v-model="dialog_update"
+                    persistent
+                    max-width="800px"
+                  >
+                    <template v-slot:activator="{ on }">
+                      <v-btn icon dark v-on="on">
+                        <v-icon>edit</v-icon>
+                      </v-btn>
+                    </template>
+                    <v-card>
+                      <v-card-title>
+                        <span class="headline">Modifier un évenement</span>
+                      </v-card-title>
+                      <v-card-text>
+                        <v-container>
+                          <v-row>
+                            <v-col cols="12">
+                              <v-select
+                                v-model="selectedEvent.name"
+                                :items="client"
+                                item-text="name"
+                                label="Client*"
+                              ></v-select>
+                            </v-col>
+                            <v-col cols="12">
+                              <v-text-field
+                                label="Autre client"
+                                v-model="selectedEvent.name"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                              <v-select
+                                v-model="selectedEvent.nom_coach"
+                                :items="coach"
+                                item-text="prenom"
+                                label="Prenom Coach"
+                              ></v-select>
+                            </v-col>
+                            <div v-if="user.admin">
+                              <v-col cols="12">
+                                <v-text-field
+                                  label="prix client"
+                                  v-model="selectedEvent.facture_client"
+                                ></v-text-field>
+                              </v-col>
+                            </div>
+                            <v-col cols="12">
+                              <v-text-field
+                                label="prix coach"
+                                v-model="selectedEvent.facture_coach"
+                              ></v-text-field>
+                            </v-col>
+                            <v-col cols="12">
+                              <v-textarea
+                                label="description"
+                                v-model="selectedEvent.details"
+                              ></v-textarea>
+                            </v-col>
+                            <v-col cols="12" sm="6">
+                              <VueCtkDateTimePicker
+                                v-model="selectedEvent.start"
+                                format="YYYY-MM-DD HH:mm"
+                                formatted="YYYY-MM-DD HH:mm"
+                                label="Date et heure de début"
+                                minuteInterval="5"
+                              />
+                              <br />
+                              <VueCtkDateTimePicker
+                                v-model="selectedEvent.end"
+                                format="YYYY-MM-DD HH:mm"
+                                formatted="YYYY-MM-DD HH:mm"
+                                label="Date et heure de fin"
+                                minuteInterval="5"
+                              />
+                            </v-col>
+                            <v-col cols="12" sm="6" v-if="user.admin">
+                              <v-select
+                                v-model="selectedEvent.role"
+                                :items="role_admin"
+                                :rules="[v => !!v || 'Item is required']"
+                                label="type d'évenement"
+                                required
+                              ></v-select>
+                            </v-col>
+                            <v-col cols="12" sm="6" v-else>
+                              <v-select
+                                v-model="selectedEvent.role"
+                                :items="role"
+                                :rules="[v => !!v || 'Item is required']"
+                                label="type d'évenement"
+                                required
+                              ></v-select>
+                            </v-col>
+                          </v-row>
+                        </v-container>
+                        <small>*indicates required field</small>
+                      </v-card-text>
                       <v-card-actions>
                         <div class="flex-grow-1"></div>
                         <v-btn
                           color="red darken-1"
                           text
-                          @click="dialog_mail = false"
+                          @click="dialog_update = false"
                           >Fermer</v-btn
                         >
-                      <v-btn color="blue darken-1" text @click="sendMail"
-                        >Envoyer</v-btn
-                      >
-                    </v-card-actions>
-                    </v-container>
-                    </v-card-text>
-                  </v-card>
-                </v-dialog>
-                </div>
-                <div v-if="user.client">
-                <v-dialog v-model="dialog_update" persistent max-width="800px">
-                  <template v-slot:activator="{ on }">
-                    <v-btn icon dark v-on="on">
-                      <v-icon>edit</v-icon>
-                    </v-btn>
-                  </template>
-                  <v-card>
-                    <v-card-title>
-                      <span class="headline">Modifier un évenement</span>
-                    </v-card-title>
-                    <v-card-text>
-                  <v-container>
-                    <v-row>
-                      <v-col cols="12">
-                        <v-select
-                          v-model="selectedEvent.name"
-                          :items="client"
-                          item-text="name"
-                          label="Client*"
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="Autre client"
-                          v-model="selectedEvent.name"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-select
-                          v-model="selectedEvent.nom_coach"
-                          :items="coach"
-                          item-text="prenom"
-                          label="Prenom Coach"
-                        ></v-select>
-                      </v-col>
-                      <div v-if="user.admin">
-                      <v-col cols="12">
-                        <v-text-field
-                          label="prix client"
-                          v-model="selectedEvent.facture_client"
-                        ></v-text-field>
-                      </v-col>
-                      </div>
-                      <v-col cols="12">
-                        <v-text-field
-                          label="prix coach"
-                          v-model="selectedEvent.facture_coach"
-                        ></v-text-field>
-                      </v-col>
-                      <v-col cols="12">
-                        <v-textarea
-                          label="description"
-                          v-model="selectedEvent.details"
-                        ></v-textarea>
-                      </v-col>
-                      <v-col cols="12" sm="6">
-                        <VueCtkDateTimePicker
-                          v-model="selectedEvent.start"
-                          format="YYYY-MM-DD HH:mm"
-                          formatted="YYYY-MM-DD HH:mm"
-                          label="Date et heure de début"
-                          minuteInterval="5"
-                        />
-                        <br />
-                        <VueCtkDateTimePicker
-                          v-model="selectedEvent.end"
-                          format="YYYY-MM-DD HH:mm"
-                          formatted="YYYY-MM-DD HH:mm"
-                          label="Date et heure de fin"
-                          minuteInterval="5"
-                        />
-                      </v-col>
-                      <v-col cols="12" sm="6" v-if="user.admin">
-                        <v-select
-                          v-model="selectedEvent.role"
-                          :items="role_admin"
-                          :rules="[v => !!v || 'Item is required']"
-                          label="type d'évenement"
-                          required
-                        ></v-select>
-                      </v-col>
-                      <v-col cols="12" sm="6" v-else>
-                        <v-select
-                          v-model="selectedEvent.role"
-                          :items="role"
-                          :rules="[v => !!v || 'Item is required']"
-                          label="type d'évenement"
-                          required
-                        ></v-select>
-                      </v-col>
-                    </v-row>
-                      </v-container>
-                      <small>*indicates required field</small>
-                    </v-card-text>
-                    <v-card-actions>
-                      <div class="flex-grow-1"></div>
-                      <v-btn
-                        color="red darken-1"
-                        text
-                        @click="dialog_update = false"
-                        >Fermer</v-btn
-                      >
-                      <v-btn color="blue darken-1" text @click="update_event"
-                        >Modifier</v-btn
-                      >
-                    </v-card-actions>
-                  </v-card>
-                </v-dialog>
+                        <v-btn color="blue darken-1" text @click="update_event"
+                          >Modifier</v-btn
+                        >
+                      </v-card-actions>
+                    </v-card>
+                  </v-dialog>
                 </div>
               </v-row>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
               <div v-if="user.client">
-              <v-dialog v-model="dialog_ajout" persistent max-width="400px">
-                <template v-slot:activator="{ on }">
-                  <v-btn icon v-on="on">
-                    <v-icon>mdi-account-plus</v-icon>
-                  </v-btn>
+                <v-dialog v-model="dialog_ajout" persistent max-width="400px">
+                  <template v-slot:activator="{ on }">
+                    <v-btn icon v-on="on">
+                      <v-icon>mdi-account-plus</v-icon>
+                    </v-btn>
                   </template>
-                <v-card>
-                  <v-card-text>
-                    <v-col cols="12">
+                  <v-card>
+                    <v-card-text>
+                      <v-col cols="12">
                         <v-select
                           v-model="ajout_name"
                           :items="coach"
@@ -356,83 +366,103 @@
                           label="Prenom Coach"
                         ></v-select>
                       </v-col>
-                    <div class="flex-grow-1"></div>
-                    <v-btn color="blue darken-1" text @click="ajout_event"
-                      >OUI</v-btn
-                    >
-                    <v-btn
-                      color="red darken-1"
-                      text
-                      @click="dialog_ajout = false"
-                      >NON</v-btn
-                    >
-                  </v-card-text>
-                </v-card>
-              </v-dialog>
+                      <div class="flex-grow-1"></div>
+                      <v-btn color="blue darken-1" text @click="ajout_event"
+                        >OUI</v-btn
+                      >
+                      <v-btn
+                        color="red darken-1"
+                        text
+                        @click="dialog_ajout = false"
+                        >NON</v-btn
+                      >
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>
               </div>
               <div v-if="user.client">
-              <v-dialog v-model="dialog_delete" persistent max-width="400px">
-                <template v-slot:activator="{ on }">
-                  <v-btn icon v-on="on">
-                    <v-icon>delete</v-icon>
-                  </v-btn>
-                </template>
-                <v-card>
-                  <v-card-text>
-                    <p>Etes vous sure de vouloir supprimer cette evenement ?</p>
-                    <div class="flex-grow-1"></div>
-                    <v-btn color="blue darken-1" text @click="delete_event"
-                      >OUI</v-btn
-                    >
-                    <v-btn
-                      color="red darken-1"
-                      text
-                      @click="dialog_delete = false"
-                      >NON</v-btn
-                    >
-                  </v-card-text>
-                </v-card>
-              </v-dialog>
+                <v-dialog v-model="dialog_delete" persistent max-width="400px">
+                  <template v-slot:activator="{ on }">
+                    <v-btn icon v-on="on">
+                      <v-icon>delete</v-icon>
+                    </v-btn>
+                  </template>
+                  <v-card>
+                    <v-card-text>
+                      <p>
+                        Etes vous sure de vouloir supprimer cette evenement ?
+                      </p>
+                      <div class="flex-grow-1"></div>
+                      <v-btn color="blue darken-1" text @click="delete_event"
+                        >OUI</v-btn
+                      >
+                      <v-btn
+                        color="red darken-1"
+                        text
+                        @click="dialog_delete = false"
+                        >NON</v-btn
+                      >
+                    </v-card-text>
+                  </v-card>
+                </v-dialog>
               </div>
             </v-toolbar>
             <v-card-text>
-              <p>Pseudo coach :
-              <span v-html="selectedEvent.nom_coach"></span>
+              <p>
+                Pseudo coach :
+                <span v-html="selectedEvent.nom_coach"></span>
               </p>
             </v-card-text>
             <div v-if="user.admin">
-            <v-card-text>
-              <p>facture client :
-              <span v-html="selectedEvent.facture_client">€</span></p>
-                <v-btn color="green darken-2" icon dark @click="add_facture_client">
+              <v-card-text>
+                <p>
+                  facture client :
+                  <span v-html="selectedEvent.facture_client">€</span>
+                </p>
+                <v-btn
+                  color="green darken-2"
+                  icon
+                  dark
+                  @click="add_facture_client"
+                >
                   <v-icon>mdi-check</v-icon>
                 </v-btn>
-            </v-card-text>
+              </v-card-text>
             </div>
             <div v-if="user.client">
-            <v-card-text>
-              <p>facture coach :
-              <span v-html="selectedEvent.facture_coach"></span>€</p>
-              <div v-if="user.admin">
-                <v-btn icon color="green darken-2" dark @click="add_facture_coach">
-                  <v-icon>mdi-check</v-icon>
-                </v-btn>
-              </div>
-            </v-card-text>
+              <v-card-text>
+                <p>
+                  facture coach :
+                  <span v-html="selectedEvent.facture_coach"></span>€
+                </p>
+                <div v-if="user.admin">
+                  <v-btn
+                    icon
+                    color="green darken-2"
+                    dark
+                    @click="add_facture_coach"
+                  >
+                    <v-icon>mdi-check</v-icon>
+                  </v-btn>
+                </div>
+              </v-card-text>
             </div>
             <v-card-text>
-              <p>heure de début :
-              <span v-html="selectedEvent.heure_debut"></span>
+              <p>
+                heure de début :
+                <span v-html="selectedEvent.heure_debut"></span>
               </p>
             </v-card-text>
             <v-card-text>
-              <p>heure de fin :
-              <span v-html="selectedEvent.heure_fin"></span>
+              <p>
+                heure de fin :
+                <span v-html="selectedEvent.heure_fin"></span>
               </p>
             </v-card-text>
             <v-card-text>
-              <p>détails :
-              <span v-html="selectedEvent.details"></span>
+              <p>
+                détails :
+                <span v-html="selectedEvent.details"></span>
               </p>
             </v-card-text>
             <v-card-actions>
@@ -450,7 +480,7 @@
 <script>
 import axios from "axios";
 
-const weekdaysDefault = [1, 2, 3, 4, 5, 6, 0]
+const weekdaysDefault = [1, 2, 3, 4, 5, 6, 0];
 
 export default {
   data() {
@@ -507,7 +537,7 @@ export default {
         groupe: "",
         facture_client: "0",
         facture_coach: "0",
-        nb: "0",
+        nb: "0"
       },
       id: "",
       ajout_name: "",
@@ -517,11 +547,11 @@ export default {
         role: "",
         admin: "",
         client: "",
-        onlyClient: "",
+        onlyClient: ""
       },
       mail: {
         msg: "",
-        subject: "",
+        subject: ""
       }
     };
   },
@@ -562,14 +592,16 @@ export default {
     }
   },
   methods: {
-    async validate(){
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + localStorage.id;
-      var bodyFormData = new FormData();
+    async validate() {
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/event/" +
+        localStorage.id;
+      let bodyFormData = new FormData();
       if (this.create_event.nom_coach == null) {
         this.create_event.nom_coach = "Benoit_C";
       }
-      if (this.create_event.role == "annonce") {
-        this.create_event.color = "#0099AD"
+      if (this.create_event.role === "annonce") {
+        this.create_event.color = "#0099AD";
       }
       bodyFormData.set("titre", this.create_event.name);
       bodyFormData.set("nom_coach", this.create_event.nom_coach);
@@ -589,21 +621,23 @@ export default {
       } catch (err) {
         if (err.response.status === 403) {
           localStorage.clear();
-          this.$router.push("login");
+          await this.$router.push("login");
           window.location.reload();
         }
       }
-      var i;
-      if(this.create_event.nb != 0) {
-        for(i = 0; i < this.create_event.nb; i++) {
-          var oldTime = this.create_event.start.split(' ')[1];
-          var start = new Date(this.create_event.start);
-          var [date, month, year] = new Date(start.getFullYear(), start.getMonth(), start.getDate()+7).toLocaleDateString().split('/');
-          this.create_event.start = year + '-' + month + '-' + date + ' ' + oldTime;
-          var oldTimeend = this.create_event.end.split(' ')[1];
-          var end = new Date(this.create_event.end);
-          var [date, month, year] = new Date(end.getFullYear(), end.getMonth(), end.getDate()+7).toLocaleDateString().split('/');
-          this.create_event.end = year + '-' + month + '-' + date + ' ' + oldTimeend;
+      let i;
+      if (this.create_event.nb !== 0) {
+        for (i = 0; i < this.create_event.nb; i++) {
+          let oldTime = this.create_event.start.split(" ")[1];
+          let start = new Date(this.create_event.start);
+          let [date, month, year] = new Date(start.getFullYear(), start.getMonth(), start.getDate()+7).toLocaleDateString().split('/');
+          this.create_event.start =
+            year + "-" + month + "-" + date + " " + oldTime;
+          let oldTimeend = this.create_event.end.split(" ")[1];
+          let end = new Date(this.create_event.end);
+          let [date, month, year] = new Date(end.getFullYear(), end.getMonth(), end.getDate()+7).toLocaleDateString().split('/');
+          this.create_event.end =
+            year + "-" + month + "-" + date + " " + oldTimeend;
           bodyFormData.set("titre", this.create_event.name);
           bodyFormData.set("nom_coach", this.create_event.nom_coach);
           bodyFormData.set("details", this.create_event.details);
@@ -618,38 +652,46 @@ export default {
             });
           } catch (err) {
             if (err.response.status === 403) {
-            localStorage.clear();
-            this.$router.push("login");
-            window.location.reload();
+              localStorage.clear();
+              await this.$router.push("login");
+              window.location.reload();
+            }
           }
-        }
         }
       }
       this.dialog = false;
       window.location.reload();
     },
     async accepter() {
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/valider/" + this.selectedEvent.id;
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/event/valider/" +
+        this.selectedEvent.id;
       try {
-        await axios.put(url,{}, {
-          headers: {
-            token: localStorage.token
+        await axios.put(
+          url,
+          {},
+          {
+            headers: {
+              token: localStorage.token
+            }
           }
-        });
+        );
       } catch (err) {
         if (err.response.status === 403) {
           localStorage.clear();
-          this.$router.push("login");
+          await this.$router.push("login");
           window.location.reload();
         }
       }
       window.location.reload();
     },
     async sendMail() {
-      var bodyFormData = new FormData();
+      let bodyFormData = new FormData();
       bodyFormData.set("msg", this.mail.msg);
       bodyFormData.set("subject", this.mail.subject);
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/mail/" + this.selectedEvent.id;
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/event/mail/" +
+        this.selectedEvent.id;
       try {
         await axios.post(url, bodyFormData, {
           headers: {
@@ -659,15 +701,17 @@ export default {
       } catch (err) {
         if (err.response.status === 403) {
           localStorage.clear();
-          this.$router.push("login");
+          await this.$router.push("login");
           window.location.reload();
         }
       }
       this.dialog_mail = false;
       window.location.reload();
     },
-    async delete_event(){
-      var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
+    async delete_event() {
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/event/" +
+        this.selectedEvent.id;
       try {
         await axios.delete(url, {
           headers: {
@@ -678,61 +722,75 @@ export default {
       } catch (err) {
         if (err.response.status === 403) {
           localStorage.clear();
-          this.$router.push("login");
+          await this.$router.push("login");
           window.location.reload();
         }
       }
       window.location.reload();
     },
-    async add_facture_client(){
-      var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalClient/event/" + this.selectedEvent.id;
+    async add_facture_client() {
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/addTotalClient/event/" +
+        this.selectedEvent.id;
       try {
-        await axios.put(url,{}, {
-          headers: {
-            token: localStorage.token
+        await axios.put(
+          url,
+          {},
+          {
+            headers: {
+              token: localStorage.token
+            }
           }
-        });
+        );
       } catch (err) {
         if (err.response.status === 403) {
           localStorage.clear();
-          this.$router.push("login");
+          await this.$router.push("login");
           window.location.reload();
         }
       }
       window.location.reload();
     },
-    async add_facture_coach(){
-      var url ="https://sportmanagementsystemapi.herokuapp.com/api/addTotalCoach/event/" + this.selectedEvent.id;
+    async add_facture_coach() {
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/addTotalCoach/event/" +
+        this.selectedEvent.id;
       try {
-        await axios.put(url,{}, {
-          headers: {
-            token: localStorage.token
+        await axios.put(
+          url,
+          {},
+          {
+            headers: {
+              token: localStorage.token
+            }
           }
-        });
+        );
       } catch (err) {
-          if (err.response.status === 403) {
-            localStorage.clear();
-            this.$router.push("login");
-            window.location.reload();
-          }
+        if (err.response.status === 403) {
+          localStorage.clear();
+          await this.$router.push("login");
+          window.location.reload();
         }
+      }
       window.location.reload();
     },
-    async ajout_event(){
-      var url ="https://sportmanagementsystemapi.herokuapp.com/api/event/ajout/" + this.selectedEvent.id;
-      var bodyFormData = new FormData();
+    async ajout_event() {
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/event/ajout/" +
+        this.selectedEvent.id;
+      let bodyFormData = new FormData();
       bodyFormData.set("nom_coach", this.ajout_name);
       bodyFormData.set("id_createur", localStorage.id);
       try {
         await axios.post(url, bodyFormData, {
           headers: {
-            token: localStorage.token,
+            token: localStorage.token
           }
         });
       } catch (err) {
         if (err.response.status === 403) {
           localStorage.clear();
-          this.$router.push("login");
+          await this.$router.push("login");
           window.location.reload();
         }
       }
@@ -740,84 +798,90 @@ export default {
       window.location.reload();
     },
     async update_event() {
-      if (this.selectedEvent.role == "annonce") {
-        this.selectedEvent.color = "#0099AD"
+      if (this.selectedEvent.role === "annonce") {
+        this.selectedEvent.color = "#0099AD";
       }
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/event/" + this.selectedEvent.id;
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/event/" +
+        this.selectedEvent.id;
       try {
         await axios.put(
-        url,
-        {
-          titre: this.selectedEvent.name,
-          nom_coach: this.selectedEvent.nom_coach,
-          facture_client: this.selectedEvent.facture_client,
-          facture_coach: this.selectedEvent.facture_coach,
-          details: this.selectedEvent.details,
-          date_debut: this.selectedEvent.start,
-          date_fin: this.selectedEvent.end,
-          color: this.selectedEvent.color,
-          role: this.selectedEvent.role,
-          id_updateur : localStorage.id
-        },
-        {
-          headers: {
-            token: localStorage.token
+          url,
+          {
+            titre: this.selectedEvent.name,
+            nom_coach: this.selectedEvent.nom_coach,
+            facture_client: this.selectedEvent.facture_client,
+            facture_coach: this.selectedEvent.facture_coach,
+            details: this.selectedEvent.details,
+            date_debut: this.selectedEvent.start,
+            date_fin: this.selectedEvent.end,
+            color: this.selectedEvent.color,
+            role: this.selectedEvent.role,
+            id_updateur: localStorage.id
+          },
+          {
+            headers: {
+              token: localStorage.token
+            }
           }
-        }
-      );
+        );
       } catch (err) {
         if (err.response.status === 403) {
           localStorage.clear();
-          this.$router.push("login");
+          await this.$router.push("login");
           window.location.reload();
         }
       }
       this.dialog_update = false;
       window.location.reload();
     },
-    async get_Event(){
+    async get_Event() {
       try {
-        var url ="https://sportmanagementsystemapi.herokuapp.com/api/user/" + localStorage.id;
+        let url =
+          "https://sportmanagementsystemapi.herokuapp.com/api/user/" +
+          localStorage.id;
         url = url + "/event";
         const response = await axios.get(url, {
           headers: {
             token: localStorage.token
           }
         });
-        for (var x = 0; x < response.data.data.length; x++) {
-        var sTime = response.data.data[x].date_debut.split(' ')[1];
-        var eTime = response.data.data[x].date_fin.split(' ')[1];
-        if(response.data.data[x].role != "annonce") {
-          this.events.push({
-          id: response.data.data[x].id,
-          name: response.data.data[x].titre,
-          nom_coach: response.data.data[x].nom_coach,
-          details: response.data.data[x].details,
-          start: response.data.data[x].date_debut,
-          end: response.data.data[x].date_fin,
-          color: response.data.data[x].color,
-          user_id: response.data.data[x].user_id,
-          facture_coach: response.data.data[x].facture_coach,
-          facture_client: response.data.data[x].facture_client,
-          role: response.data.data[x].role,
-          heure_debut: sTime,
-          heure_fin: eTime,
-          valider: response.data.data[x].valider
-          });
-        }
+        for (let x = 0; x < response.data.data.length; x++) {
+          let sTime = response.data.data[x].date_debut.split(" ")[1];
+          let eTime = response.data.data[x].date_fin.split(" ")[1];
+          if (response.data.data[x].role !== "annonce") {
+            this.events.push({
+              id: response.data.data[x].id,
+              name: response.data.data[x].titre,
+              nom_coach: response.data.data[x].nom_coach,
+              details: response.data.data[x].details,
+              start: response.data.data[x].date_debut,
+              end: response.data.data[x].date_fin,
+              color: response.data.data[x].color,
+              user_id: response.data.data[x].user_id,
+              facture_coach: response.data.data[x].facture_coach,
+              facture_client: response.data.data[x].facture_client,
+              role: response.data.data[x].role,
+              heure_debut: sTime,
+              heure_fin: eTime,
+              valider: response.data.data[x].valider
+            });
+          }
         }
       } catch (err) {
         if (err.response.status === 403) {
           localStorage.clear();
-          this.$router.push("login");
+          await this.$router.push("login");
           window.location.reload();
         }
       }
     },
-    async get_Coach(){
+    async get_Coach() {
       try {
-        const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/coach");
-        for (var x = 0; x < response.data.data.length; x++) {
+        const response = await axios.get(
+          "https://sportmanagementsystemapi.herokuapp.com/api/coach"
+        );
+        for (let x = 0; x < response.data.data.length; x++) {
           this.coach.push({
             prenom: response.data.data[x].pseudo,
             specialite: response.data.data[x].specialite
@@ -826,15 +890,17 @@ export default {
       } catch (err) {
         if (err.response.status === 403) {
           localStorage.clear();
-          this.$router.push("login");
+          await this.$router.push("login");
           window.location.reload();
         }
       }
     },
-    async get_Client(){
+    async get_Client() {
       try {
-        const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/client");
-        for (var x = 0; x < response.data.data.length; x++) {
+        const response = await axios.get(
+          "https://sportmanagementsystemapi.herokuapp.com/api/client"
+        );
+        for (let x = 0; x < response.data.data.length; x++) {
           this.client.push({
             name: response.data.data[x].pseudo
           });
@@ -842,7 +908,7 @@ export default {
       } catch (err) {
         if (err.response.status === 403) {
           localStorage.clear();
-          this.$router.push("login");
+          await this.$router.push("login");
           window.location.reload();
         }
       }
@@ -890,13 +956,14 @@ export default {
     }
   },
   async mounted() {
-    this.$refs.calendar.checkChange()
+    this.$refs.calendar.checkChange();
     setTimeout(this.get_Event, 100);
     setTimeout(this.get_Coach, 100);
     setTimeout(this.get_Client, 100);
     try {
       this.id = localStorage.id;
-      var url = "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
+      let url =
+        "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id;
       const response = await axios.get(url, {
         headers: {
           token: localStorage.token
@@ -908,16 +975,15 @@ export default {
     } catch (err) {
       if (err.response.status === 403) {
         localStorage.clear();
-        this.$router.push("login");
+        await this.$router.push("login");
         window.location.reload();
       }
     }
-    if (this.user.role=="admin") {
+    if (this.user.role === "admin") {
       this.user.admin = true;
     }
-    if (this.user.role!="sociéte") {
+    if (this.user.role !== "sociéte") {
       this.user.client = true;
-
     } else {
       this.user.onlyClient = true;
     }
