@@ -12,7 +12,7 @@
                                 <v-text-field
                                         label="Prénom"
                                         required
-                                        v-model="this.localStorage.id"
+                                        v-model="storage"
                                 ></v-text-field>
                             </v-col>
                             <v-col cols="12">
@@ -89,10 +89,11 @@
                 roleCoach: this.role,
                 colorCoach: this.couleur,
                 factureMoisCoach: this.facture_mois,
-                prixParSeance: this.facture_coach
+                prixParSeance: this.facture_coach,
+                storage: this.storage
             };
         },
-        props: ['id', 'prenom', 'nom', 'pseudo', 'email', 'specialite', 'role', 'couleur', 'facture_mois', 'facture_coach'],
+        props: ['id', 'prenom', 'nom', 'pseudo', 'email', 'specialite', 'role', 'couleur', 'facture_mois', 'facture_coach', 'storage'],
         methods: {
             submitmodif() {
                 var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.id; //this.selectedElement.id;
