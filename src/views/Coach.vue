@@ -4,6 +4,9 @@
                 :items="coach"
                 :items-per-page.sync="itemsPerPage"
                 hide-default-footer
+                @click="showEvent"
+                v-model="selectedOpen"
+                :activator="selectedElement"
         >
 
             <template v-slot:default="props">
@@ -71,7 +74,10 @@
         components: {ModifCoach, SupprCoach},
         data: () => ({
             itemsPerPage: 4,
-            coach: []
+            coach: [],
+            selectedEvent: {},
+            selectedElement: null,
+            selectedOpen: false
         }),
         async mounted() {
             try {
@@ -117,6 +123,21 @@
             delete_coach() {
                 var url = 'https://sportmanagementsystemapi.herokuapp.com/api/user/' + this.coach.id;
                 return url
+            },
+            showEvent({ nativeEvent, event }) {
+                const open = () => {
+                    this.selectedEvent = event;
+                    this.selectedElement = nativeEvent.target;
+                    setTimeout(() => (this.selectedOpen = true), 10);
+                };
+
+                if (this.selectedOpen) {
+                    this.selectedOpen = false;
+                    setTimeout(open, 10);
+                } else {
+                    open();
+                }
+                nativeEvent.stopPropagation();
             }
         }
     }
