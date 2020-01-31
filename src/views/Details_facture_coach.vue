@@ -18,36 +18,37 @@
 import axios from "axios";
 
 export default {
-  data () {
+  data() {
     return {
       expanded: [],
-      coach:[],
+      coach: [],
       singleExpand: true,
       headers: [
         {
-          text: 'Nom',
-          align: 'left',
+          text: "Nom",
+          align: "left",
           sortable: false,
-          value: 'nom',
+          value: "nom"
         },
-        { text: 'Prenom', value: 'prenom' },
-        { text: 'Facture total', value: 'facture_mois' },
-        { text: '', value: 'data-table-expand' },
-      ],
-    }
+        { text: "Prenom", value: "prenom" },
+        { text: "Facture total", value: "facture_mois" },
+        { text: "", value: "data-table-expand" }
+      ]
+    };
   },
   async mounted() {
     try {
-      const response = await axios.get("https://sportmanagementsystemapi.herokuapp.com/api/coach");
+      const response = await axios.get(
+        "https://sportmanagementsystemapi.herokuapp.com/api/coach"
+      );
       for (var x = 0; x < response.data.data.length; x++) {
         this.coach.push({
           nom: response.data.data[x].nom,
           prenom: response.data.data[x].prenom,
-          facture_mois: response.data.data[x].facture_mois,
+          facture_mois: response.data.data[x].facture_mois
         });
       }
-    } catch (err) {
-    }
-  },
-}
+    } catch (err) {}
+  }
+};
 </script>
