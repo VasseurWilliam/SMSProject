@@ -103,6 +103,7 @@ export default {
   data: () => ({
     itemsPerPage: 4,
     coach: [],
+    id: null,
     pseudo: null,
     name: null,
     prenom: null,
