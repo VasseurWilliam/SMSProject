@@ -112,8 +112,7 @@ export default {
           specialite: this.specialite,
           role: this.role,
           color: this.color,
-          facture_mois: this.facture_mois,
-          prix_par_seance: this.prix_par_seance
+          facture_mois: this.facture_mois
         },
         {
           headers: {
