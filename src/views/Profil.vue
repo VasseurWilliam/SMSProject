@@ -17,12 +17,13 @@
           <v-container>
             <v-row>
               <v-col cols="12">
-                <v-text-field label="Nom" required v-model="nom"></v-text-field>
+                <v-text-field label="Nom" required :rules="rules" v-model="nom"></v-text-field>
               </v-col>
               <v-col cols="12">
                 <v-text-field
                   label="Prénom"
                   required
+                  :rules="rules"
                   v-model="prenom"
                 ></v-text-field>
               </v-col>
@@ -30,6 +31,7 @@
                 <v-text-field
                   label="Pseudo"
                   required
+                  :rules="rules"
                   v-model="pseudo"
                 ></v-text-field>
               </v-col>
@@ -37,6 +39,7 @@
                 <v-text-field
                   label="email"
                   required
+                  :rules="rules"
                   v-model="email"
                 ></v-text-field>
               </v-col>
@@ -44,6 +47,7 @@
                 <v-text-field
                   label="Mot de passe"
                   required
+                  :rules="rules"
                   v-model="password"
                 ></v-text-field>
               </v-col>
@@ -74,7 +78,8 @@ export default {
       email: null,
       password: null,
       role: null,
-      color: null
+      color: null,
+      rules: [v => !!v || "Ce champs est requis"]
     };
   },
   methods: {
