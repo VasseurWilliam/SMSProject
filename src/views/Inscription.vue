@@ -54,7 +54,6 @@
           label="prix_par_seance"
           autocomplete="off"
         ></v-text-field>
-        
         <v-select
           v-model="user.role"
           :items="item"
@@ -62,15 +61,16 @@
           label="role"
         ></v-select>
 
-        <v-text-field v-if="this.user.role === 'coach'"
+        <v-text-field
+          v-if="this.user.role === 'coach'"
           v-model="user.specialite"
           :rules="specialiteRules"
           :counter="30"
           label="Spécialité"
           autocomplete="off"
-        ></v-text-field> 
-
-        <v-color-picker v-if="this.user.role === 'coach'"
+        ></v-text-field>
+        <v-color-picker
+          v-if="this.user.role === 'coach'"
           v-model="user.color"
           :hide-canvas="hideCanvas"
           :hide-inputs="hideInputs"
@@ -79,7 +79,6 @@
           :show-swatches="showSwatches"
           class="mx-auto"
         ></v-color-picker>
-        
         <br />
 
         <v-btn
@@ -112,7 +111,7 @@ export default {
         email: "",
         password: "",
         role: "",
-        color : "",
+        color: "",
         specialite: "",
         prix_par_seance: "",
         show1: false
@@ -138,10 +137,6 @@ export default {
         v => !!v || "Ce champs est requis",
         v => v.length < 20 || "20 caractères maximum"
       ],
-      pseudoRules: [
-        v => !!v || "Ce champs est requis",
-        v => v.length < 30 || "20 caractères maximum"
-      ],
       emailRules: [
         v => !!v || "Ce champs est requis",
         v => /.+@.+\..+/.test(v) || "E-mail must be valid"
@@ -158,29 +153,32 @@ export default {
   },
   methods: {
     async validate() {
-        if (this.user.role == 'sociéte') {
-          this.user.color = "#000000";
+      if (this.user.role === "sociéte") {
+        this.user.color = "#000000";
+      }
+      let bodyFormData = new FormData();
+      bodyFormData.set("nom", this.user.nom);
+      bodyFormData.set("prenom", this.user.prenom);
+      bodyFormData.set("pseudo", this.user.pseudo);
+      bodyFormData.set("email", this.user.email);
+      bodyFormData.set("password", this.user.password);
+      bodyFormData.set("role", this.user.role);
+      bodyFormData.set("specialite", this.user.specialite);
+      bodyFormData.set("color", this.user.color);
+      bodyFormData.set("prix_par_seance", this.user.prix_par_seance);
+      try {
+        await axios.post(
+          "https://sportmanagementsystemapi.herokuapp.com/api/user",
+          bodyFormData
+        );
+      } catch (err) {
+        if (err.response.status === 403) {
+          localStorage.clear();
+          this.$router.push("login");
+          window.location.reload();
         }
-        var bodyFormData = new FormData();
-        bodyFormData.set("nom", this.user.nom);
-        bodyFormData.set("prenom", this.user.prenom);
-        bodyFormData.set("pseudo", this.user.pseudo);
-        bodyFormData.set("email", this.user.email);
-        bodyFormData.set("password", this.user.password);
-        bodyFormData.set("role", this.user.role);
-        bodyFormData.set("specialite", this.user.specialite);
-        bodyFormData.set("color", this.user.color);
-        bodyFormData.set("prix_par_seance", this.user.prix_par_seance);
-        try {
-          await axios.post("https://sportmanagementsystemapi.herokuapp.com/api/user", bodyFormData);
-        } catch (err) {
-          if (err.response.status === 403) {
-            localStorage.clear();
-            this.$router.push("login");
-            window.location.reload();
-          }
-        } 
-        window.location.reload();
+      }
+      window.location.reload();
     },
     reset() {
       this.$refs.form.reset();

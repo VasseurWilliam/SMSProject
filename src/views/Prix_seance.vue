@@ -108,7 +108,7 @@ export default {
       );
       for (let y = 0; y < response.data.data.length; y++) {
         this.tout.push({
-          pseudo: response.data.data[x].pseudo,
+          pseudo: response.data.data[y].pseudo,
           prix_par_seance: response.data.data[y].prix_par_seance
         });
       }
