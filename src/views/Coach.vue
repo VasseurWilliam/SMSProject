@@ -73,7 +73,7 @@
                       :specialite="item.specialite"
                       :couleur="item.color"
                       :facture_mois="item.facture_mois"
-                      :facture_coach="item.prix_par_seance"
+                      :prix_par_seance="item.prix_par_seance"
                     >
                     </ModifCoach>
                   </v-list-item-content>
