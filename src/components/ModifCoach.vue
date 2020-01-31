@@ -48,9 +48,9 @@
               </v-col>
               <v-col cols="12">
                 <v-text-field
-                  label="Facture Coach"
+                  label="Prix par seance"
                   required
-                  v-model="facture_coach"
+                  v-model="prix_par_seance"
                 ></v-text-field>
               </v-col>
             </v-row>
@@ -83,7 +83,7 @@ export default {
       roleCoach: this.role,
       colorCoach: this.couleur,
       factureMoisCoach: this.facture_mois,
-      prixParSeance: this.facture_coach
+      prixParSeance: this.prix_par_seance
     };
   },
   props: [
@@ -96,7 +96,7 @@ export default {
     "role",
     "couleur",
     "facture_mois",
-    "facture_coach"
+    "prix_par_seance"
   ],
   methods: {
     submitmodif() {
