@@ -102,7 +102,17 @@ export default {
   components: { ModifCoach, SupprCoach },
   data: () => ({
     itemsPerPage: 4,
-    coach: []
+    coach: [],
+    pseudo: null,
+    name: null,
+    prenom: null,
+    email: null,
+    password: null,
+    role: null,
+    specialite: null,
+    color: null,
+    facture_mois: null,
+    prix_par_seance: null
   }),
   async mounted() {
     try {
