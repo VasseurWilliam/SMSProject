@@ -109,10 +109,8 @@ export default {
           prenom: this.prenom,
           pseudo: this.pseudo,
           email: this.email,
-          specialite: this.specialite,
           role: this.role,
-          color: this.color,
-          facture_mois: this.facture_mois
+          color: this.color
         },
         {
           headers: {
