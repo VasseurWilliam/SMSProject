@@ -101,7 +101,7 @@ export default {
   methods: {
     submitmodif() {
       let url =
-        "https://sportmanagementsystemapi.herokuapp.com/api/coach/" + this.id; //this.selectedElement.id;
+        "https://sportmanagementsystemapi.herokuapp.com/api/user/" + this.id; //this.selectedElement.id;
       axios.put(
         url,
         {
