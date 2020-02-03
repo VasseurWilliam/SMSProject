@@ -87,42 +87,23 @@ export default {
       let url =
         "https://sportmanagementsystemapi.herokuapp.com/api/user/" +
         localStorage.id;
-      if (this.password === null) {
-        axios.put(
-          url,
-          {
-            nom: this.nom,
-            prenom: this.prenom,
-            pseudo: this.pseudo,
-            email: this.email,
-            role: this.role,
-            color: this.color
-          },
-          {
-            headers: {
-              token: localStorage.token
-            }
+      axios.put(
+        url,
+        {
+          nom: this.nom,
+          prenom: this.prenom,
+          pseudo: this.pseudo,
+          email: this.email,
+          password: this.password,
+          role: this.role,
+          color: this.color
+        },
+        {
+          headers: {
+            token: localStorage.token
           }
-        );
-      } else {
-        axios.put(
-          url,
-          {
-            nom: this.nom,
-            prenom: this.prenom,
-            pseudo: this.pseudo,
-            email: this.email,
-            password: this.password,
-            role: this.role,
-            color: this.color
-          },
-          {
-            headers: {
-              token: localStorage.token
-            }
-          }
-        );
-      }
+        }
+      );
       this.dialog = false;
       window.location.reload();
     }
