@@ -87,7 +87,7 @@ export default {
       let url =
         "https://sportmanagementsystemapi.herokuapp.com/api/user/" +
         localStorage.id;
-      if (this.password === "") {
+      if (this.password === null) {
         axios.put(
           url,
           {
