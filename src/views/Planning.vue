@@ -26,8 +26,8 @@
                         </v-col>
                         <v-col cols="12">
                           <v-text-field
-                            label="Autre client"
-                            v-model="create_event.name"
+                            label="Lieu"
+                            v-model="create_event.lieu"
                           ></v-text-field>
                         </v-col>
                         <v-col
@@ -347,7 +347,8 @@
                   </v-dialog>
                 </div>
               </v-row>
-              <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
+              <v-toolbar-title v-if="selectedEvent.lieu != null" v-html="selectedEvent.name + ' --- ' + selectedEvent.lieu"></v-toolbar-title>
+              <v-toolbar-title v-else v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
               <div v-if="user.client">
                 <v-dialog v-model="dialog_ajout" persistent max-width="400px">
@@ -527,6 +528,7 @@ export default {
       },
       create_event: {
         name: "",
+        lieu: "",
         nom_coach: "",
         start: "",
         end: "",
@@ -611,6 +613,9 @@ export default {
       bodyFormData.set("role", this.create_event.role);
       if (this.create_event.groupe != null) {
         bodyFormData.set("groupe", this.create_event.groupe);
+      }
+      if (this.create_event.lieu != null) {
+        bodyFormData.set("lieu", this.create_event.lieu);
       }
       try {
         await axios.post(url, bodyFormData, {
@@ -876,7 +881,8 @@ export default {
               role: response.data.data[x].role,
               heure_debut: sTime,
               heure_fin: eTime,
-              valider: response.data.data[x].valider
+              valider: response.data.data[x].valider,
+              lieu: response.data.data[x].lieu
             });
           }
         }
